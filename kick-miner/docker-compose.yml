@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  kick-miner:
+    image: ghcr.io/baillora/kick_channel_points_miner:latest
+    container_name: kick-channel-points-miner
+    restart: unless-stopped
+    volumes:
+      - ./config.json:/app/config/config.json
+    ports:
+      - "5000:5000"
+    environment:
+      - TZ=America/Sao_Paulo

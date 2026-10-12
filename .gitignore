@@ -1,0 +1,32 @@
+# Binários gerados
+bot-app
+bot-app-linux
+bot-poke-linux
+bot-poke.exe
+bot-template-go.exe
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Temporários e dumps
+*.tmp
+app.js.tmp
+
+# Credenciais e Dados Sensíveis (NUNCA SUBIR NO GIT)
+accounts.json
+session.json
+kick-miner/config.json
+kick-miner/app/
+*.key
+*.pem
+data/
+
+# Logs e arquivos temporários
+*.log
+tmp/
+temp/
+
+# OS artifacts
+.DS_Store
+Thumbs.db
