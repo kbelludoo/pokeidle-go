@@ -511,18 +511,11 @@
       </div>
     </header>
 
-    <!-- API / TUNNEL BAR -->
-    <div class="api-bar">
-      <label for="apiUrl">🔗 Fonte de Telemetria:</label>
-      <input type="text" id="apiUrl" value="status.json" placeholder="status.json ou https://seu-tunnel.trycloudflare.com">
-      <button onclick="saveApiUrl()">Conectar</button>
-    </div>
-
     <!-- METRICS GRID -->
     <div class="metrics-grid">
       <div class="metric-card">
         <div class="metric-lbl">Treinador</div>
-        <div class="metric-val" id="valTrainer" style="color: var(--accent); font-size: 1.25rem;">kbelludoo</div>
+        <div class="metric-val" id="valTrainer" style="color: var(--accent); font-size: 1.25rem;">Treinador #1</div>
       </div>
       <div class="metric-card">
         <div class="metric-lbl">Ouro Acumulado</div>
@@ -702,13 +695,6 @@
             </div>
           </div>
 
-          <!-- ACTIONS -->
-          <div class="actions-grid">
-            <button class="btn-act heal" onclick="sendAction('joyHeal')">💖 Curar (Enfermeira Joy)</button>
-            <button class="btn-act" onclick="sendAction('toggleHunt')">⚔️ Alternar Caçada</button>
-            <button class="btn-act" onclick="sendAction('autoCatch')">🔴 Auto-Catch</button>
-            <button class="btn-act" onclick="sendAction('claimDaily')">🎁 Recompensa Diária</button>
-          </div>
         </div>
       </div>
 
@@ -728,22 +714,11 @@
 
     <!-- FOOTER -->
     <footer>
-      ⚡ Pokéidle Go Engine • Desenvolvido para <a href="https://pokeidle.io" target="_blank" style="color: var(--accent); text-decoration: none;">pokéidle.io</a> • kbelludoo • 0 Navegadores na VPS
+      ⚡ Pokéidle Go Engine • Desenvolvido para <a href="https://pokeidle.io" target="_blank" style="color: var(--accent); text-decoration: none;">pokéidle.io</a> • Treinador #1 • 0 Navegadores na VPS
     </footer>
   </div>
 
   <script>
-    let currentApi = localStorage.getItem("pokeidle_api_url") || "status.json";
-    document.getElementById("apiUrl").value = currentApi;
-
-    function saveApiUrl() {
-      let val = document.getElementById("apiUrl").value.trim().replace(/\/$/, "");
-      if (!val) val = "status.json";
-      currentApi = val;
-      localStorage.setItem("pokeidle_api_url", currentApi);
-      update();
-    }
-
     function formatNumber(n) {
       if (!n) return "0";
       return Number(n).toLocaleString('pt-BR');
@@ -756,27 +731,9 @@
       return String(n);
     }
 
-    async function sendAction(action) {
-      if (currentApi.endsWith(".json")) {
-        alert("Modo leitura estática (status.json). Conecte ao IP ou túnel do bot para disparar comandos em tempo real.");
-        return;
-      }
-      try {
-        const res = await fetch(`${currentApi}/api/action`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ action })
-        });
-        if (res.ok) update();
-      } catch (e) {
-        alert("Erro na ação: " + e);
-      }
-    }
-
     async function update() {
       try {
-        const url = currentApi.endsWith(".json") ? currentApi : `${currentApi}/api/status`;
-        const res = await fetch(url, { cache: "no-store" });
+        const res = await fetch('status.json?t=' + Date.now(), { cache: "no-store" });
         if (!res.ok) return;
         const data = await res.json();
 
@@ -787,7 +744,7 @@
         if (accounts.length > 0) {
           const acc = accounts[0];
 
-          document.getElementById('valTrainer').textContent = `${acc.name || 'kbelludoo'} (Nv. ${acc.level || 11})`;
+          document.getElementById('valTrainer').textContent = `${acc.name || 'Treinador #1'} (Nv. ${acc.level || 11})`;
           document.getElementById('valGold').textContent = formatGold(acc.gold || 0);
           document.getElementById('valExp').textContent = formatNumber(Math.round(acc.expPerHour || 0));
           document.getElementById('valKills').textContent = formatNumber(acc.kills || 0);
