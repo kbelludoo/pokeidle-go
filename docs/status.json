@@ -1,85 +1,53 @@
 {
-  "uptime": "1d 4h 32m",
-  "goroutines": 8,
-  "ramAllocMB": 2.38,
-  "ramSysMB": 17.18,
-  "game": "PokeIdle World",
   "accounts": [
     {
       "id": "acc-1",
-      "name": "kbelludoo",
-      "level": 11,
-      "xp": 48200,
-      "xpNext": 65000,
-      "gold": 322800,
-      "diamonds": 15,
-      "orbs": 380,
-      "kills": 86,
-      "catches": 14,
-      "expPerHour": 14412,
+      "name": "Treinador #1",
+      "level": 29,
+      "vocation": "Bulbasaur (Nv. 28)",
+      "hp": 261,
+      "maxHp": 576,
+      "mana": 79,
+      "maxMana": 79,
+      "gold": 1682628,
+      "kills": 1351,
+      "expPerHour": 17225.62051950191,
       "status": "hunting",
       "currentArea": "geodude",
-      "currentAreaName": "Caverna Rochosa (Geodude)",
-      "durationSec": 15820,
-      "activePokemon": {
-        "id": 1,
-        "name": "Bulbasaur",
-        "level": 12,
-        "types": ["Grama", "Veneno"],
-        "hp": 252,
-        "maxHp": 252,
-        "power": 34,
-        "effectivePower": 68,
-        "shiny": false,
-        "xp": 3120,
-        "xpNext": 4000
-      },
-      "matchup": {
-        "status": "Super Efetivo x2.0 💥",
-        "multiplier": 2.0,
-        "effectivePower": 68,
-        "attackerTypes": "Grama / Veneno",
-        "defenderTypes": "Pedra / Terra",
-        "speedBonus": "+120% velocidade de farm"
-      },
-      "team": [
-        { "name": "Bulbasaur", "level": 12, "types": ["Grama", "Veneno"], "hp": 252, "maxHp": 252, "active": true, "matchup": "x2.0 💥" },
-        { "name": "Pidgey", "level": 10, "types": ["Normal", "Voador"], "hp": 180, "maxHp": 180, "active": false, "matchup": "x0.5 🛡️" },
-        { "name": "Geodude", "level": 9, "types": ["Pedra", "Terra"], "hp": 165, "maxHp": 165, "active": false, "matchup": "x1.0" },
-        { "name": "Rattata", "level": 8, "types": ["Normal"], "hp": 140, "maxHp": 140, "active": false, "matchup": "x0.5 🛡️" }
-      ],
-      "pokeballs": {
-        "pokeball": 42,
-        "greatball": 15,
-        "ultraball": 4,
-        "masterball": 1
-      },
-      "items": {
-        "potion": 18,
-        "superpotion": 8,
-        "revive": 5,
-        "hardstone": 28
-      },
-      "automation": {
-        "autoHunt": true,
-        "autoWeakness": true,
-        "autoOptimizeXP": true,
-        "autoCatch": true,
-        "autoHeal": true,
-        "autoRevive": true,
-        "noCentro": false
-      },
+      "durationSec": 4418,
       "logs": [
-        "🎯 [Otimizador de XP/h] Avaliou rotas desbloqueadas e selecionou Caverna Rochosa para taxa máxima",
-        "⚔️ [Auto-Fraqueza] Equipou Bulbasaur (Grama) com Super Efetivo x2.0 contra Geodude (Dano Efetivo: 68)!",
-        "Encontrou Geodude selvagem (Nv. 9)!",
-        "Bulbasaur usou Chicote de Vinha! Dano: 68 (Super Efetivo x2.0)",
-        "Derrotou Geodude selvagem! Loot: 28x Pedra Dura, +35 Ouro, +145 EXP",
-        "Arremessou Pokébola em Geodude selvagem... 1... 2... 3... Capturado!",
-        "Bulbasaur subiu para o Nível 12 (+12 HP, +3 Poder)!",
-        "Taxa medida: 14.412 EXP/h (Velocidade de farm aumentada em 2.2x)",
-        "Vida da equipe em 100% - Caçada e fraqueza ativas."
-      ]
+        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball, Stone Orb",
+        "Derrotou Geodude! Loot: Small Stone, Earth Ball, Stone Orb",
+        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball",
+        "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball",
+        "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball",
+        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball",
+        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball",
+        "Derrotou Geodude! Loot: Small Stone, Earth Ball",
+        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball",
+        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball"
+      ],
+      "updatedAt": 1791864277779,
+      "extra": {
+        "catches": 0,
+        "diamonds": 0,
+        "kickLives": [
+          "patopapao2",
+          "axt",
+          "rodil",
+          "matta",
+          "xdaren",
+          "tftoddy",
+          "luccatv",
+          "surskity"
+        ],
+        "noCentro": false,
+        "orbs": 0
+      }
     }
-  ]
+  ],
+  "goroutines": 9,
+  "ramAllocMB": 1.1620025634765625,
+  "ramSysMB": 13.099861145019531,
+  "uptime": "1h13m39s"
 }
