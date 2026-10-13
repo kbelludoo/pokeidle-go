@@ -6,27 +6,25 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <title>⚡ Pokéidle Go — Live Dashboard & Command Center</title>
+  <title>⚡ Pokéidle Go — Painel do Jogo & Telemetria Oficial</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #07090e;
-      --card-bg: rgba(13, 18, 30, 0.85);
-      --card-border: rgba(56, 189, 248, 0.15);
-      --card-hover: rgba(56, 189, 248, 0.25);
+      --bg: #060911;
+      --card-bg: rgba(13, 19, 33, 0.88);
+      --card-border: rgba(56, 189, 248, 0.16);
+      --card-hover: rgba(56, 189, 248, 0.28);
       --accent: #38bdf8;
-      --accent-glow: rgba(56, 189, 248, 0.3);
+      --accent-glow: rgba(56, 189, 248, 0.35);
       --green: #10b981;
-      --green-glow: rgba(16, 185, 129, 0.3);
+      --green-glow: rgba(16, 185, 129, 0.35);
       --gold: #f59e0b;
-      --gold-glow: rgba(245, 158, 11, 0.3);
+      --gold-glow: rgba(245, 158, 11, 0.35);
       --red: #ef4444;
       --purple: #a855f7;
-      --kick-green: #53fc18;
-      --kick-glow: rgba(83, 252, 24, 0.3);
       --text: #f8fafc;
       --text-muted: #94a3b8;
       --text-dim: #64748b;
@@ -36,10 +34,10 @@
     body {
       background: var(--bg);
       background-image:
-        radial-gradient(circle at 10% 15%, rgba(56, 189, 248, 0.05) 0%, transparent 40%),
-        radial-gradient(circle at 85% 20%, rgba(168, 85, 247, 0.05) 0%, transparent 45%),
-        radial-gradient(circle at 50% 80%, rgba(83, 252, 24, 0.04) 0%, transparent 50%),
-        linear-gradient(to bottom, #07090e, #0a0e17);
+        radial-gradient(circle at 15% 15%, rgba(56, 189, 248, 0.06) 0%, transparent 40%),
+        radial-gradient(circle at 85% 20%, rgba(16, 185, 129, 0.05) 0%, transparent 45%),
+        radial-gradient(circle at 50% 85%, rgba(245, 158, 11, 0.04) 0%, transparent 50%),
+        linear-gradient(to bottom, #060911, #0a0f1d);
       color: var(--text);
       font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
       min-height: 100vh;
@@ -72,20 +70,20 @@
     }
 
     .logo-badge {
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(168, 85, 247, 0.25));
-      border: 1px solid var(--accent);
+      width: 50px;
+      height: 50px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(56, 189, 248, 0.2));
+      border: 1.5px solid var(--accent);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.5rem;
-      box-shadow: 0 0 18px var(--accent-glow);
+      font-size: 1.6rem;
+      box-shadow: 0 0 20px var(--accent-glow);
     }
 
     .brand-title h1 {
-      font-size: 1.35rem;
+      font-size: 1.4rem;
       font-weight: 800;
       letter-spacing: -0.02em;
       color: #fff;
@@ -110,15 +108,15 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 6px 14px;
+      padding: 7px 15px;
       border-radius: 999px;
-      font-size: 0.75rem;
+      font-size: 0.76rem;
       font-weight: 700;
       font-family: 'JetBrains Mono', monospace;
       background: rgba(16, 185, 129, 0.12);
       border: 1px solid var(--green);
       color: var(--green);
-      box-shadow: 0 0 12px var(--green-glow);
+      box-shadow: 0 0 14px var(--green-glow);
     }
 
     .pulse {
@@ -190,10 +188,10 @@
     }
     .api-bar button:hover { background: var(--accent); color: #04090e; }
 
-    /* HERO STATS GRID */
+    /* STATS GRID */
     .metrics-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
       gap: 14px;
       margin-bottom: 20px;
     }
@@ -226,60 +224,10 @@
       color: #fff;
     }
 
-    /* MULTIPLIER / LURKER BANNER */
-    .lurker-banner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      margin-bottom: 24px;
-    }
-    @media (max-width: 768px) {
-      .lurker-banner { grid-template-columns: 1fr; }
-    }
-    .banner-card {
-      background: var(--card-bg);
-      border-radius: 16px;
-      padding: 18px 22px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 14px;
-    }
-    .banner-twitch {
-      border: 1px solid rgba(168, 85, 247, 0.35);
-      background: linear-gradient(135deg, rgba(168, 85, 247, 0.08) 0%, rgba(13, 18, 30, 0.9) 100%);
-    }
-    .banner-kick {
-      border: 1px solid rgba(83, 252, 24, 0.3);
-      background: linear-gradient(135deg, rgba(83, 252, 24, 0.08) 0%, rgba(13, 18, 30, 0.9) 100%);
-    }
-    .banner-info h3 {
-      font-size: 0.95rem;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .banner-info p {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      margin-top: 3px;
-    }
-    .banner-badge {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.82rem;
-      font-weight: 800;
-      padding: 6px 12px;
-      border-radius: 8px;
-      white-space: nowrap;
-    }
-    .twitch-badge { background: rgba(168, 85, 247, 0.2); color: #c084fc; border: 1px solid #c084fc; }
-    .kick-badge { background: rgba(83, 252, 24, 0.18); color: var(--kick-green); border: 1px solid var(--kick-green); }
-
     /* MAIN CONTENT LAYOUT */
     .main-grid {
       display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
+      grid-template-columns: 1.15fr 0.85fr;
       gap: 20px;
       margin-bottom: 24px;
     }
@@ -294,6 +242,7 @@
       border-radius: 18px;
       padding: 22px;
       box-shadow: 0 8px 24px -10px rgba(0,0,0,0.5);
+      margin-bottom: 20px;
     }
     .card-title {
       font-size: 1.05rem;
@@ -304,26 +253,67 @@
       align-items: center;
     }
 
-    /* TEAM & POKEMON VIEW */
-    .trainer-header {
+    /* POKEMON BATTLE VIEW */
+    .battle-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 12px;
-      padding: 12px 16px;
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 14px;
+      padding: 14px 18px;
       margin-bottom: 16px;
     }
-    .trainer-name {
-      font-size: 1.1rem;
+    .poke-identity {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .poke-avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid var(--green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      box-shadow: 0 0 16px rgba(16, 185, 129, 0.25);
+    }
+    .poke-name {
+      font-size: 1.25rem;
       font-weight: 800;
       color: #fff;
     }
-    .trainer-area {
+    .poke-badges {
+      display: flex;
+      gap: 6px;
+      margin-top: 4px;
+    }
+    .type-badge {
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .type-grass { background: rgba(34, 197, 94, 0.2); color: #4ade80; border: 1px solid #22c55e; }
+    .type-poison { background: rgba(168, 85, 247, 0.2); color: #c084fc; border: 1px solid #a855f7; }
+    .type-water { background: rgba(56, 189, 248, 0.2); color: #38bdf8; border: 1px solid #38bdf8; }
+    .type-fire { background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid #ef4444; }
+    .type-rock { background: rgba(217, 119, 6, 0.2); color: #fbbf24; border: 1px solid #d97706; }
+
+    .route-badge {
       font-size: 0.8rem;
       font-family: 'JetBrains Mono', monospace;
       color: var(--accent);
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid var(--accent);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-weight: 700;
     }
 
     /* BARS */
@@ -347,8 +337,8 @@
       border-radius: 999px;
       transition: width 0.4s ease;
     }
-    .hp-fill { background: linear-gradient(90deg, #ef4444, #f87171); }
-    .mana-fill { background: linear-gradient(90deg, #0284c7, #38bdf8); }
+    .hp-fill { background: linear-gradient(90deg, #10b981, #34d399); }
+    .xp-fill { background: linear-gradient(90deg, #0284c7, #38bdf8); }
 
     /* DETAIL MINI TILES */
     .tiles-grid {
@@ -366,26 +356,77 @@
     .tile .lbl { font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; }
     .tile .val { font-size: 0.95rem; font-weight: 700; color: #fff; font-family: 'JetBrains Mono', monospace; margin-top: 2px; }
 
-    /* POKEBALL INVENTORY */
-    .balls-row {
-      display: flex;
+    /* POKEMON TEAM ROSTER */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
       gap: 10px;
-      background: #050810;
+      margin-bottom: 16px;
+    }
+    .team-member {
+      background: rgba(255,255,255,0.02);
       border: 1px solid rgba(255,255,255,0.06);
       border-radius: 10px;
-      padding: 10px 14px;
-      margin-bottom: 16px;
-      align-items: center;
-      justify-content: space-around;
-    }
-    .ball-item {
+      padding: 10px 12px;
       display: flex;
       align-items: center;
-      gap: 6px;
-      font-size: 0.82rem;
-      font-family: 'JetBrains Mono', monospace;
-      font-weight: 700;
+      justify-content: space-between;
     }
+    .team-member.active-slot {
+      border-color: var(--accent);
+      background: rgba(56, 189, 248, 0.06);
+    }
+    .member-info h4 {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .member-info p {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .member-badge {
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    /* POKEBALL & ITEM INVENTORY */
+    .inventory-section {
+      background: #050810;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 16px;
+    }
+    .inv-title {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 10px;
+      letter-spacing: 0.05em;
+    }
+    .balls-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+    @media (max-width: 600px) {
+      .balls-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    .ball-box {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 8px;
+      padding: 8px 10px;
+      text-align: center;
+    }
+    .ball-box .ball-icon { font-size: 1.2rem; margin-bottom: 2px; }
+    .ball-box .ball-name { font-size: 0.7rem; color: var(--text-muted); }
+    .ball-box .ball-count { font-size: 0.95rem; font-weight: 800; font-family: 'JetBrains Mono', monospace; margin-top: 2px; }
 
     /* ACTION BUTTONS */
     .actions-grid {
@@ -416,34 +457,34 @@
     }
     .btn-act.heal:hover { background: rgba(239, 68, 68, 0.3); }
 
-    /* LOGS BOX */
+    /* BATTLE LOGS BOX */
     .logs-container {
       background: #04060b;
       border: 1px solid rgba(255,255,255,0.08);
       border-radius: 14px;
       padding: 16px;
-      height: 380px;
+      height: 520px;
       overflow-y: auto;
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.78rem;
       line-height: 1.6;
     }
     .log-item {
-      margin-bottom: 6px;
+      margin-bottom: 8px;
       color: #94a3b8;
       border-left: 2px solid rgba(255,255,255,0.1);
-      padding-left: 8px;
+      padding-left: 10px;
     }
     .log-item.loot { border-color: var(--gold); color: #fde68a; }
-    .log-item.catch { border-color: var(--accent); color: #bae6fd; }
+    .log-item.catch { border-color: var(--accent); color: #bae6fd; font-weight: 700; }
     .log-item.lvl { border-color: var(--green); color: #a7f3d0; font-weight: 700; }
-    .log-item.lurker { border-color: var(--purple); color: #e9d5ff; }
+    .log-item.combat { border-color: #f87171; color: #fecaca; }
 
     footer {
       text-align: center;
       color: var(--text-dim);
       font-size: 0.8rem;
-      margin-top: 36px;
+      margin-top: 24px;
       font-family: 'JetBrains Mono', monospace;
     }
   </style>
@@ -456,7 +497,7 @@
         <div class="logo-badge">⚡</div>
         <div class="brand-title">
           <h1>POKÉIDLE <span>GO</span></h1>
-          <p>Motor autônomo nativo • 24/7 sem navegadores</p>
+          <p>Motor de caçada autônomo • 100% dedicado a Pokéidle World</p>
         </div>
       </div>
       <div class="header-right">
@@ -472,7 +513,7 @@
 
     <!-- API / TUNNEL BAR -->
     <div class="api-bar">
-      <label for="apiUrl">🔗 Fonte de Dados:</label>
+      <label for="apiUrl">🔗 Fonte de Telemetria:</label>
       <input type="text" id="apiUrl" value="status.json" placeholder="status.json ou https://seu-tunnel.trycloudflare.com">
       <button onclick="saveApiUrl()">Conectar</button>
     </div>
@@ -480,8 +521,8 @@
     <!-- METRICS GRID -->
     <div class="metrics-grid">
       <div class="metric-card">
-        <div class="metric-lbl">RAM Utilizada</div>
-        <div class="metric-val" id="valRam" style="color: var(--accent);">~2.38 MB</div>
+        <div class="metric-lbl">Treinador</div>
+        <div class="metric-val" id="valTrainer" style="color: var(--accent); font-size: 1.25rem;">kbelludoo</div>
       </div>
       <div class="metric-card">
         <div class="metric-lbl">Ouro Acumulado</div>
@@ -492,128 +533,176 @@
         <div class="metric-val" id="valExp" style="color: #67e8f9;">14.412</div>
       </div>
       <div class="metric-card">
-        <div class="metric-lbl">Abates (Kills)</div>
+        <div class="metric-lbl">Monstros Derrotados</div>
         <div class="metric-val" id="valKills">86</div>
       </div>
       <div class="metric-card">
-        <div class="metric-lbl">Capturas</div>
-        <div class="metric-val" id="valCatches">14</div>
+        <div class="metric-lbl">Pokémons Capturados</div>
+        <div class="metric-val" id="valCatches" style="color: #a7f3d0;">14</div>
       </div>
       <div class="metric-card">
-        <div class="metric-lbl">Tempo de Sessão</div>
+        <div class="metric-lbl">Tempo de Caça</div>
         <div class="metric-val" id="valUptime" style="font-size: 1.15rem;">1d 4h 32m</div>
-      </div>
-    </div>
-
-    <!-- LURKER MULTIPLIERS BANNER -->
-    <div class="lurker-banner">
-      <div class="banner-card banner-twitch">
-        <div class="banner-info">
-          <h3 style="color: #c084fc;">🟣 Twitch IRC Lurker</h3>
-          <p id="twitchDesc">Conectado a 11 canais parceiros online</p>
-        </div>
-        <div class="banner-badge twitch-badge">+15% A +20% EXP</div>
-      </div>
-
-      <div class="banner-card banner-kick">
-        <div class="banner-info">
-          <h3 style="color: var(--kick-green);">🟢 Kick Points Lurker</h3>
-          <p id="kickDesc">Assistindo live de 'tftoddy' na Kick</p>
-        </div>
-        <div class="banner-badge kick-badge" id="kickPointsBadge">20 PONTOS (⭐ +10/5m)</div>
       </div>
     </div>
 
     <!-- MAIN SECTION -->
     <div class="main-grid">
-      <!-- TRAINER & POKEMON TEAM CARD -->
-      <div class="content-card">
-        <div class="card-title">
-          <span>🐾 Treinador & Pokémon Ativo</span>
-          <span style="font-size: 0.78rem; color: var(--text-muted); font-family: 'JetBrains Mono', monospace;" id="accNick">kbelludoo</span>
-        </div>
+      <!-- LEFT COLUMN: POKEMON & INVENTORY -->
+      <div>
+        <!-- ACTIVE POKEMON CARD -->
+        <div class="content-card">
+          <div class="card-title">
+            <span>🐾 Pokémon em Batalha</span>
+            <span class="route-badge" id="huntArea">📍 Caverna (Geodude)</span>
+          </div>
 
-        <div class="trainer-header">
-          <div>
-            <div class="trainer-name" id="pokeName">🌱 Bulbasaur (Nv. 12)</div>
-            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;" id="pokeType">Tipo: Grama / Veneno</div>
+          <div class="battle-header">
+            <div class="poke-identity">
+              <div class="poke-avatar" id="pokeAvatar">🌱</div>
+              <div>
+                <div class="poke-name" id="pokeName">Bulbasaur <span style="font-size: 0.85rem; color: var(--accent);" id="pokeLevel">Nv. 12</span></div>
+                <div class="poke-badges" id="pokeBadges">
+                  <span class="type-badge type-grass">Grama</span>
+                  <span class="type-badge type-poison">Veneno</span>
+                </div>
+              </div>
+            </div>
+            <div style="text-align: right;">
+              <div style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase;">Poder de Ataque</div>
+              <div style="font-size: 1.2rem; font-weight: 800; color: #fff; font-family: 'JetBrains Mono', monospace;" id="pokePower">⚡ 34</div>
+            </div>
           </div>
-          <div class="trainer-area" id="huntArea">📍 Rota: Geodude</div>
-        </div>
 
-        <!-- HP BAR -->
-        <div class="bar-group">
-          <div class="bar-lbl-row">
-            <span style="color: #fca5a5;">❤️ Vida da Equipe (HP)</span>
-            <span id="hpText" style="font-family: 'JetBrains Mono', monospace;">252 / 252 (100%)</span>
+          <!-- HP BAR -->
+          <div class="bar-group">
+            <div class="bar-lbl-row">
+              <span style="color: #4ade80;">❤️ Pontos de Vida (HP)</span>
+              <span id="hpText" style="font-family: 'JetBrains Mono', monospace;">252 / 252 (100%)</span>
+            </div>
+            <div class="bar-track">
+              <div class="bar-fill hp-fill" id="hpFill" style="width: 100%;"></div>
+            </div>
           </div>
-          <div class="bar-track">
-            <div class="bar-fill hp-fill" id="hpFill" style="width: 100%;"></div>
-          </div>
-        </div>
 
-        <!-- POWER / MANA BAR -->
-        <div class="bar-group">
-          <div class="bar-lbl-row">
-            <span style="color: var(--accent);">✨ Poder de Combate</span>
-            <span id="manaText" style="font-family: 'JetBrains Mono', monospace;">34 / 34 (100%)</span>
+          <!-- XP BAR -->
+          <div class="bar-group">
+            <div class="bar-lbl-row">
+              <span style="color: var(--accent);">✨ Experiência do Pokémon (XP)</span>
+              <span id="xpText" style="font-family: 'JetBrains Mono', monospace;">3.120 / 4.000 (78%)</span>
+            </div>
+            <div class="bar-track">
+              <div class="bar-fill xp-fill" id="xpFill" style="width: 78%;"></div>
+            </div>
           </div>
-          <div class="bar-track">
-            <div class="bar-fill mana-fill" id="manaFill" style="width: 100%;"></div>
-          </div>
-        </div>
 
-        <!-- TILES -->
-        <div class="tiles-grid">
-          <div class="tile">
-            <div class="lbl">Diamantes</div>
-            <div class="tile val" style="color: #67e8f9;" id="valDiamonds">💎 15</div>
+          <!-- TILES -->
+          <div class="tiles-grid">
+            <div class="tile">
+              <div class="lbl">Diamantes</div>
+              <div class="tile val" style="color: #67e8f9;" id="valDiamonds">💎 15</div>
+            </div>
+            <div class="tile">
+              <div class="lbl">Orbes Elementais</div>
+              <div class="tile val" style="color: #c084fc;" id="valOrbs">🔮 380</div>
+            </div>
+            <div class="tile">
+              <div class="lbl">Centro Pokémon</div>
+              <div class="tile val" style="color: var(--green);" id="valCenter">🏥 Liberado</div>
+            </div>
+            <div class="tile">
+              <div class="lbl">Modo de Caçada</div>
+              <div class="tile val" style="color: var(--accent);" id="valHuntState">⚔️ Automático</div>
+            </div>
           </div>
-          <div class="tile">
-            <div class="lbl">Orbs de Poder</div>
-            <div class="tile val" style="color: #c084fc;" id="valOrbs">🔮 380</div>
-          </div>
-          <div class="tile">
-            <div class="lbl">Centro Pokémon</div>
-            <div class="tile val" id="valCenter">🏥 Liberado</div>
-          </div>
-          <div class="tile">
-            <div class="lbl">Status da Caçada</div>
-            <div class="tile val" style="color: var(--green);" id="valHuntState">⚔️ Automático</div>
-          </div>
-        </div>
 
-        <!-- POKEBALLS -->
-        <div class="balls-row">
-          <div class="ball-item" style="color: #f87171;">🔴 Pokébola: <span id="ball1">42</span></div>
-          <div class="ball-item" style="color: #38bdf8;">🔵 Great Ball: <span id="ball2">15</span></div>
-          <div class="ball-item" style="color: #facc15;">🟡 Ultra Ball: <span id="ball3">4</span></div>
-        </div>
+          <!-- TEAM ROSTER -->
+          <div class="inv-title">Equipe Pokémon</div>
+          <div class="team-grid" id="teamGrid">
+            <div class="team-member active-slot">
+              <div class="member-info">
+                <h4>🌱 Bulbasaur</h4>
+                <p>Nv. 12 • HP 100%</p>
+              </div>
+              <span class="member-badge" style="background: var(--accent); color: #04090e;">ATIVO</span>
+            </div>
+            <div class="team-member">
+              <div class="member-info">
+                <h4>🦅 Pidgey</h4>
+                <p>Nv. 10 • HP 100%</p>
+              </div>
+              <span class="member-badge" style="background: rgba(255,255,255,0.1); color: var(--text-muted);">SLOT 2</span>
+            </div>
+            <div class="team-member">
+              <div class="member-info">
+                <h4>🪨 Geodude</h4>
+                <p>Nv. 9 • HP 100%</p>
+              </div>
+              <span class="member-badge" style="background: rgba(255,255,255,0.1); color: var(--text-muted);">SLOT 3</span>
+            </div>
+            <div class="team-member">
+              <div class="member-info">
+                <h4>🐀 Rattata</h4>
+                <p>Nv. 8 • HP 100%</p>
+              </div>
+              <span class="member-badge" style="background: rgba(255,255,255,0.1); color: var(--text-muted);">SLOT 4</span>
+            </div>
+          </div>
 
-        <!-- ACTIONS -->
-        <div class="actions-grid">
-          <button class="btn-act heal" onclick="sendAction('joyHeal')">💖 Nurse Joy (Curar)</button>
-          <button class="btn-act" onclick="sendAction('toggleHunt')">⚔️ Toggle Hunt</button>
-          <button class="btn-act" onclick="sendAction('autoCatch')">🔴 Auto-Catch</button>
-          <button class="btn-act" onclick="sendAction('claimDaily')">🎁 Diário</button>
+          <!-- POKEBALLS INVENTORY -->
+          <div class="inventory-section">
+            <div class="inv-title">Mochila de Pokébolas & Suprimentos</div>
+            <div class="balls-grid">
+              <div class="ball-box">
+                <div class="ball-icon">🔴</div>
+                <div class="ball-name">Pokébola</div>
+                <div class="ball-count" style="color: #f87171;" id="ballPoke">42</div>
+              </div>
+              <div class="ball-box">
+                <div class="ball-icon">🔵</div>
+                <div class="ball-name">Great Ball</div>
+                <div class="ball-count" style="color: #38bdf8;" id="ballGreat">15</div>
+              </div>
+              <div class="ball-box">
+                <div class="ball-icon">🟡</div>
+                <div class="ball-name">Ultra Ball</div>
+                <div class="ball-count" style="color: #facc15;" id="ballUltra">4</div>
+              </div>
+              <div class="ball-box">
+                <div class="ball-icon">🟣</div>
+                <div class="ball-name">Master Ball</div>
+                <div class="ball-count" style="color: #c084fc;" id="ballMaster">1</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ACTIONS -->
+          <div class="actions-grid">
+            <button class="btn-act heal" onclick="sendAction('joyHeal')">💖 Curar (Enfermeira Joy)</button>
+            <button class="btn-act" onclick="sendAction('toggleHunt')">⚔️ Alternar Caçada</button>
+            <button class="btn-act" onclick="sendAction('autoCatch')">🔴 Auto-Catch</button>
+            <button class="btn-act" onclick="sendAction('claimDaily')">🎁 Recompensa Diária</button>
+          </div>
         </div>
       </div>
 
-      <!-- EVENT LOGS -->
-      <div class="content-card">
-        <div class="card-title">
-          <span>📜 Console de Ações ao Vivo</span>
-          <span style="font-size: 0.72rem; color: var(--text-dim); font-family: 'JetBrains Mono', monospace;">Tempo Real</span>
-        </div>
-        <div class="logs-container" id="logsBox">
-          <div class="log-item">Iniciando monitoramento...</div>
+      <!-- RIGHT COLUMN: COMBAT EVENT LOGS -->
+      <div>
+        <div class="content-card">
+          <div class="card-title">
+            <span>📜 Registro de Combate e Eventos</span>
+            <span style="font-size: 0.72rem; color: var(--text-dim); font-family: 'JetBrains Mono', monospace;">Tempo Real</span>
+          </div>
+          <div class="logs-container" id="logsBox">
+            <div class="log-item">Iniciando conexão com Pokéidle...</div>
+          </div>
         </div>
       </div>
     </div>
 
     <!-- FOOTER -->
     <footer>
-      ⚡ Pokéidle Go Engine • Desenvolvido por <a href="https://github.com/kbelludoo" style="color: var(--accent); text-decoration: none;">kbelludoo</a> • 0 Navegadores na VPS
+      ⚡ Pokéidle Go Engine • Desenvolvido para <a href="https://pokeidle.io" target="_blank" style="color: var(--accent); text-decoration: none;">pokéidle.io</a> • kbelludoo • 0 Navegadores na VPS
     </footer>
   </div>
 
@@ -643,7 +732,7 @@
 
     async function sendAction(action) {
       if (currentApi.endsWith(".json")) {
-        alert("Modo leitura de telemetria estática (status.json). Conecte ao IP/Túnel do bot para disparar comandos em tempo real.");
+        alert("Modo leitura estática (status.json). Conecte ao IP ou túnel do bot para disparar comandos em tempo real.");
         return;
       }
       try {
@@ -665,60 +754,82 @@
         if (!res.ok) return;
         const data = await res.json();
 
-        // Top metrics
-        if (data.ramAllocMB) document.getElementById('valRam').textContent = `~${data.ramAllocMB.toFixed(2)} MB`;
+        // System stats
         if (data.uptime) document.getElementById('valUptime').textContent = data.uptime;
 
         const accounts = data.accounts || [];
         if (accounts.length > 0) {
           const acc = accounts[0];
-          const extra = acc.extra || {};
 
-          document.getElementById('accNick').textContent = acc.name || acc.id;
+          document.getElementById('valTrainer').textContent = `${acc.name || 'kbelludoo'} (Nv. ${acc.level || 11})`;
           document.getElementById('valGold').textContent = formatGold(acc.gold || 0);
           document.getElementById('valExp').textContent = formatNumber(Math.round(acc.expPerHour || 0));
           document.getElementById('valKills').textContent = formatNumber(acc.kills || 0);
-          document.getElementById('valCatches').textContent = formatNumber(extra.catches || 0);
+          document.getElementById('valCatches').textContent = formatNumber(acc.catches || 0);
 
-          // Pokemon
-          const pokeName = acc.vocation || extra.activePokemon || "🌱 Bulbasaur (Nv. 12)";
-          document.getElementById('pokeName').textContent = pokeName;
-          document.getElementById('pokeType').textContent = extra.pokemonTypes ? `Tipo: ${extra.pokemonTypes}` : "Tipo: Grama / Veneno";
-          document.getElementById('huntArea').textContent = `📍 Rota: ${acc.currentArea || 'Geodude'}`;
+          // Route
+          document.getElementById('huntArea').textContent = `📍 ${acc.currentAreaName || acc.currentArea || 'Caverna Rochosa'}`;
 
-          // HP & Mana
-          const hp = acc.hp || 0;
-          const maxHp = acc.maxHp || 1;
+          // Active Pokemon
+          const pk = acc.activePokemon || {};
+          const pkName = pk.name || "Bulbasaur";
+          const pkLvl = pk.level || 12;
+          document.getElementById('pokeName').innerHTML = `${pkName} <span style="font-size: 0.85rem; color: var(--accent);">Nv. ${pkLvl}</span>`;
+          document.getElementById('pokePower').textContent = `⚡ ${pk.power || 34}`;
+
+          if (pkName.toLowerCase().includes("bulba")) document.getElementById('pokeAvatar').textContent = "🌱";
+          else if (pkName.toLowerCase().includes("charm")) document.getElementById('pokeAvatar').textContent = "🔥";
+          else if (pkName.toLowerCase().includes("squirt")) document.getElementById('pokeAvatar').textContent = "💧";
+          else if (pkName.toLowerCase().includes("pika")) document.getElementById('pokeAvatar').textContent = "⚡";
+          else document.getElementById('pokeAvatar').textContent = "🐾";
+
+          // HP Bar
+          const hp = pk.hp || acc.hp || 252;
+          const maxHp = pk.maxHp || acc.maxHp || 252;
           const hpPct = Math.min(100, Math.round((hp / maxHp) * 100));
           document.getElementById('hpText').textContent = `${hp} / ${maxHp} (${hpPct}%)`;
           document.getElementById('hpFill').style.width = `${hpPct}%`;
 
-          const mana = acc.mana || 0;
-          const maxMana = acc.maxMana || 1;
-          const manaPct = Math.min(100, Math.round((mana / maxMana) * 100));
-          document.getElementById('manaText').textContent = `${mana} / ${maxMana} (${manaPct}%)`;
-          document.getElementById('manaFill').style.width = `${manaPct}%`;
+          // XP Bar
+          const xp = pk.xp || 3120;
+          const xpNext = pk.xpNext || 4000;
+          const xpPct = Math.min(100, Math.round((xp / xpNext) * 100));
+          document.getElementById('xpText').textContent = `${formatNumber(xp)} / ${formatNumber(xpNext)} (${xpPct}%)`;
+          document.getElementById('xpFill').style.width = `${xpPct}%`;
 
           // Resources
-          document.getElementById('valDiamonds').textContent = `💎 ${extra.diamonds || 0}`;
-          document.getElementById('valOrbs').textContent = `🔮 ${extra.orbs || 0}`;
-          document.getElementById('valCenter').textContent = extra.noCentro ? "🏥 No Centro (Curando)" : "🏥 Liberado";
+          document.getElementById('valDiamonds').textContent = `💎 ${acc.diamonds || 0}`;
+          document.getElementById('valOrbs').textContent = `🔮 ${acc.orbs || 0}`;
+
+          const auto = acc.automation || {};
+          document.getElementById('valCenter').textContent = auto.noCentro ? "🏥 No Centro (Curando)" : "🏥 Liberado";
+          document.getElementById('valHuntState').textContent = auto.autoHunt ? "⚔️ Automático" : "⏸️ Pausado";
 
           // Balls
-          if (extra.pokeballs) {
-            document.getElementById('ball1').textContent = extra.pokeballs.pokeball || 0;
-            document.getElementById('ball2').textContent = extra.pokeballs.greatball || 0;
-            document.getElementById('ball3').textContent = extra.pokeballs.ultraball || 0;
+          if (acc.pokeballs) {
+            document.getElementById('ballPoke').textContent = acc.pokeballs.pokeball || 0;
+            document.getElementById('ballGreat').textContent = acc.pokeballs.greatball || 0;
+            document.getElementById('ballUltra').textContent = acc.pokeballs.ultraball || 0;
+            document.getElementById('ballMaster').textContent = acc.pokeballs.masterball || 0;
           }
 
-          // Lurker info
-          if (extra.kick) {
-            document.getElementById('kickDesc').textContent = `Assistindo live de '${extra.kick.streamer || 'tftoddy'}' na Kick`;
-            document.getElementById('kickPointsBadge').textContent = `${extra.kick.points || 20} PONTOS (⭐ ${extra.kick.rate || '+10/5m'})`;
-          }
-
-          if (extra.twitch && extra.twitch.channels) {
-            document.getElementById('twitchDesc').textContent = `Conectado a ${extra.twitch.channels.length} canais parceiros online`;
+          // Team Roster
+          if (acc.team && acc.team.length > 0) {
+            const teamGrid = document.getElementById('teamGrid');
+            teamGrid.innerHTML = acc.team.map((m, idx) => {
+              const isActive = m.active || idx === 0;
+              return `
+                <div class="team-member ${isActive ? 'active-slot' : ''}">
+                  <div class="member-info">
+                    <h4>${m.name}</h4>
+                    <p>Nv. ${m.level} • HP ${Math.round((m.hp / m.maxHp) * 100)}%</p>
+                  </div>
+                  <span class="member-badge" style="background: ${isActive ? 'var(--accent)' : 'rgba(255,255,255,0.1)'}; color: ${isActive ? '#04090e' : 'var(--text-muted)'};">
+                    ${isActive ? 'ATIVO' : 'SLOT ' + (idx + 1)}
+                  </span>
+                </div>
+              `;
+            }).join('');
           }
 
           // Logs
@@ -728,16 +839,16 @@
             logsBox.innerHTML = logs.map(l => {
               let cls = '';
               if (l.includes('Loot') || l.includes('Ouro')) cls = 'loot';
-              if (l.includes('Capturou')) cls = 'catch';
-              if (l.includes('subiu') || l.includes('Nível')) cls = 'lvl';
-              if (l.includes('Twitch') || l.includes('Kick')) cls = 'lurker';
+              else if (l.includes('Captur') || l.includes('Pokébola')) cls = 'catch';
+              else if (l.includes('subiu') || l.includes('Nível')) cls = 'lvl';
+              else if (l.includes('Dano') || l.includes('Derrotou') || l.includes('selvagem')) cls = 'combat';
               return `<div class="log-item ${cls}">${l}</div>`;
             }).join('');
             logsBox.scrollTop = logsBox.scrollHeight;
           }
         }
       } catch (e) {
-        console.error("Erro ao atualizar:", e);
+        console.error("Erro ao atualizar telemetria:", e);
       }
     }
 

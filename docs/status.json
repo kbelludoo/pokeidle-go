@@ -1,59 +1,74 @@
 {
   "uptime": "1d 4h 32m",
-  "goroutines": 14,
+  "goroutines": 8,
   "ramAllocMB": 2.38,
   "ramSysMB": 17.18,
+  "game": "PokeIdle World",
   "accounts": [
     {
       "id": "acc-1",
       "name": "kbelludoo",
       "level": 11,
-      "vocation": "🌱 Bulbasaur (Nv. 12)",
-      "hp": 252,
-      "maxHp": 252,
-      "mana": 34,
-      "maxMana": 34,
+      "xp": 48200,
+      "xpNext": 65000,
       "gold": 322800,
+      "diamonds": 15,
+      "orbs": 380,
       "kills": 86,
+      "catches": 14,
       "expPerHour": 14412,
       "status": "hunting",
       "currentArea": "geodude",
+      "currentAreaName": "Caverna Rochosa (Geodude)",
       "durationSec": 15820,
-      "logs": [
-        "Derrotou Geodude selvagem! Loot: 28x Pedra Dura, 35x Ouro",
-        "Capturou Geodude selvagem! (Nv. 9, Normal)",
-        "Derrotou Geodude selvagem! Loot: 1x Pokébola",
-        "[Twitch Lurker] Conectado a 11 canais oficiais (+15% a +20% EXP ativo)",
-        "[Kick Lurker] Conectado à live de 'tftoddy'! Saldo atual: 20 pontos (+10 a cada 5m)",
-        "Bulbasaur subiu para o Nível 12 (+12 HP, +3 Poder)!",
-        "Derrotou Geodude selvagem! Loot: 40x Ouro"
+      "activePokemon": {
+        "id": 1,
+        "name": "Bulbasaur",
+        "level": 12,
+        "types": ["Grama", "Veneno"],
+        "hp": 252,
+        "maxHp": 252,
+        "power": 34,
+        "shiny": false,
+        "xp": 3120,
+        "xpNext": 4000
+      },
+      "team": [
+        { "name": "Bulbasaur", "level": 12, "types": ["Grama", "Veneno"], "hp": 252, "maxHp": 252, "active": true },
+        { "name": "Pidgey", "level": 10, "types": ["Normal", "Voador"], "hp": 180, "maxHp": 180, "active": false },
+        { "name": "Geodude", "level": 9, "types": ["Pedra", "Terra"], "hp": 165, "maxHp": 165, "active": false },
+        { "name": "Rattata", "level": 8, "types": ["Normal"], "hp": 140, "maxHp": 140, "active": false }
       ],
-      "updatedAt": 1791857366000,
-      "extra": {
-        "diamonds": 15,
-        "orbs": 380,
-        "catches": 14,
-        "noCentro": false,
-        "activePokemon": "Bulbasaur",
-        "pokemonLevel": 12,
-        "pokemonTypes": "Grama / Veneno",
-        "pokeballs": {
-          "pokeball": 42,
-          "greatball": 15,
-          "ultraball": 4
-        },
-        "twitch": {
-          "connected": true,
-          "bonusActive": true,
-          "channels": ["#tftoddy", "#faasii", "#axtlol", "#xdaren_", "#cogu", "#matta", "#patopapao", "#rodil", "#biscoitao", "#luccatv", "#clovaobengala"]
-        },
-        "kick": {
-          "connected": true,
-          "streamer": "tftoddy",
-          "points": 20,
-          "rate": "+10 pts / 5m"
-        }
-      }
+      "pokeballs": {
+        "pokeball": 42,
+        "greatball": 15,
+        "ultraball": 4,
+        "masterball": 1
+      },
+      "items": {
+        "potion": 18,
+        "superpotion": 8,
+        "revive": 5,
+        "hardstone": 28
+      },
+      "automation": {
+        "autoHunt": true,
+        "autoCatch": true,
+        "autoHeal": true,
+        "autoRevive": true,
+        "noCentro": false
+      },
+      "logs": [
+        "Iniciou caçada autônoma na Caverna Rochosa (Geodude)",
+        "Encontrou Geodude selvagem (Nv. 9)!",
+        "Bulbasaur usou Chicote de Vinha! Dano: 68 (Super Efetivo x2.0)",
+        "Derrotou Geodude selvagem! Loot: 28x Pedra Dura, +35 Ouro, +145 EXP",
+        "Arremessou Pokébola em Geodude selvagem... 1... 2... 3... Capturado!",
+        "Bulbasaur subiu para o Nível 12 (+12 HP, +3 Poder)!",
+        "Encontrou Geodude selvagem (Nv. 10)!",
+        "Derrotou Geodude selvagem! Loot: +40 Ouro, +1x Pokébola",
+        "Vida da equipe em 100% - Caçada contínua ativa."
+      ]
     }
   ]
 }
