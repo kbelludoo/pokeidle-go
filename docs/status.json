@@ -9,31 +9,30 @@
       "maxHp": 600,
       "mana": 82,
       "maxMana": 82,
-      "gold": 1733630,
-      "kills": 2492,
-      "expPerHour": 14242.179724736832,
+      "gold": 1735463,
+      "kills": 2532,
+      "expPerHour": 14205.645089596022,
       "status": "hunting",
       "currentArea": "geodude",
-      "durationSec": 8228,
+      "durationSec": 8350,
       "logs": [
         "Derrotou Geodude! Loot: Small Stone, Earth Ball",
-        "Derrotou Geodude! Loot: 2x Small Stone, Earth Ball, Stone Orb",
         "Derrotou Geodude! Loot: 2x Earth Ball",
-        "Derrotou Geodude! Loot: 2x Small Stone, Earth Ball",
-        "Derrotou Geodude! Loot: 2x Small Stone, Earth Ball, Stone Orb",
-        "Derrotou Geodude! Loot: Small Stone, Earth Ball",
-        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball, Stone Orb",
-        "Derrotou Geodude! Loot: Small Stone, Earth Ball, Stone Orb",
         "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball",
-        "Derrotou Geodude! Loot: Small Stone, Earth Ball"
+        "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball",
+        "Derrotou Geodude! Loot: Small Stone, Earth Ball",
+        "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball, Stone Orb",
+        "Derrotou Geodude! Loot: 2x Earth Ball",
+        "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball",
+        "Derrotou Geodude! Loot: 2x Small Stone, Earth Ball",
+        "Derrotou Geodude! Loot: 2x Earth Ball"
       ],
-      "updatedAt": 1791868087513,
+      "updatedAt": 1791868210043,
       "extra": {
         "catches": 0,
         "diamonds": 0,
         "kickLives": [
           "axt",
-          "rodil",
           "xdaren",
           "tftoddy",
           "surskity"
@@ -44,7 +43,7 @@
     }
   ],
   "goroutines": 9,
-  "ramAllocMB": 1.0535812377929688,
+  "ramAllocMB": 1.0883407592773438,
   "ramSysMB": 13.099861145019531,
-  "uptime": "2h17m12s"
+  "uptime": "2h19m11s"
 }
