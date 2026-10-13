@@ -5,29 +5,29 @@
       "name": "Treinador #1",
       "level": 29,
       "vocation": "Bulbasaur (Nv. 29)",
-      "hp": 417,
+      "hp": 413,
       "maxHp": 600,
       "mana": 82,
       "maxMana": 82,
-      "gold": 1803697,
-      "kills": 503,
-      "expPerHour": 10657.058517190058,
+      "gold": 1805567,
+      "kills": 541,
+      "expPerHour": 10708.323406869147,
       "status": "hunting",
       "currentArea": "geodude",
-      "durationSec": 1699,
+      "durationSec": 1818,
       "logs": [
-        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball, Stone Orb",
-        "Derrotou Geodude! Loot: 2x Small Stone, Earth Ball, Stone Orb",
-        "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball",
-        "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball",
-        "Derrotou Geodude! Loot: 2x Small Stone, Earth Ball",
         "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball, Stone Orb",
-        "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball",
-        "Derrotou Geodude! Loot: 2x Small Stone, Earth Ball",
+        "Derrotou Geodude! Loot: Small Stone, Earth Ball",
         "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball, Stone Orb",
-        "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball"
+        "Derrotou Geodude! Loot: Small Stone, Earth Ball",
+        "Derrotou Geodude! Loot: 2x Earth Ball",
+        "Derrotou Geodude! Loot: Small Stone, Earth Ball",
+        "Derrotou Geodude! Loot: Small Stone, Earth Ball, Stone Orb",
+        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball, Stone Orb, Strange Rock",
+        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball",
+        "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball, Stone Orb"
       ],
-      "updatedAt": 1791873247674,
+      "updatedAt": 1791873367291,
       "extra": {
         "catches": 0,
         "diamonds": 0,
@@ -42,7 +42,7 @@
     }
   ],
   "goroutines": 11,
-  "ramAllocMB": 1.0026321411132812,
+  "ramAllocMB": 0.9953994750976562,
   "ramSysMB": 13.099861145019531,
-  "uptime": "28m21s"
+  "uptime": "30m20s"
 }
