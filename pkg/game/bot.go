@@ -46,6 +46,7 @@ type Bot struct {
 	pokemons    map[int64]PokeItemPokemon
 	balls       map[string]int
 	pokedex     map[string]PokeDexEntry
+	bossState   *PokeBossState
 
 	ticketChan chan string
 }
@@ -64,6 +65,7 @@ func NewBot(cfg AccountConfig) *Bot {
 		pokemons:    make(map[int64]PokeItemPokemon),
 		balls:       make(map[string]int),
 		pokedex:     make(map[string]PokeDexEntry),
+		bossState:   &PokeBossState{Vitorias: make(map[string]int)},
 		twitchCli:   twitch.NewClient(cfg.Twitch),
 		kickCli:     kick.NewClient(cfg.Kick),
 		optimizer:   NewHuntOptimizer(),
@@ -411,12 +413,20 @@ func (b *Bot) applyState(e *PokeState) {
 		}
 	}
 
-	// Telemetria do Bestiário / Pokédex
-	captured, seen, pct := CountBestiaryProgress(b.pokedex)
-	b.status.Extra["bestiaryCaptured"] = captured
-	b.status.Extra["bestiarySeen"] = seen
-	b.status.Extra["bestiaryTotal"] = 151
-	b.status.Extra["bestiaryProgressPct"] = fmt.Sprintf("%.1f%%", pct)
+	if e.Boss != nil {
+		b.bossState = e.Boss
+	}
+
+	// Telemetria Completa de Todos os Bestiários (Nacional 1-9, Outland, Megas, Shinys e Bosses)
+	fullReport := CalculateAllBestiaries(b.pokedex, b.bossState)
+	b.status.Extra["bestiary"] = fullReport
+	b.status.Extra["bestiaryCaptured"] = fullReport.NationalCaptured
+	b.status.Extra["bestiarySeen"] = fullReport.NationalSeen
+	b.status.Extra["bestiaryTotal"] = fullReport.NationalTotal
+	b.status.Extra["bestiaryProgressPct"] = fmt.Sprintf("%.1f%%", fullReport.NationalPct)
+	b.status.Extra["shinysCaptured"] = fullReport.ShinysCaptured
+	b.status.Extra["shinysSeen"] = fullReport.ShinysSeen
+	b.status.Extra["bossesDefeated"] = fullReport.BossesDefeated
 	b.status.Extra["focusBestiary"] = b.config.Settings.FocusBestiary
 	b.status.Extra["huntHasUnregistered"] = HuntHasUnregisteredSpecies(b.getCurrentHuntArea(), b.pokedex)
 
@@ -504,27 +514,62 @@ func (b *Bot) handleBattleEvents(evs []PokeGameEvent) {
 				entry := b.pokedex[pokeIDStr]
 				isNewBestiary := entry.C == 0
 				entry.C++
+				if ev.Pokemon.Shiny {
+					entry.SC++
+				}
 				b.pokedex[pokeIDStr] = entry
-				captured, _, pct := CountBestiaryProgress(b.pokedex)
-				b.status.Extra["bestiaryCaptured"] = captured
-				b.status.Extra["bestiaryProgressPct"] = fmt.Sprintf("%.1f%%", pct)
+				fullReport := CalculateAllBestiaries(b.pokedex, b.bossState)
+				b.status.Extra["bestiary"] = fullReport
+				b.status.Extra["bestiaryCaptured"] = fullReport.NationalCaptured
+				b.status.Extra["bestiaryProgressPct"] = fmt.Sprintf("%.1f%%", fullReport.NationalPct)
+				b.status.Extra["shinysCaptured"] = fullReport.ShinysCaptured
 				b.mu.Unlock()
 
+				genInfo := GetGenerationForPokeID(ev.Pokemon.PokeID)
+				genTag := "Nacional"
+				genProgress := ""
+				if genInfo != nil {
+					genTag = fmt.Sprintf("%s (%s)", genInfo.Name, genInfo.Region)
+					genProgress = fmt.Sprintf(" • %s: %d/%d (%.1f%%)", genInfo.Region, genInfo.Captured, genInfo.Total, genInfo.Pct)
+				}
+
 				if isNewBestiary {
-					b.addLog(fmt.Sprintf("📖 [Bestiário] NOVO REGISTRO DESBLOQUEADO: %s (#%d)! Progresso da Pokédex: %d/151 (%.1f%%)",
-						ev.Pokemon.Nome, ev.Pokemon.PokeID, captured, pct))
+					b.addLog(fmt.Sprintf("📖 [Bestiário - %s] NOVO REGISTRO DESBLOQUEADO: %s (#%d)! Total Nacional: %d/%d (%.1f%%)%s",
+						genTag, ev.Pokemon.Nome, ev.Pokemon.PokeID, fullReport.NationalCaptured, fullReport.NationalTotal, fullReport.NationalPct, genProgress))
 
 					// Se focado em completar o Bestiário, checa se a rota atual foi concluída
 					if b.config.Settings.FocusBestiary {
 						currentArea := b.getCurrentHuntArea()
 						if !HuntHasUnregisteredSpecies(currentArea, b.pokedex) {
-							b.addLog(fmt.Sprintf("🏆 [Bestiário] 100%% das espécies de '%s' capturadas! Procurando próxima rota com espécies pendentes...", currentArea.Nome))
+							b.addLog(fmt.Sprintf("🏆 [Bestiário - %s] 100%% das espécies de '%s' capturadas! Procurando próxima rota com espécies pendentes...", genTag, currentArea.Nome))
 							go b.ensureHunting()
 						}
 					}
 				}
+
+				if ev.Pokemon.Shiny {
+					b.addLog(fmt.Sprintf("✨ [Shiny Dex] ✨ SHINY %s (#%d) registrado na Shiny Dex! Total: %d Shinys capturados!",
+						ev.Pokemon.Nome, ev.Pokemon.PokeID, fullReport.ShinysCaptured))
+				}
 			}
 			go b.optimizeTeam()
+
+		case "bossMorto":
+			b.mu.Lock()
+			if b.bossState == nil {
+				b.bossState = &PokeBossState{Vitorias: make(map[string]int)}
+			}
+			if b.bossState.Vitorias == nil {
+				b.bossState.Vitorias = make(map[string]int)
+			}
+			b.bossState.Vitorias[ev.Nome]++
+			fullReport := CalculateAllBestiaries(b.pokedex, b.bossState)
+			b.status.Extra["bestiary"] = fullReport
+			b.status.Extra["bossesDefeated"] = fullReport.BossesDefeated
+			b.mu.Unlock()
+
+			b.addLog(fmt.Sprintf("👑 [Boss Dex] Boss '%s' derrotado com sucesso! Progresso de Arena: %d/87 (%.1f%%)",
+				ev.Nome, fullReport.BossesDefeated, fullReport.BossesPct))
 
 		case "levelup":
 			if ev.Quem == "treinador" {

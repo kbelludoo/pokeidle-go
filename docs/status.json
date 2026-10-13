@@ -10,8 +10,121 @@
         "kickLives": [
           "biscoitao"
         ],
-        "noCentro": false,
-        "orbs": 0
+        "hp": 549,
+        "maxHp": 636,
+        "power": 88,
+        "effectivePower": 176,
+        "shiny": false,
+        "xp": 8820,
+        "xpNext": 11500
+      },
+      "matchup": {
+        "status": "Super Efetivo x2.0 💥",
+        "multiplier": 2.0,
+        "effectivePower": 176,
+        "attackerTypes": "Grama / Veneno",
+        "defenderTypes": "Pedra / Terra",
+        "speedBonus": "+120% velocidade de farm"
+      },
+      "team": [
+        {
+          "name": "Bulbasaur",
+          "level": 31,
+          "types": [
+            "Grama",
+            "Veneno"
+          ],
+          "hp": 549,
+          "maxHp": 636,
+          "active": true,
+          "matchup": "x2.0 💥"
+        },
+        {
+          "name": "Pidgeotto",
+          "level": 28,
+          "types": [
+            "Normal",
+            "Voador"
+          ],
+          "hp": 480,
+          "maxHp": 480,
+          "active": false,
+          "matchup": "x0.5 🛡️"
+        },
+        {
+          "name": "Geodude",
+          "level": 27,
+          "types": [
+            "Pedra",
+            "Terra"
+          ],
+          "hp": 465,
+          "maxHp": 465,
+          "active": false,
+          "matchup": "x1.0"
+        },
+        {
+          "name": "Raticate",
+          "level": 26,
+          "types": [
+            "Normal"
+          ],
+          "hp": 420,
+          "maxHp": 420,
+          "active": false,
+          "matchup": "x0.5 🛡️"
+        }
+      ],
+      "pokeballs": {
+        "pokeball": 58,
+        "greatball": 24,
+        "ultraball": 8,
+        "masterball": 1
+      },
+      "items": {
+        "potion": 25,
+        "superpotion": 14,
+        "revive": 9,
+        "hardstone": 52
+      },
+      "bestiary": {
+        "nationalCaptured": 74,
+        "nationalSeen": 142,
+        "nationalTotal": 1131,
+        "nationalPct": 6.5,
+        "shinysCaptured": 2,
+        "shinysSeen": 6,
+        "shinysPct": 0.2,
+        "bossesDefeated": 12,
+        "bossesTotal": 87,
+        "bossesPct": 13.8,
+        "totalKills": 1463,
+        "totalCaptures": 74,
+        "currentAreaStatus": "100% Concluído (Caverna Rochosa)",
+        "focusBestiary": true,
+        "generations": [
+          { "id": 1, "name": "Gen 1 (Kanto)", "region": "Kanto", "minId": 1, "maxId": 151, "total": 151, "captured": 48, "seen": 86, "pct": 31.8, "complete": false },
+          { "id": 2, "name": "Gen 2 (Johto)", "region": "Johto", "minId": 152, "maxId": 251, "total": 100, "captured": 14, "seen": 28, "pct": 14.0, "complete": false },
+          { "id": 3, "name": "Gen 3 (Hoenn)", "region": "Hoenn", "minId": 252, "maxId": 386, "total": 135, "captured": 8, "seen": 16, "pct": 5.9, "complete": false },
+          { "id": 4, "name": "Gen 4 (Sinnoh)", "region": "Sinnoh", "minId": 387, "maxId": 493, "total": 107, "captured": 4, "seen": 8, "pct": 3.7, "complete": false },
+          { "id": 5, "name": "Gen 5 (Unova)", "region": "Unova", "minId": 494, "maxId": 649, "total": 156, "captured": 0, "seen": 2, "pct": 0.0, "complete": false },
+          { "id": 6, "name": "Gen 6 (Kalos)", "region": "Kalos", "minId": 650, "maxId": 721, "total": 72, "captured": 0, "seen": 1, "pct": 0.0, "complete": false },
+          { "id": 7, "name": "Gen 7 (Alola)", "region": "Alola", "minId": 722, "maxId": 809, "total": 88, "captured": 0, "seen": 1, "pct": 0.0, "complete": false },
+          { "id": 8, "name": "Gen 8 (Galar)", "region": "Galar", "minId": 810, "maxId": 905, "total": 96, "captured": 0, "seen": 0, "pct": 0.0, "complete": false },
+          { "id": 9, "name": "Gen 9 (Paldea)", "region": "Paldea", "minId": 906, "maxId": 1025, "total": 120, "captured": 0, "seen": 0, "pct": 0.0, "complete": false },
+          { "id": 10, "name": "Outland", "region": "Outland", "minId": 2001, "maxId": 2058, "total": 58, "captured": 0, "seen": 0, "pct": 0.0, "complete": false },
+          { "id": 11, "name": "Mega Evoluções", "region": "Megas", "minId": 3001, "maxId": 3999, "total": 48, "captured": 0, "seen": 0, "pct": 0.0, "complete": false }
+        ]
+      },
+      "automation": {
+        "autoHunt": true,
+        "autoWeakness": true,
+        "autoOptimizeXP": true,
+        "autoCatch": true,
+        "focusBestiary": true,
+        "autoHeal": true,
+        "autoRevive": true,
+        "noCentro": false
       },
       "gold": 2134306,
       "hp": 545,

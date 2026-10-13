@@ -3,6 +3,7 @@ package game
 import (
 	"fmt"
 	"sort"
+	"strconv"
 	"strings"
 	"sync"
 	"time"
@@ -202,7 +203,124 @@ func PickBestPokemonForHunt(pokemons map[int64]PokeItemPokemon, hunt PokeHuntAre
 	return bestPk, bestMatchup, true
 }
 
-// CountBestiaryProgress calcula o total de espécies capturadas, vistas e porcentagem da Pokédex (151 Gen 1)
+// PokeGenerations define todas as 11 faixas/gerações da Pokédex oficial do Pokéidle World
+var PokeGenerations = []GenerationInfo{
+	{ID: 1, Name: "Geração 1", Region: "Kanto", MinID: 1, MaxID: 151, Total: 151},
+	{ID: 2, Name: "Geração 2", Region: "Johto", MinID: 152, MaxID: 251, Total: 100},
+	{ID: 3, Name: "Geração 3", Region: "Hoenn", MinID: 252, MaxID: 386, Total: 135},
+	{ID: 4, Name: "Geração 4", Region: "Sinnoh", MinID: 387, MaxID: 493, Total: 107},
+	{ID: 5, Name: "Geração 5", Region: "Unova", MinID: 494, MaxID: 649, Total: 156},
+	{ID: 6, Name: "Geração 6", Region: "Kalos", MinID: 650, MaxID: 721, Total: 72},
+	{ID: 7, Name: "Geração 7", Region: "Alola", MinID: 722, MaxID: 809, Total: 88},
+	{ID: 8, Name: "Geração 8", Region: "Galar", MinID: 810, MaxID: 905, Total: 96},
+	{ID: 9, Name: "Geração 9", Region: "Paldea", MinID: 906, MaxID: 1025, Total: 120},
+	{ID: 10, Name: "Outland", Region: "Outland", MinID: 2001, MaxID: 2058, Total: 58},
+	{ID: 11, Name: "Mega Evoluções", Region: "Megas", MinID: 3001, MaxID: 3999, Total: 48},
+}
+
+// GetGenerationForPokeID retorna a geração e região correspondente a um pokeId
+func GetGenerationForPokeID(pokeID int) *GenerationInfo {
+	for i := range PokeGenerations {
+		if pokeID >= PokeGenerations[i].MinID && pokeID <= PokeGenerations[i].MaxID {
+			return &PokeGenerations[i]
+		}
+	}
+	return nil
+}
+
+// CalculateAllBestiaries gera o relatório completo de todos os bestiários (Nacional, 1-9, Outland, Megas, Shiny e Bosses)
+func CalculateAllBestiaries(pokedex map[string]PokeDexEntry, bossState *PokeBossState) BestiaryFullReport {
+	report := BestiaryFullReport{
+		NationalTotal: 1131, // Total de espécies catalogadas no Pokéidle
+		BossesTotal:   87,   // 87 chefes mundiais da Arena
+	}
+
+	gens := make([]GenerationInfo, len(PokeGenerations))
+	copy(gens, PokeGenerations)
+
+	if pokedex != nil {
+		for key, entry := range pokedex {
+			id, err := strconv.Atoi(key)
+			if err != nil {
+				continue
+			}
+
+			report.TotalKills += int64(entry.K)
+			report.TotalCaptures += int64(entry.C)
+
+			isCaptured := entry.C > 0
+			isSeen := entry.K > 0 || entry.C > 0
+
+			if isCaptured {
+				report.NationalCaptured++
+			}
+			if isSeen {
+				report.NationalSeen++
+			}
+
+			// Shiny Dex
+			if entry.SC > 0 {
+				report.ShinysCaptured++
+			}
+			if entry.SV > 0 || entry.SC > 0 {
+				report.ShinysSeen++
+			}
+
+			// Atualiza a geração correspondente
+			for i := range gens {
+				if id >= gens[i].MinID && id <= gens[i].MaxID {
+					if isCaptured {
+						gens[i].Captured++
+					}
+					if isSeen {
+						gens[i].Seen++
+					}
+					break
+				}
+			}
+		}
+	}
+
+	// Porcentagens por geração
+	for i := range gens {
+		if gens[i].Total > 0 {
+			gens[i].Pct = (float64(gens[i].Captured) / float64(gens[i].Total)) * 100.0
+			if gens[i].Pct > 100.0 {
+				gens[i].Pct = 100.0
+			}
+			gens[i].Complete = gens[i].Captured >= gens[i].Total
+		}
+	}
+	report.Generations = gens
+
+	// Porcentagem nacional global
+	if report.NationalTotal > 0 {
+		report.NationalPct = (float64(report.NationalCaptured) / float64(report.NationalTotal)) * 100.0
+		if report.NationalPct > 100.0 {
+			report.NationalPct = 100.0
+		}
+	}
+
+	// Shiny Dex Pct
+	if report.NationalTotal > 0 {
+		report.ShinysPct = (float64(report.ShinysCaptured) / float64(report.NationalTotal)) * 100.0
+	}
+
+	// Boss Dex
+	if bossState != nil && bossState.Vitorias != nil {
+		report.BossesDefeated = len(bossState.Vitorias)
+		if report.BossesTotal > 0 {
+			report.BossesPct = (float64(report.BossesDefeated) / float64(report.BossesTotal)) * 100.0
+			if report.BossesPct > 100.0 {
+				report.BossesPct = 100.0
+			}
+		}
+	}
+
+	return report
+}
+
+// CountBestiaryProgress calcula o total de espécies capturadas, vistas e porcentagem nacional
 func CountBestiaryProgress(pokedex map[string]PokeDexEntry) (int, int, float64) {
 	if pokedex == nil {
 		return 0, 0, 0.0
@@ -217,8 +335,8 @@ func CountBestiaryProgress(pokedex map[string]PokeDexEntry) (int, int, float64) 
 			seen++
 		}
 	}
-	const totalGen1 = 151
-	pct := (float64(captured) / float64(totalGen1)) * 100.0
+	const totalNacional = 1131
+	pct := (float64(captured) / float64(totalNacional)) * 100.0
 	if pct > 100.0 {
 		pct = 100.0
 	}

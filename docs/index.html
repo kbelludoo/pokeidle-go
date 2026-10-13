@@ -573,39 +573,68 @@
       </div>
     </div>
 
-    <!-- BESTIARY & POKÉDEX BANNER -->
-    <div style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.12) 0%, rgba(245, 158, 11, 0.1) 100%); border: 1px solid rgba(239, 68, 68, 0.35); border-radius: 16px; padding: 16px 22px; margin-bottom: 22px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; box-shadow: 0 10px 25px -10px rgba(0,0,0,0.5);">
-      <div style="display: flex; align-items: center; gap: 14px; flex: 1; min-width: 280px;">
-        <div style="width: 46px; height: 46px; border-radius: 12px; background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; box-shadow: 0 0 15px rgba(239, 68, 68, 0.3);">
-          📖
+    <!-- TODOS OS BESTIÁRIOS - MODO COMPLETO -->
+    <div style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.12) 0%, rgba(245, 158, 11, 0.08) 50%, rgba(168, 85, 247, 0.1) 100%); border: 1px solid rgba(239, 68, 68, 0.35); border-radius: 16px; padding: 18px 22px; margin-bottom: 22px; box-shadow: 0 10px 25px -10px rgba(0,0,0,0.5);">
+      <!-- TOPO COM OS 3 GRANDES BESTIÁRIOS -->
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; margin-bottom: 14px;">
+        <div style="display: flex; align-items: center; gap: 14px; flex: 1; min-width: 280px;">
+          <div style="width: 46px; height: 46px; border-radius: 12px; background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; box-shadow: 0 0 15px rgba(239, 68, 68, 0.3);">
+            📖
+          </div>
+          <div>
+            <div style="font-size: 1rem; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 8px;">
+              <span>Todos os Bestiários • Modo Completo</span>
+              <span style="font-size: 0.72rem; background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid #ef4444; padding: 2px 8px; border-radius: 6px; font-weight: 700;" id="bestiaryBadge">11 GERAÇÕES ATIVAS</span>
+            </div>
+            <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 3px;" id="bestiaryStatus">
+              🏆 100% Concluído em Caverna Rochosa • Buscando espécies pendentes em qualquer geração (+350pts)
+            </div>
+          </div>
         </div>
-        <div style="flex: 1;">
-          <div style="font-size: 0.98rem; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 8px;">
-            <span>Bestiário & Pokédex Autônoma</span>
-            <span style="font-size: 0.72rem; background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid #ef4444; padding: 2px 8px; border-radius: 6px; font-weight: 700;" id="bestiaryBadge">FOCO ATIVO</span>
+
+        <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
+          <!-- POKEDEX NACIONAL -->
+          <div style="text-align: right; background: rgba(255,255,255,0.03); padding: 8px 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.06);">
+            <div style="font-size: 0.68rem; color: var(--text-muted); text-transform: uppercase;">Pokédex Nacional</div>
+            <div style="font-size: 1.05rem; font-weight: 800; color: #f87171; font-family: 'JetBrains Mono', monospace;" id="bestiaryProgressText">
+              74 / 1.131 (6.5%)
+            </div>
           </div>
-          <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 3px;" id="bestiaryStatus">
-            🏆 100% Concluído (Caverna Rochosa) • Priorizando rotas com espécies pendentes (+350pts)
+
+          <!-- SHINY DEX -->
+          <div style="text-align: right; background: rgba(255,255,255,0.03); padding: 8px 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.06);">
+            <div style="font-size: 0.68rem; color: var(--text-muted); text-transform: uppercase;">✨ Shiny Dex</div>
+            <div style="font-size: 1.05rem; font-weight: 800; color: #fbbf24; font-family: 'JetBrains Mono', monospace;" id="shinyDexText">
+              2 Capturados (6 Vistos)
+            </div>
           </div>
-          <div style="margin-top: 8px;">
-            <div class="bar-track" style="height: 8px;">
-              <div class="bar-fill bestiary-fill" id="bestiaryFill" style="width: 31.8%;"></div>
+
+          <!-- BOSS DEX -->
+          <div style="text-align: right; background: rgba(255,255,255,0.03); padding: 8px 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.06);">
+            <div style="font-size: 0.68rem; color: var(--text-muted); text-transform: uppercase;">👑 Boss Dex</div>
+            <div style="font-size: 1.05rem; font-weight: 800; color: #c084fc; font-family: 'JetBrains Mono', monospace;" id="bossDexText">
+              12 / 87 (13.8%)
             </div>
           </div>
         </div>
       </div>
-      <div style="display: flex; align-items: center; gap: 18px;">
-        <div style="text-align: right;">
-          <div style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase;">Progresso Pokédex</div>
-          <div style="font-size: 1.15rem; font-weight: 800; color: #f87171; font-family: 'JetBrains Mono', monospace;" id="bestiaryProgressText">
-            48 / 151 (31.8%)
-          </div>
+
+      <!-- BARRA NACIONAL GERAL -->
+      <div style="margin-bottom: 12px;">
+        <div class="bar-track" style="height: 8px;">
+          <div class="bar-fill bestiary-fill" id="bestiaryFill" style="width: 6.5%;"></div>
         </div>
-        <div style="text-align: right; border-left: 1px solid rgba(255,255,255,0.1); padding-left: 14px;">
-          <div style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase;">Monstros Vistos</div>
-          <div style="font-size: 1.15rem; font-weight: 800; color: #fbbf24; font-family: 'JetBrains Mono', monospace;" id="bestiarySeen">
-            86 Vistos
+      </div>
+
+      <!-- GRADE DE TODAS AS 11 GERAÇÕES/FAIXAS -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 8px; margin-top: 10px;" id="gensGrid">
+        <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; padding: 7px 10px;">
+          <div style="display: flex; justify-content: space-between; font-size: 0.72rem; font-weight: 700; color: #38bdf8;">
+            <span>Gen 1 (Kanto)</span>
+            <span>48/151</span>
           </div>
+          <div style="font-size: 0.65rem; color: var(--text-muted); margin-bottom: 4px;">Kanto (31.8%)</div>
+          <div class="bar-track" style="height: 4px;"><div class="bar-fill" style="width: 31.8%; background: linear-gradient(90deg, #0284c7, #38bdf8);"></div></div>
         </div>
       </div>
     </div>
@@ -851,20 +880,55 @@
             document.getElementById('valDefenders').textContent = m.defenderTypes || 'Pedra / Terra';
           }
 
-          // Bestiário / Pokédex
+          // Todos os Bestiários (Modo Completo)
           if (acc.bestiary) {
             const b = acc.bestiary;
-            const captured = b.captured || 0;
-            const total = b.total || 151;
-            const pct = b.progressPct || (Math.round((captured / total) * 1000) / 10);
-            document.getElementById('bestiaryProgressText').textContent = `${captured} / ${total} (${pct}%)`;
+            const captured = b.nationalCaptured || b.captured || 0;
+            const total = b.nationalTotal || b.total || 1131;
+            const pct = b.nationalPct || b.progressPct || (Math.round((captured / total) * 1000) / 10);
+
+            document.getElementById('bestiaryProgressText').textContent = `${captured} / ${formatNumber(total)} (${pct}%)`;
             document.getElementById('bestiaryFill').style.width = `${pct}%`;
-            document.getElementById('bestiarySeen').textContent = `${b.seen || captured} Vistos`;
+
+            if (document.getElementById('shinyDexText')) {
+              const sc = b.shinysCaptured || 0;
+              const sv = b.shinysSeen || sc;
+              document.getElementById('shinyDexText').textContent = `${sc} Capturados (${sv} Vistos)`;
+            }
+
+            if (document.getElementById('bossDexText')) {
+              const bd = b.bossesDefeated || 0;
+              const bt = b.bossesTotal || 87;
+              const bp = b.bossesPct || Math.round((bd / bt) * 100);
+              document.getElementById('bossDexText').textContent = `${bd} / ${bt} (${bp}%)`;
+            }
+
             if (b.currentAreaStatus) {
-              document.getElementById('bestiaryStatus').innerHTML = `🏆 ${b.currentAreaStatus} • Priorizando rotas com espécies pendentes (+350pts)`;
+              document.getElementById('bestiaryStatus').innerHTML = `🏆 ${b.currentAreaStatus} • Buscando espécies pendentes em qualquer geração (+350pts)`;
             }
             if (b.focusBestiary !== undefined) {
-              document.getElementById('bestiaryBadge').textContent = b.focusBestiary ? "FOCO ATIVO" : "NORMAL";
+              document.getElementById('bestiaryBadge').textContent = b.focusBestiary ? "11 GERAÇÕES ATIVAS" : "NORMAL";
+            }
+
+            // Grade de Gerações Dinâmica
+            const gensGrid = document.getElementById('gensGrid');
+            if (gensGrid && b.generations && b.generations.length > 0) {
+              gensGrid.innerHTML = b.generations.map(g => {
+                const complete = g.complete || (g.captured >= g.total);
+                const color = complete ? '#fbbf24' : (g.captured > 0 ? '#38bdf8' : 'rgba(255,255,255,0.4)');
+                return `
+                  <div style="background: rgba(255,255,255,0.02); border: 1px solid ${complete ? 'rgba(251, 191, 36, 0.4)' : 'rgba(255,255,255,0.06)'}; border-radius: 8px; padding: 7px 10px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.72rem; font-weight: 700; color: ${color};">
+                      <span>${complete ? '✓ ' : ''}${g.name}</span>
+                      <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: #fff;">${g.captured}/${g.total}</span>
+                    </div>
+                    <div style="font-size: 0.65rem; color: var(--text-muted); margin-bottom: 4px;">${g.region} (${g.pct.toFixed(1)}%)</div>
+                    <div class="bar-track" style="height: 4px;">
+                      <div class="bar-fill" style="width: ${g.pct}%; background: ${complete ? 'linear-gradient(90deg, #f59e0b, #fbbf24)' : 'linear-gradient(90deg, #0284c7, #38bdf8)'};"></div>
+                    </div>
+                  </div>
+                `;
+              }).join('');
             }
           }
 

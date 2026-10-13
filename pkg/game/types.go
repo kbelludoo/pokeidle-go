@@ -89,8 +89,14 @@ type PokeState struct {
 	Balls      map[string]int          `json:"balls,omitempty"`
 	Automation PokeAutomationPref      `json:"automation,omitempty"`
 	Pokedex    map[string]PokeDexEntry `json:"pokedex,omitempty"`
+	Boss       *PokeBossState          `json:"boss,omitempty"`
 	Twitch     *PokeTwitchState        `json:"twitch,omitempty"`
 	Kick       *PokeKickState          `json:"kick,omitempty"`
+}
+
+type PokeBossState struct {
+	Vitorias map[string]int `json:"vitorias,omitempty"`
+	Tokens   int            `json:"tokens,omitempty"`
 }
 
 type PokeDexEntry struct {
@@ -98,6 +104,37 @@ type PokeDexEntry struct {
 	C  int `json:"c"`  // Capturas (registradas na Pokébola)
 	SV int `json:"sv"` // Shinys vistos no selvagem
 	SC int `json:"sc"` // Shinys capturados
+}
+
+// GenerationInfo armazena dados de uma geração / região específica da Pokédex
+type GenerationInfo struct {
+	ID       int     `json:"id"`
+	Name     string  `json:"name"`
+	Region   string  `json:"region"`
+	MinID    int     `json:"minId"`
+	MaxID    int     `json:"maxId"`
+	Total    int     `json:"total"`
+	Captured int     `json:"captured"`
+	Seen     int     `json:"seen"`
+	Pct      float64 `json:"pct"`
+	Complete bool    `json:"complete"`
+}
+
+// BestiaryFullReport engloba todas as facetas do Bestiário (Nacional, Gerações 1-9, Outland, Megas, Shiny Dex e Boss Dex)
+type BestiaryFullReport struct {
+	NationalCaptured int              `json:"nationalCaptured"`
+	NationalSeen     int              `json:"nationalSeen"`
+	NationalTotal    int              `json:"nationalTotal"`
+	NationalPct      float64          `json:"nationalPct"`
+	ShinysCaptured   int              `json:"shinysCaptured"`
+	ShinysSeen       int              `json:"shinysSeen"`
+	ShinysPct        float64          `json:"shinysPct"`
+	BossesDefeated   int              `json:"bossesDefeated"`
+	BossesTotal      int              `json:"bossesTotal"`
+	BossesPct        float64          `json:"bossesPct"`
+	TotalKills       int64            `json:"totalKills"`
+	TotalCaptures    int64            `json:"totalCaptures"`
+	Generations      []GenerationInfo `json:"generations"`
 }
 
 type PokeTwitchState struct {
