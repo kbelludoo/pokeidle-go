@@ -29,15 +29,24 @@
         "hp": 252,
         "maxHp": 252,
         "power": 34,
+        "effectivePower": 68,
         "shiny": false,
         "xp": 3120,
         "xpNext": 4000
       },
+      "matchup": {
+        "status": "Super Efetivo x2.0 💥",
+        "multiplier": 2.0,
+        "effectivePower": 68,
+        "attackerTypes": "Grama / Veneno",
+        "defenderTypes": "Pedra / Terra",
+        "speedBonus": "+120% velocidade de farm"
+      },
       "team": [
-        { "name": "Bulbasaur", "level": 12, "types": ["Grama", "Veneno"], "hp": 252, "maxHp": 252, "active": true },
-        { "name": "Pidgey", "level": 10, "types": ["Normal", "Voador"], "hp": 180, "maxHp": 180, "active": false },
-        { "name": "Geodude", "level": 9, "types": ["Pedra", "Terra"], "hp": 165, "maxHp": 165, "active": false },
-        { "name": "Rattata", "level": 8, "types": ["Normal"], "hp": 140, "maxHp": 140, "active": false }
+        { "name": "Bulbasaur", "level": 12, "types": ["Grama", "Veneno"], "hp": 252, "maxHp": 252, "active": true, "matchup": "x2.0 💥" },
+        { "name": "Pidgey", "level": 10, "types": ["Normal", "Voador"], "hp": 180, "maxHp": 180, "active": false, "matchup": "x0.5 🛡️" },
+        { "name": "Geodude", "level": 9, "types": ["Pedra", "Terra"], "hp": 165, "maxHp": 165, "active": false, "matchup": "x1.0" },
+        { "name": "Rattata", "level": 8, "types": ["Normal"], "hp": 140, "maxHp": 140, "active": false, "matchup": "x0.5 🛡️" }
       ],
       "pokeballs": {
         "pokeball": 42,
@@ -53,21 +62,23 @@
       },
       "automation": {
         "autoHunt": true,
+        "autoWeakness": true,
+        "autoOptimizeXP": true,
         "autoCatch": true,
         "autoHeal": true,
         "autoRevive": true,
         "noCentro": false
       },
       "logs": [
-        "Iniciou caçada autônoma na Caverna Rochosa (Geodude)",
+        "🎯 [Otimizador de XP/h] Avaliou rotas desbloqueadas e selecionou Caverna Rochosa para taxa máxima",
+        "⚔️ [Auto-Fraqueza] Equipou Bulbasaur (Grama) com Super Efetivo x2.0 contra Geodude (Dano Efetivo: 68)!",
         "Encontrou Geodude selvagem (Nv. 9)!",
         "Bulbasaur usou Chicote de Vinha! Dano: 68 (Super Efetivo x2.0)",
         "Derrotou Geodude selvagem! Loot: 28x Pedra Dura, +35 Ouro, +145 EXP",
         "Arremessou Pokébola em Geodude selvagem... 1... 2... 3... Capturado!",
         "Bulbasaur subiu para o Nível 12 (+12 HP, +3 Poder)!",
-        "Encontrou Geodude selvagem (Nv. 10)!",
-        "Derrotou Geodude selvagem! Loot: +40 Ouro, +1x Pokébola",
-        "Vida da equipe em 100% - Caçada contínua ativa."
+        "Taxa medida: 14.412 EXP/h (Velocidade de farm aumentada em 2.2x)",
+        "Vida da equipe em 100% - Caçada e fraqueza ativas."
       ]
     }
   ]

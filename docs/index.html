@@ -546,6 +546,32 @@
       </div>
     </div>
 
+    <!-- WEAKNESS & XP/H OPTIMIZER BANNER -->
+    <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(56, 189, 248, 0.1) 100%); border: 1px solid rgba(16, 185, 129, 0.35); border-radius: 16px; padding: 16px 22px; margin-bottom: 22px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; box-shadow: 0 10px 25px -10px rgba(0,0,0,0.5);">
+      <div style="display: flex; align-items: center; gap: 14px;">
+        <div style="width: 46px; height: 46px; border-radius: 12px; background: rgba(16, 185, 129, 0.2); border: 1px solid var(--green); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; box-shadow: 0 0 15px rgba(16, 185, 129, 0.3);">
+          ⚔️
+        </div>
+        <div>
+          <div style="font-size: 0.98rem; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 8px;">
+            <span>Auto-Fraqueza & Otimizador XP/h</span>
+            <span style="font-size: 0.72rem; background: rgba(16, 185, 129, 0.2); color: var(--green); border: 1px solid var(--green); padding: 2px 8px; border-radius: 6px; font-weight: 700;">ATIVO</span>
+          </div>
+          <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 3px;" id="matchupDetail">
+            🌱 Grama (Bulbasaur) vs 🪨 Pedra/Terra (Geodude) • Dano Efetivo: <b style="color: #4ade80;">68 (x2.0 Super Efetivo)</b>
+          </div>
+        </div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 14px;">
+        <div style="text-align: right;">
+          <div style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase;">Multiplicador de Combate</div>
+          <div style="font-size: 1.15rem; font-weight: 800; color: #4ade80; font-family: 'JetBrains Mono', monospace;" id="matchupBadge">
+            SUPER EFETIVO x2.0 💥
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- MAIN SECTION -->
     <div class="main-grid">
       <!-- LEFT COLUMN: POKEMON & INVENTORY -->
@@ -569,8 +595,8 @@
               </div>
             </div>
             <div style="text-align: right;">
-              <div style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase;">Poder de Ataque</div>
-              <div style="font-size: 1.2rem; font-weight: 800; color: #fff; font-family: 'JetBrains Mono', monospace;" id="pokePower">⚡ 34</div>
+              <div style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase;">Dano Efetivo c/ Fraqueza</div>
+              <div style="font-size: 1.25rem; font-weight: 800; color: #4ade80; font-family: 'JetBrains Mono', monospace;" id="pokePower">💥 68 Real</div>
             </div>
           </div>
 
@@ -599,12 +625,12 @@
           <!-- TILES -->
           <div class="tiles-grid">
             <div class="tile">
-              <div class="lbl">Diamantes</div>
-              <div class="tile val" style="color: #67e8f9;" id="valDiamonds">💎 15</div>
+              <div class="lbl">Vantagem Elemental</div>
+              <div class="tile val" style="color: #4ade80;" id="valMatchup">x2.0 💥</div>
             </div>
             <div class="tile">
-              <div class="lbl">Orbes Elementais</div>
-              <div class="tile val" style="color: #c084fc;" id="valOrbs">🔮 380</div>
+              <div class="lbl">Inimigos da Rota</div>
+              <div class="tile val" style="color: #fbbf24;" id="valDefenders">🪨 Pedra / Terra</div>
             </div>
             <div class="tile">
               <div class="lbl">Centro Pokémon</div>
@@ -612,7 +638,7 @@
             </div>
             <div class="tile">
               <div class="lbl">Modo de Caçada</div>
-              <div class="tile val" style="color: var(--accent);" id="valHuntState">⚔️ Automático</div>
+              <div class="tile val" style="color: var(--accent);" id="valHuntState">⚔️ Máx XP/h</div>
             </div>
           </div>
 
@@ -775,7 +801,17 @@
           const pkName = pk.name || "Bulbasaur";
           const pkLvl = pk.level || 12;
           document.getElementById('pokeName').innerHTML = `${pkName} <span style="font-size: 0.85rem; color: var(--accent);">Nv. ${pkLvl}</span>`;
-          document.getElementById('pokePower').textContent = `⚡ ${pk.power || 34}`;
+          
+          const effPower = pk.effectivePower || (pk.power ? pk.power * 2 : 68);
+          document.getElementById('pokePower').textContent = `💥 ${effPower} Real`;
+
+          if (acc.matchup) {
+            const m = acc.matchup;
+            document.getElementById('matchupBadge').textContent = m.status || 'SUPER EFETIVO x2.0 💥';
+            document.getElementById('matchupDetail').innerHTML = `${m.attackerTypes || 'Grama'} vs ${m.defenderTypes || 'Pedra/Terra'} • Dano Efetivo: <b style="color: #4ade80;">${m.effectivePower || effPower} (${m.status || 'x2.0'})</b>`;
+            document.getElementById('valMatchup').textContent = `x${m.multiplier || 2.0} 💥`;
+            document.getElementById('valDefenders').textContent = m.defenderTypes || 'Pedra / Terra';
+          }
 
           if (pkName.toLowerCase().includes("bulba")) document.getElementById('pokeAvatar').textContent = "🌱";
           else if (pkName.toLowerCase().includes("charm")) document.getElementById('pokeAvatar').textContent = "🔥";
@@ -798,12 +834,9 @@
           document.getElementById('xpFill').style.width = `${xpPct}%`;
 
           // Resources
-          document.getElementById('valDiamonds').textContent = `💎 ${acc.diamonds || 0}`;
-          document.getElementById('valOrbs').textContent = `🔮 ${acc.orbs || 0}`;
-
           const auto = acc.automation || {};
           document.getElementById('valCenter').textContent = auto.noCentro ? "🏥 No Centro (Curando)" : "🏥 Liberado";
-          document.getElementById('valHuntState').textContent = auto.autoHunt ? "⚔️ Automático" : "⏸️ Pausado";
+          document.getElementById('valHuntState').textContent = auto.autoHunt ? "⚔️ Máx XP/h" : "⏸️ Pausado";
 
           // Balls
           if (acc.pokeballs) {
@@ -818,11 +851,12 @@
             const teamGrid = document.getElementById('teamGrid');
             teamGrid.innerHTML = acc.team.map((m, idx) => {
               const isActive = m.active || idx === 0;
+              const matchTag = m.matchup ? `<span style="color: #4ade80; font-weight: 700; margin-left: 6px;">${m.matchup}</span>` : '';
               return `
                 <div class="team-member ${isActive ? 'active-slot' : ''}">
                   <div class="member-info">
                     <h4>${m.name}</h4>
-                    <p>Nv. ${m.level} • HP ${Math.round((m.hp / m.maxHp) * 100)}%</p>
+                    <p>Nv. ${m.level} • HP ${Math.round((m.hp / m.maxHp) * 100)}%${matchTag}</p>
                   </div>
                   <span class="member-badge" style="background: ${isActive ? 'var(--accent)' : 'rgba(255,255,255,0.1)'}; color: ${isActive ? '#04090e' : 'var(--text-muted)'};">
                     ${isActive ? 'ATIVO' : 'SLOT ' + (idx + 1)}

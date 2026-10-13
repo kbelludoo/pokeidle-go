@@ -32,6 +32,9 @@ type Bot struct {
 	// Kick WebSocket lurker (para farmar pontos de canal 24/7 sem navegador)
 	kickCli *kick.Client
 
+	// Otimizador de Hunt e Fraquezas Elementais
+	optimizer *HuntOptimizer
+
 	// Dados do PokeIdle
 	hunts       []PokeHuntArea
 	currentHunt string
@@ -61,6 +64,7 @@ func NewBot(cfg AccountConfig) *Bot {
 		balls:       make(map[string]int),
 		twitchCli:   twitch.NewClient(cfg.Twitch),
 		kickCli:     kick.NewClient(cfg.Kick),
+		optimizer:   NewHuntOptimizer(),
 	}
 }
 
@@ -301,6 +305,9 @@ func (b *Bot) applyState(e *PokeState) {
 	}
 	b.noCentro = e.NoCentro
 	if e.HuntSlug != "" {
+		if b.optimizer != nil && (b.currentHunt != e.HuntSlug || b.currentHunt == "") {
+			b.optimizer.OnHuntChanged(e.HuntSlug, e.XP)
+		}
 		b.currentHunt = e.HuntSlug
 		b.status.CurrentArea = e.HuntSlug
 	}
@@ -437,6 +444,9 @@ func (b *Bot) handleBattleEvents(evs []PokeGameEvent) {
 				b.mu.Lock()
 				b.status.Kills++
 				b.status.UpdatedAt = time.Now().UnixMilli()
+				if b.optimizer != nil {
+					b.optimizer.RecordKill(b.currentHunt, 120)
+				}
 				b.mu.Unlock()
 
 				var dropNames []string
@@ -485,29 +495,47 @@ func (b *Bot) handleBattleEvents(evs []PokeGameEvent) {
 	}
 }
 
+func (b *Bot) getCurrentHuntArea() PokeHuntArea {
+	for _, h := range b.hunts {
+		if h.Slug == b.currentHunt {
+			return h
+		}
+	}
+	return PokeHuntArea{Slug: b.currentHunt, Nome: b.currentHunt, Nivel: 1}
+}
+
 func (b *Bot) ensureHunting() {
 	b.mu.RLock()
 	target := b.config.Settings.HuntTarget
 	current := b.currentHunt
 	userLevel := b.status.Level
 	hunts := b.hunts
+	pokemons := b.pokemons
 	b.mu.RUnlock()
 
 	slugToHunt := target
-	if slugToHunt == "" {
-		if current != "" {
-			slugToHunt = current
-		} else if len(hunts) > 0 {
-			// Seleciona a hunt mais alta desbloqueada para o nível do jogador
-			bestSlug := hunts[0].Slug
-			bestLevel := 0
-			for _, h := range hunts {
-				if userLevel >= h.Nivel && h.Nivel >= bestLevel {
-					bestLevel = h.Nivel
-					bestSlug = h.Slug
-				}
+	if slugToHunt == "" || slugToHunt == "auto" {
+		if len(hunts) > 0 && b.optimizer != nil {
+			bestHunt, _, rationale := b.optimizer.FindBestHuntForMaxXP(hunts, pokemons, userLevel)
+			if bestHunt.Slug != "" {
+				slugToHunt = bestHunt.Slug
+				b.addLog(fmt.Sprintf("🎯 [Otimizador de XP/h] Rota recomendada: %s (Nv. %d) — %s", bestHunt.Nome, bestHunt.Nivel, rationale))
 			}
-			slugToHunt = bestSlug
+		}
+		if slugToHunt == "" || slugToHunt == "auto" {
+			if current != "" {
+				slugToHunt = current
+			} else if len(hunts) > 0 {
+				bestSlug := hunts[0].Slug
+				bestLevel := 0
+				for _, h := range hunts {
+					if userLevel >= h.Nivel && h.Nivel >= bestLevel {
+						bestLevel = h.Nivel
+						bestSlug = h.Slug
+					}
+				}
+				slugToHunt = bestSlug
+			}
 		}
 	}
 
@@ -577,7 +605,7 @@ func (b *Bot) performPeriodicRoutine() {
 	b.optimizeTeam()
 }
 
-// optimizeTeam seleciona os melhores pokémons com base em Poder e nível do treinador
+// optimizeTeam seleciona os melhores pokémons com base em Fraquezas Elementais, Poder e nível do treinador
 func (b *Bot) optimizeTeam() {
 	b.mu.Lock()
 	defer b.mu.Unlock()
@@ -600,20 +628,46 @@ func (b *Bot) optimizeTeam() {
 		return
 	}
 
-	// Ordena por Poder decrescente (desempate por Shiny e Level)
-	sort.Slice(usable, func(i, j int) bool {
-		if usable[i].Poder != usable[j].Poder {
-			return usable[i].Poder > usable[j].Poder
+	currentHuntArea := b.getCurrentHuntArea()
+	defenderTypes := GetHuntDefenderTypes(currentHuntArea)
+
+	// Avalia todos os utilizáveis contra a rota atual considerando fraqueza elemental
+	type scoredPokemon struct {
+		pk      PokeItemPokemon
+		matchup MatchupResult
+	}
+	var scoredList []scoredPokemon
+	for _, p := range usable {
+		m := EvaluatePokemonAgainstHunt(p, defenderTypes)
+		scoredList = append(scoredList, scoredPokemon{pk: p, matchup: m})
+	}
+
+	// Ordena por Dano Efetivo (Poder * Multiplicador de Fraqueza) decrescente
+	sort.Slice(scoredList, func(i, j int) bool {
+		if scoredList[i].matchup.EffectivePower != scoredList[j].matchup.EffectivePower {
+			return scoredList[i].matchup.EffectivePower > scoredList[j].matchup.EffectivePower
 		}
-		if usable[i].Shiny != usable[j].Shiny {
-			return usable[i].Shiny
+		if scoredList[i].pk.Shiny != scoredList[j].pk.Shiny {
+			return scoredList[i].pk.Shiny
 		}
-		return usable[i].Level > usable[j].Level
+		return scoredList[i].pk.Level > scoredList[j].pk.Level
 	})
 
-	bestPk := usable[0]
+	bestChoice := scoredList[0]
+	bestPk := bestChoice.pk
+	bestMatchup := bestChoice.matchup
 
-	// 1. Se o Pokémon mais forte utilizável não for o ativo atual, equipa ele no campo
+	// Salva telemetria de matchup nos extras da conta
+	if b.status.Extra == nil {
+		b.status.Extra = make(map[string]any)
+	}
+	b.status.Extra["matchup"] = bestMatchup.MatchupLabel
+	b.status.Extra["matchupMultiplier"] = bestMatchup.Multiplier
+	b.status.Extra["effectivePower"] = int(bestMatchup.EffectivePower)
+	b.status.Extra["pokemonTypes"] = strings.Join(bestMatchup.PokemonTypes, " / ")
+	b.status.Extra["huntDefenders"] = strings.Join(defenderTypes, " / ")
+
+	// 1. Se o Pokémon escolhido por fraqueza/dano não for o ativo atual, equipa no campo
 	if bestPk.ID != b.activeID {
 		_ = b.socket.SendJSON(WSMessage{
 			T:         "team.active",
@@ -624,16 +678,16 @@ func (b *Bot) optimizeTeam() {
 		if pkName == "" {
 			pkName = bestPk.Name
 		}
-		b.status.Logs = append(b.status.Logs, fmt.Sprintf("Equipou o Pokémon mais forte: %s (Poder %d, Nv. %d)", pkName, bestPk.Poder, bestPk.Level))
+		b.status.Logs = append(b.status.Logs, fmt.Sprintf("⚔️ [Auto-Fraqueza] Equipou %s (%s) com %s contra a rota (Dano Efetivo: %.0f)!",
+			pkName, strings.Join(bestMatchup.PokemonTypes, "/"), bestMatchup.MatchupLabel, bestMatchup.EffectivePower))
 	}
 
 	// 2. Preenche os 5 slots da equipe com os melhores Pokémon utilizáveis
 	const maxEquipe = 5
-	topLimit := len(usable)
+	topLimit := len(scoredList)
 	if topLimit > maxEquipe {
 		topLimit = maxEquipe
 	}
-	topEquipe := usable[:topLimit]
 
 	// Identifica quais slots (0 a 4) já estão ocupados
 	slotsOcupados := make(map[int]int64)
@@ -644,7 +698,8 @@ func (b *Bot) optimizeTeam() {
 	}
 
 	// Para cada um dos top pokémons, se não estiver em nenhum slot, move para o primeiro vago
-	for _, topP := range topEquipe {
+	for i := 0; i < topLimit; i++ {
+		topP := scoredList[i].pk
 		if topP.Slot == nil {
 			for slot := 0; slot < maxEquipe; slot++ {
 				if _, ocupado := slotsOcupados[slot]; !ocupado {
