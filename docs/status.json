@@ -5,29 +5,29 @@
       "name": "Treinador #1",
       "level": 29,
       "vocation": "Bulbasaur (Nv. 29)",
-      "hp": 440,
+      "hp": 431,
       "maxHp": 600,
       "mana": 82,
       "maxMana": 82,
-      "gold": 1795942,
-      "kills": 328,
-      "expPerHour": 10790.851819244685,
+      "gold": 1797471,
+      "kills": 362,
+      "expPerHour": 10701.61556032502,
       "status": "hunting",
       "currentArea": "geodude",
-      "durationSec": 1094,
+      "durationSec": 1217,
       "logs": [
+        "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball, Stone Orb",
+        "Derrotou Geodude! Loot: 2x Small Stone, Earth Ball, Stone Orb",
         "Derrotou Geodude! Loot: 2x Small Stone, Earth Ball",
+        "Derrotou Geodude! Loot: 2x Earth Ball, Stone Orb",
+        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball",
         "Derrotou Geodude! Loot: Small Stone, Earth Ball, Stone Orb",
+        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball, Stone Orb",
         "Derrotou Geodude! Loot: Small Stone, Earth Ball, Stone Orb",
-        "Derrotou Geodude! Loot: Small Stone, Earth Ball",
-        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball, Stone Orb",
-        "Derrotou Geodude! Loot: 2x Small Stone, Earth Ball",
-        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball, Stone Orb",
-        "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball, Stone Orb, Strange Rock",
-        "Derrotou Geodude! Loot: Small Stone, Earth Ball",
-        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball"
+        "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball",
+        "Derrotou Geodude! Loot: 2x Small Stone, Earth Ball"
       ],
-      "updatedAt": 1791872642779,
+      "updatedAt": 1791872766279,
       "extra": {
         "catches": 0,
         "diamonds": 0,
@@ -41,8 +41,8 @@
       }
     }
   ],
-  "goroutines": 9,
-  "ramAllocMB": 0.980743408203125,
+  "goroutines": 10,
+  "ramAllocMB": 1.0047073364257812,
   "ramSysMB": 13.099861145019531,
-  "uptime": "18m21s"
+  "uptime": "20m20s"
 }
