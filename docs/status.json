@@ -2,8 +2,8 @@
   "accounts": [
     {
       "currentArea": "geodude",
-      "durationSec": 3182,
-      "expPerHour": 9742.09892794183,
+      "durationSec": 3305,
+      "expPerHour": 9724.05466813735,
       "extra": {
         "catches": 0,
         "diamonds": 0,
@@ -13,34 +13,34 @@
         "noCentro": false,
         "orbs": 0
       },
-      "gold": 2176722,
+      "gold": 2178294,
       "hp": 494,
       "id": "acc-1",
-      "kills": 957,
+      "kills": 992,
       "level": 31,
       "logs": [
         "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball",
-        "Derrotou Geodude! Loot: Small Stone, Earth Ball",
-        "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball",
-        "Derrotou Geodude! Loot: 2x Small Stone, Stone Orb",
-        "Derrotou Geodude! Loot: Small Stone, Earth Ball",
         "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball",
-        "Derrotou Geodude! Loot: Small Stone, Stone Orb",
-        "Derrotou Geodude! Loot: 2x Small Stone, Earth Ball, Stone Orb",
+        "Derrotou Geodude! Loot: 2x Small Stone, Earth Ball",
         "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball",
-        "Derrotou Geodude! Loot: Small Stone, Earth Ball"
+        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball, Stone Orb",
+        "Derrotou Geodude! Loot: Small Stone, Earth Ball",
+        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball, Stone Orb",
+        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball, Stone Orb",
+        "Derrotou Geodude! Loot: 2x Earth Ball, Stone Orb",
+        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball, Stone Orb"
       ],
       "mana": 88,
       "maxHp": 636,
       "maxMana": 88,
       "name": "Treinador #1",
       "status": "hunting",
-      "updatedAt": 1791900003956,
+      "updatedAt": 1791900126480,
       "vocation": "Bulbasaur (Nv. 31)"
     }
   ],
   "goroutines": 9,
-  "ramAllocMB": 1.0368118286132812,
+  "ramAllocMB": 1.0520706176757812,
   "ramSysMB": 13.099861145019531,
-  "uptime": "53m10s"
+  "uptime": "55m8s"
 }
