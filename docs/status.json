@@ -9,30 +9,29 @@
       "maxHp": 600,
       "mana": 82,
       "maxMana": 82,
-      "gold": 1706349,
-      "kills": 1881,
-      "expPerHour": 15379.308613955078,
+      "gold": 1707947,
+      "kills": 1917,
+      "expPerHour": 15301.039826462807,
       "status": "hunting",
       "currentArea": "geodude",
-      "durationSec": 6189,
+      "durationSec": 6306,
       "logs": [
-        "Derrotou Geodude! Loot: Small Stone, Earth Ball",
+        "Derrotou Geodude! Loot: 2x Small Stone, Earth Ball, Stone Orb",
         "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball",
+        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball, Stone Orb",
+        "Derrotou Geodude! Loot: 2x Small Stone, Earth Ball, Stone Orb",
         "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball, Stone Orb",
-        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball",
-        "Derrotou Geodude! Loot: Small Stone, Earth Ball, Stone Orb",
-        "Derrotou Geodude! Loot: 2x Small Stone",
-        "Derrotou Geodude! Loot: Small Stone, Earth Ball, Stone Orb, Strange Rock",
-        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball, Stone Orb",
-        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball, Stone Orb",
-        "Derrotou Geodude! Loot: Small Stone, Earth Ball"
+        "Derrotou Geodude! Loot: 2x Small Stone, Earth Ball",
+        "Derrotou Geodude! Loot: Small Stone, Earth Ball",
+        "Derrotou Geodude! Loot: Small Stone, Earth Ball",
+        "Derrotou Geodude! Loot: 2x Small Stone, Stone Orb",
+        "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball, Stone Orb"
       ],
-      "updatedAt": 1791866048879,
+      "updatedAt": 1791866165241,
       "extra": {
         "catches": 0,
         "diamonds": 0,
         "kickLives": [
-          "patopapao2",
           "axt",
           "rodil",
           "matta",
@@ -46,7 +45,7 @@
     }
   ],
   "goroutines": 9,
-  "ramAllocMB": 1.090118408203125,
+  "ramAllocMB": 1.0773086547851562,
   "ramSysMB": 13.099861145019531,
-  "uptime": "1h43m11s"
+  "uptime": "1h45m10s"
 }
