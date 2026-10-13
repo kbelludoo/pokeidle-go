@@ -2,6 +2,7 @@ package game
 
 import (
 	"fmt"
+	"sort"
 	"strings"
 	"sync"
 	"time"
@@ -271,4 +272,118 @@ func (o *HuntOptimizer) FindBestHuntForMaxXP(hunts []PokeHuntArea, pokemons map[
 	}
 
 	return bestHunt, bestMatchup, rationale
+}
+
+// FindBestHuntForPokemon encontra a melhor rota especificamente vantajosa para um Pokémon individual
+func (o *HuntOptimizer) FindBestHuntForPokemon(hunts []PokeHuntArea, p PokeItemPokemon, trainerLevel int) (PokeHuntArea, MatchupResult, bool) {
+	if len(hunts) == 0 {
+		return PokeHuntArea{}, MatchupResult{}, false
+	}
+
+	var unlocked []PokeHuntArea
+	for _, h := range hunts {
+		if trainerLevel >= h.Nivel {
+			unlocked = append(unlocked, h)
+		}
+	}
+	if len(unlocked) == 0 {
+		unlocked = append(unlocked, hunts[0])
+	}
+
+	bestScore := -999.0
+	var bestHunt PokeHuntArea
+	var bestMatchup MatchupResult
+	found := false
+
+	for _, h := range unlocked {
+		defenderTypes := GetHuntDefenderTypes(h)
+		m := EvaluatePokemonAgainstHunt(p, defenderTypes)
+
+		// Se a hunt for muito alta para o nível atual do Pokémon, não arrisca morrer
+		if h.Nivel > p.Level+4 && !p.Starter {
+			continue
+		}
+
+		score := float64(h.Nivel) * 10.0
+		if m.Multiplier >= 2.0 {
+			score += 150.0 // Super Efetivo! Vantagem máxima
+		} else if m.Multiplier > 1.0 {
+			score += 50.0
+		} else if m.Multiplier < 1.0 {
+			score -= 80.0 // Evita desvantagem de tipo
+		}
+
+		// Considera métrica empírica se já houver
+		o.mu.RLock()
+		if metric, exists := o.metrics[h.Slug]; exists && metric.ExpPerHour > 0 {
+			score += metric.ExpPerHour * 0.05
+		}
+		o.mu.RUnlock()
+
+		if score > bestScore {
+			bestScore = score
+			bestHunt = h
+			bestMatchup = m
+			found = true
+		}
+	}
+
+	return bestHunt, bestMatchup, found
+}
+
+// SelectNextPokemonForBalancedTeam identifica qual membro da equipe precisa de treinamento para manter todos no mesmo nível
+func SelectNextPokemonForBalancedTeam(pokemons map[int64]PokeItemPokemon, trainerLevel int, activeID int64) (PokeItemPokemon, bool) {
+	var usable []PokeItemPokemon
+	for _, p := range pokemons {
+		if p.Starter || (trainerLevel > 0 && p.Level <= trainerLevel+5) || trainerLevel == 0 {
+			usable = append(usable, p)
+		}
+	}
+	if len(usable) == 0 {
+		return PokeItemPokemon{}, false
+	}
+
+	// Filtra os pokémons da equipe (ou starter)
+	var teamMembers []PokeItemPokemon
+	for _, p := range usable {
+		if p.Slot != nil || p.ID == activeID || p.Starter {
+			teamMembers = append(teamMembers, p)
+		}
+	}
+	if len(teamMembers) == 0 {
+		teamMembers = usable
+	}
+
+	var currentActive *PokeItemPokemon
+	for _, p := range teamMembers {
+		if p.ID == activeID {
+			cp := p
+			currentActive = &cp
+			break
+		}
+	}
+
+	// Ordena membros do menor nível para o maior
+	sort.Slice(teamMembers, func(i, j int) bool {
+		return teamMembers[i].Level < teamMembers[j].Level
+	})
+
+	lowestMember := teamMembers[0]
+
+	// Se o ativo já encostou no nível do treinador e outro membro está mais de 1 nível atrás:
+	// rotaciona para o menor subir!
+	if currentActive != nil && currentActive.Level >= trainerLevel && lowestMember.Level < currentActive.Level {
+		return lowestMember, true
+	}
+
+	// Se o ativo está quase no teto (+4), força a troca para não bater na trava de desobediência
+	if currentActive != nil && currentActive.Level >= trainerLevel+4 && lowestMember.ID != currentActive.ID {
+		return lowestMember, true
+	}
+
+	if currentActive != nil {
+		return *currentActive, true
+	}
+
+	return lowestMember, true
 }

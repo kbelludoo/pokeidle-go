@@ -628,6 +628,41 @@ func (b *Bot) optimizeTeam() {
 		return
 	}
 
+	// 1. BALANCEAMENTO DE NÍVEL DA EQUIPE COM TROCA DE HUNT:
+	// Identifica se há algum membro da equipe ficando para trás e precisando de treinamento
+	targetPk, shouldRotate := SelectNextPokemonForBalancedTeam(b.pokemons, trainerLevel, b.activeID)
+	if shouldRotate && targetPk.ID != b.activeID && (b.config.Settings.HuntTarget == "" || b.config.Settings.HuntTarget == "auto") {
+		// Encontra a melhor rota especificamente vantajosa para os tipos desse Pokémon
+		bestHunt, matchup, found := b.optimizer.FindBestHuntForPokemon(b.hunts, targetPk, trainerLevel)
+		if found && bestHunt.Slug != "" && bestHunt.Slug != b.currentHunt {
+			_ = b.socket.SendJSON(WSMessage{
+				T:    "hunt.select",
+				Slug: bestHunt.Slug,
+			})
+			b.currentHunt = bestHunt.Slug
+			b.status.CurrentArea = bestHunt.Slug
+			pkName := targetPk.Nome
+			if pkName == "" {
+				pkName = targetPk.Name
+			}
+			b.status.Logs = append(b.status.Logs, fmt.Sprintf("🔄 [Troca de Hunt Automática] Migrou para '%s' (Nv. %d) para dar vantagem %s ao %s (Nv. %d)!",
+				bestHunt.Nome, bestHunt.Nivel, matchup.MatchupLabel, pkName, targetPk.Level))
+		}
+
+		// Equipa o Pokémon no campo de batalha
+		_ = b.socket.SendJSON(WSMessage{
+			T:         "team.active",
+			PokemonID: targetPk.ID,
+		})
+		b.activeID = targetPk.ID
+		pkName := targetPk.Nome
+		if pkName == "" {
+			pkName = targetPk.Name
+		}
+		b.status.Logs = append(b.status.Logs, fmt.Sprintf("🐾 [Equipe Nivelada] Escalou %s (Nv. %d) para subir de nível e acompanhar o time!",
+			pkName, targetPk.Level))
+	}
+
 	currentHuntArea := b.getCurrentHuntArea()
 	defenderTypes := GetHuntDefenderTypes(currentHuntArea)
 
@@ -667,8 +702,8 @@ func (b *Bot) optimizeTeam() {
 	b.status.Extra["pokemonTypes"] = strings.Join(bestMatchup.PokemonTypes, " / ")
 	b.status.Extra["huntDefenders"] = strings.Join(defenderTypes, " / ")
 
-	// 1. Se o Pokémon escolhido por fraqueza/dano não for o ativo atual, equipa no campo
-	if bestPk.ID != b.activeID {
+	// 2. Se não estava em rotação forçada e o ativo não for o mais forte com vantagem da rota:
+	if !shouldRotate && bestPk.ID != b.activeID {
 		_ = b.socket.SendJSON(WSMessage{
 			T:         "team.active",
 			PokemonID: bestPk.ID,
