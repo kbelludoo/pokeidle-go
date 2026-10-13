@@ -9,7 +9,7 @@ $root = Resolve-Path "$PSScriptRoot\.."
 $accountsFile = Join-Path $root "accounts.json"
 
 $token = ""
-$nick = "kbelludoo"
+$nick = ""
 
 try {
     $clip = [System.Windows.Forms.Clipboard]::GetText()
@@ -77,8 +77,8 @@ try {
     "name": "Conta Principal",
     "enabled": true,
     "credentials": {
-      "email": "kbelludoo@gmail.com",
-      "password": "ECTbb,,0209",
+      "email": "",
+      "password": "",
       "sessionCookie": "",
       "token": ""
     },

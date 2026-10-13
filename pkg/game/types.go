@@ -24,13 +24,14 @@ type GameCredentials struct {
 }
 
 type GameSettings struct {
-	HuntTarget string `json:"huntTarget"` // Slug da hunt (ex: "pallet-town", "route-1")
-	AutoHunt   bool   `json:"autoHunt"`
-	AutoSell   bool   `json:"autoSell"`
-	AutoHeal   bool   `json:"autoHeal"`
-	AutoDaily  bool   `json:"autoDaily"`
-	AutoCatch  bool   `json:"autoCatch"`
-	Lure       int    `json:"lure"`
+	HuntTarget    string `json:"huntTarget"` // Slug da hunt (ex: "pallet-town", "route-1")
+	AutoHunt      bool   `json:"autoHunt"`
+	AutoSell      bool   `json:"autoSell"`
+	AutoHeal      bool   `json:"autoHeal"`
+	AutoDaily     bool   `json:"autoDaily"`
+	AutoCatch     bool   `json:"autoCatch"`
+	FocusBestiary bool   `json:"focusBestiary"` // Priorizar preenchimento do Bestiário / Pokédex
+	Lure          int    `json:"lure"`
 }
 
 // PokeIdle Inbound & Outbound Packets
@@ -84,11 +85,19 @@ type PokeState struct {
 	Pokemons   []PokeItemPokemon  `json:"pokemons,omitempty"`
 	PkMud      []PokeItemPokemon  `json:"pkMud,omitempty"`
 	PkFora     []int64            `json:"pkFora,omitempty"`
-	Items      map[string]int     `json:"items,omitempty"`
-	Balls      map[string]int     `json:"balls,omitempty"`
-	Automation PokeAutomationPref `json:"automation,omitempty"`
-	Twitch     *PokeTwitchState   `json:"twitch,omitempty"`
-	Kick       *PokeKickState     `json:"kick,omitempty"`
+	Items      map[string]int          `json:"items,omitempty"`
+	Balls      map[string]int          `json:"balls,omitempty"`
+	Automation PokeAutomationPref      `json:"automation,omitempty"`
+	Pokedex    map[string]PokeDexEntry `json:"pokedex,omitempty"`
+	Twitch     *PokeTwitchState        `json:"twitch,omitempty"`
+	Kick       *PokeKickState          `json:"kick,omitempty"`
+}
+
+type PokeDexEntry struct {
+	K  int `json:"k"`  // Kills (derrotas de monstros daquela espécie)
+	C  int `json:"c"`  // Capturas (registradas na Pokébola)
+	SV int `json:"sv"` // Shinys vistos no selvagem
+	SC int `json:"sc"` // Shinys capturados
 }
 
 type PokeTwitchState struct {
@@ -147,10 +156,16 @@ type PokeItemPokemon struct {
 }
 
 type PokeHuntArea struct {
-	Slug   string `json:"slug"`
-	Nome   string `json:"nome"`
-	Nivel  int    `json:"nivel"`
-	Regiao string `json:"regiao,omitempty"`
+	Slug     string            `json:"slug"`
+	Nome     string            `json:"nome"`
+	Nivel    int               `json:"nivel"`
+	Regiao   string            `json:"regiao,omitempty"`
+	Especies []PokeHuntSpecies `json:"especies,omitempty"`
+}
+
+type PokeHuntSpecies struct {
+	PokeID int `json:"pokeId"`
+	Pontos int `json:"pontos,omitempty"`
 }
 
 type PokeGameEvent struct {
@@ -172,6 +187,7 @@ type PokeDrop struct {
 
 type PokeCapturedPk struct {
 	ID      int64  `json:"id"`
+	PokeID  int    `json:"pokeId,omitempty"`
 	Nome    string `json:"nome"`
 	Level   int    `json:"level"`
 	Shiny   bool   `json:"shiny"`

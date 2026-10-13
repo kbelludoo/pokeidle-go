@@ -45,6 +45,7 @@ type Bot struct {
 	activeID    int64
 	pokemons    map[int64]PokeItemPokemon
 	balls       map[string]int
+	pokedex     map[string]PokeDexEntry
 
 	ticketChan chan string
 }
@@ -62,6 +63,7 @@ func NewBot(cfg AccountConfig) *Bot {
 		startedAt:   time.Now(),
 		pokemons:    make(map[int64]PokeItemPokemon),
 		balls:       make(map[string]int),
+		pokedex:     make(map[string]PokeDexEntry),
 		twitchCli:   twitch.NewClient(cfg.Twitch),
 		kickCli:     kick.NewClient(cfg.Kick),
 		optimizer:   NewHuntOptimizer(),
@@ -400,6 +402,24 @@ func (b *Bot) applyState(e *PokeState) {
 		}
 	}
 
+	if e.Pokedex != nil {
+		if b.pokedex == nil {
+			b.pokedex = make(map[string]PokeDexEntry)
+		}
+		for k, v := range e.Pokedex {
+			b.pokedex[k] = v
+		}
+	}
+
+	// Telemetria do Bestiário / Pokédex
+	captured, seen, pct := CountBestiaryProgress(b.pokedex)
+	b.status.Extra["bestiaryCaptured"] = captured
+	b.status.Extra["bestiarySeen"] = seen
+	b.status.Extra["bestiaryTotal"] = 151
+	b.status.Extra["bestiaryProgressPct"] = fmt.Sprintf("%.1f%%", pct)
+	b.status.Extra["focusBestiary"] = b.config.Settings.FocusBestiary
+	b.status.Extra["huntHasUnregistered"] = HuntHasUnregisteredSpecies(b.getCurrentHuntArea(), b.pokedex)
+
 	// Sincroniza canais de streamers oficiais no ar para o lurker IRC da Twitch
 	if e.Twitch != nil && b.twitchCli != nil {
 		var liveChannels []string
@@ -477,6 +497,32 @@ func (b *Bot) handleBattleEvents(evs []PokeGameEvent) {
 					shinyTag = "✨ SHINY "
 				}
 				b.addLog(fmt.Sprintf("🎉 %s%s capturado com sucesso! (Nv. %d)", shinyTag, ev.Pokemon.Nome, ev.Pokemon.Level))
+
+				// Checagem de novo registro no Bestiário / Pokédex
+				b.mu.Lock()
+				pokeIDStr := fmt.Sprintf("%d", ev.Pokemon.PokeID)
+				entry := b.pokedex[pokeIDStr]
+				isNewBestiary := entry.C == 0
+				entry.C++
+				b.pokedex[pokeIDStr] = entry
+				captured, _, pct := CountBestiaryProgress(b.pokedex)
+				b.status.Extra["bestiaryCaptured"] = captured
+				b.status.Extra["bestiaryProgressPct"] = fmt.Sprintf("%.1f%%", pct)
+				b.mu.Unlock()
+
+				if isNewBestiary {
+					b.addLog(fmt.Sprintf("📖 [Bestiário] NOVO REGISTRO DESBLOQUEADO: %s (#%d)! Progresso da Pokédex: %d/151 (%.1f%%)",
+						ev.Pokemon.Nome, ev.Pokemon.PokeID, captured, pct))
+
+					// Se focado em completar o Bestiário, checa se a rota atual foi concluída
+					if b.config.Settings.FocusBestiary {
+						currentArea := b.getCurrentHuntArea()
+						if !HuntHasUnregisteredSpecies(currentArea, b.pokedex) {
+							b.addLog(fmt.Sprintf("🏆 [Bestiário] 100%% das espécies de '%s' capturadas! Procurando próxima rota com espécies pendentes...", currentArea.Nome))
+							go b.ensureHunting()
+						}
+					}
+				}
 			}
 			go b.optimizeTeam()
 
@@ -511,12 +557,14 @@ func (b *Bot) ensureHunting() {
 	userLevel := b.status.Level
 	hunts := b.hunts
 	pokemons := b.pokemons
+	pokedex := b.pokedex
+	focusBestiary := b.config.Settings.FocusBestiary
 	b.mu.RUnlock()
 
 	slugToHunt := target
 	if slugToHunt == "" || slugToHunt == "auto" {
 		if len(hunts) > 0 && b.optimizer != nil {
-			bestHunt, _, rationale := b.optimizer.FindBestHuntForMaxXP(hunts, pokemons, userLevel)
+			bestHunt, _, rationale := b.optimizer.FindBestHuntForMaxXP(hunts, pokemons, userLevel, pokedex, focusBestiary)
 			if bestHunt.Slug != "" {
 				slugToHunt = bestHunt.Slug
 				b.addLog(fmt.Sprintf("🎯 [Otimizador de XP/h] Rota recomendada: %s (Nv. %d) — %s", bestHunt.Nome, bestHunt.Nivel, rationale))
@@ -591,17 +639,35 @@ func (b *Bot) performPeriodicRoutine() {
 	}
 
 	// 4. Auto-Restock de Pokébolas se a quantidade for baixa e tiver ouro
-	if ballCount < 15 && gold >= 3000 {
+	minBalls := 15
+	currentHuntArea := b.getCurrentHuntArea()
+	hasUnregistered := HuntHasUnregisteredSpecies(currentHuntArea, b.pokedex)
+	if b.config.Settings.FocusBestiary || hasUnregistered {
+		minBalls = 30
+	}
+	if ballCount < minBalls && gold >= 3000 {
 		_ = b.socket.SendJSON(WSMessage{
 			T:      "shop.buy",
 			Kind:   "ball",
 			ItemID: 1,
 			Qty:    30,
 		})
-		b.addLog("Reabasteceu 30x Pokébolas no Shop automaticamente.")
+		b.addLog("Reabasteceu 30x Pokébolas no Shop automaticamente para garantir capturas.")
 	}
 
-	// 5. Otimização contínua do time e do Pokémon ativo
+	// 5. Se estiver caçando em rota com monstros ainda não registrados, força captura contínua
+	if hasUnregistered || b.config.Settings.FocusBestiary {
+		_ = b.socket.SendJSON(WSMessage{
+			T:                   "auto.set",
+			AutoBallSemParar:    true,
+			AutoBallAteCapturar: true,
+			BallIDs:             []int{1, 2, 3, 4},
+			AutoRevive:          true,
+			AutoPotion:          true,
+		})
+	}
+
+	// 6. Otimização contínua do time e do Pokémon ativo
 	b.optimizeTeam()
 }
 
@@ -632,8 +698,8 @@ func (b *Bot) optimizeTeam() {
 	// Identifica se há algum membro da equipe ficando para trás e precisando de treinamento
 	targetPk, shouldRotate := SelectNextPokemonForBalancedTeam(b.pokemons, trainerLevel, b.activeID)
 	if shouldRotate && targetPk.ID != b.activeID && (b.config.Settings.HuntTarget == "" || b.config.Settings.HuntTarget == "auto") {
-		// Encontra a melhor rota especificamente vantajosa para os tipos desse Pokémon
-		bestHunt, matchup, found := b.optimizer.FindBestHuntForPokemon(b.hunts, targetPk, trainerLevel)
+		// Encontra a melhor rota especificamente vantajosa para os tipos desse Pokémon e com prioridade no Bestiário
+		bestHunt, matchup, found := b.optimizer.FindBestHuntForPokemon(b.hunts, targetPk, trainerLevel, b.pokedex, b.config.Settings.FocusBestiary)
 		if found && bestHunt.Slug != "" && bestHunt.Slug != b.currentHunt {
 			_ = b.socket.SendJSON(WSMessage{
 				T:    "hunt.select",

@@ -202,8 +202,68 @@ func PickBestPokemonForHunt(pokemons map[int64]PokeItemPokemon, hunt PokeHuntAre
 	return bestPk, bestMatchup, true
 }
 
-// FindBestHuntForMaxXP avalia todas as hunts acessíveis e escolhe a que maximiza EXP/h
-func (o *HuntOptimizer) FindBestHuntForMaxXP(hunts []PokeHuntArea, pokemons map[int64]PokeItemPokemon, trainerLevel int) (PokeHuntArea, MatchupResult, string) {
+// CountBestiaryProgress calcula o total de espécies capturadas, vistas e porcentagem da Pokédex (151 Gen 1)
+func CountBestiaryProgress(pokedex map[string]PokeDexEntry) (int, int, float64) {
+	if pokedex == nil {
+		return 0, 0, 0.0
+	}
+	captured := 0
+	seen := 0
+	for _, entry := range pokedex {
+		if entry.C > 0 {
+			captured++
+		}
+		if entry.K > 0 || entry.C > 0 {
+			seen++
+		}
+	}
+	const totalGen1 = 151
+	pct := (float64(captured) / float64(totalGen1)) * 100.0
+	if pct > 100.0 {
+		pct = 100.0
+	}
+	return captured, seen, pct
+}
+
+// HuntHasUnregisteredSpecies verifica se uma rota contém monstros que ainda não foram capturados no Bestiário
+func HuntHasUnregisteredSpecies(h PokeHuntArea, pokedex map[string]PokeDexEntry) bool {
+	if pokedex == nil {
+		return false
+	}
+	// Se a rota tiver espécies explícitas enviadas pelo servidor
+	if len(h.Especies) > 0 {
+		for _, esp := range h.Especies {
+			key := fmt.Sprintf("%d", esp.PokeID)
+			entry, exists := pokedex[key]
+			if !exists || entry.C == 0 {
+				return true // Espécie ainda pendente de registro de captura no Bestiário!
+			}
+		}
+		return false
+	}
+
+	// Fallback por slug se o monstro estiver no nome da hunt
+	slugLower := strings.ToLower(h.Slug + " " + h.Nome)
+	unregisteredKeyNames := map[string]int{
+		"geodude": 74, "pidgey": 16, "caterpie": 10, "rattata": 19,
+		"zubat": 41, "diglett": 50, "magikarp": 129, "poliwag": 60,
+		"charmander": 4, "bulbasaur": 1, "squirtle": 7, "pikachu": 25,
+		"gastly": 92, "machop": 66, "abra": 63, "onix": 95,
+	}
+	for name, id := range unregisteredKeyNames {
+		if strings.Contains(slugLower, name) {
+			key := fmt.Sprintf("%d", id)
+			entry, exists := pokedex[key]
+			if !exists || entry.C == 0 {
+				return true
+			}
+		}
+	}
+	return false
+}
+
+// FindBestHuntForMaxXP avalia todas as hunts acessíveis e escolhe a que maximiza EXP/h com bônus de Bestiário
+func (o *HuntOptimizer) FindBestHuntForMaxXP(hunts []PokeHuntArea, pokemons map[int64]PokeItemPokemon, trainerLevel int, pokedex map[string]PokeDexEntry, focusBestiary bool) (PokeHuntArea, MatchupResult, string) {
 	if len(hunts) == 0 {
 		return PokeHuntArea{}, MatchupResult{}, "Nenhuma hunt disponível"
 	}
@@ -255,6 +315,16 @@ func (o *HuntOptimizer) FindBestHuntForMaxXP(hunts []PokeHuntArea, pokemons map[
 
 		score := (levelFactor * 100.0) + (matchup.EffectivePower * 10.0 * speedBonus)
 
+		// BÔNUS DO BESTIÁRIO: Prioriza rotas que têm monstros ainda não registrados
+		hasPending := HuntHasUnregisteredSpecies(h, pokedex)
+		if hasPending {
+			if focusBestiary {
+				score += 350.0 // Prioridade máxima para fechar o Bestiário!
+			} else {
+				score += 75.0 // Bônus natural de descoberta e registro
+			}
+		}
+
 		// Se já temos medição empírica real de EXP/h dessa rota, dá peso prioritário
 		o.mu.RLock()
 		if m, exists := o.metrics[h.Slug]; exists && m.ExpPerHour > 0 {
@@ -266,16 +336,20 @@ func (o *HuntOptimizer) FindBestHuntForMaxXP(hunts []PokeHuntArea, pokemons map[
 			bestScore = score
 			bestHunt = h
 			bestMatchup = matchup
-			rationale = fmt.Sprintf("Hunt '%s' (Nv. %d): Vantagem %s com %s (Dano Efetivo: %.0f)",
-				h.Nome, h.Nivel, matchup.MatchupLabel, matchup.PokemonName, matchup.EffectivePower)
+			bestiaryTag := ""
+			if hasPending {
+				bestiaryTag = " • 📖 Monstro Novo p/ Bestiário!"
+			}
+			rationale = fmt.Sprintf("Hunt '%s' (Nv. %d): Vantagem %s com %s (Dano Efetivo: %.0f)%s",
+				h.Nome, h.Nivel, matchup.MatchupLabel, matchup.PokemonName, matchup.EffectivePower, bestiaryTag)
 		}
 	}
 
 	return bestHunt, bestMatchup, rationale
 }
 
-// FindBestHuntForPokemon encontra a melhor rota especificamente vantajosa para um Pokémon individual
-func (o *HuntOptimizer) FindBestHuntForPokemon(hunts []PokeHuntArea, p PokeItemPokemon, trainerLevel int) (PokeHuntArea, MatchupResult, bool) {
+// FindBestHuntForPokemon encontra a melhor rota especificamente vantajosa para um Pokémon individual com foco em Bestiário
+func (o *HuntOptimizer) FindBestHuntForPokemon(hunts []PokeHuntArea, p PokeItemPokemon, trainerLevel int, pokedex map[string]PokeDexEntry, focusBestiary bool) (PokeHuntArea, MatchupResult, bool) {
 	if len(hunts) == 0 {
 		return PokeHuntArea{}, MatchupResult{}, false
 	}
@@ -311,6 +385,15 @@ func (o *HuntOptimizer) FindBestHuntForPokemon(hunts []PokeHuntArea, p PokeItemP
 			score += 50.0
 		} else if m.Multiplier < 1.0 {
 			score -= 80.0 // Evita desvantagem de tipo
+		}
+
+		// Bônus de Bestiário
+		if HuntHasUnregisteredSpecies(h, pokedex) {
+			if focusBestiary {
+				score += 250.0
+			} else {
+				score += 60.0
+			}
 		}
 
 		// Considera métrica empírica se já houver
