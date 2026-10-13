@@ -1,140 +1,46 @@
 {
-  "uptime": "1h 22m 3s",
-  "goroutines": 12,
-  "ramAllocMB": 1.22,
-  "ramSysMB": 13.1,
-  "game": "PokeIdle World",
   "accounts": [
     {
-      "id": "acc-1",
-      "name": "Treinador #1",
-      "level": 31,
-      "xp": 182400,
-      "xpNext": 240000,
-      "gold": 2127543,
-      "diamonds": 18,
-      "orbs": 420,
-      "kills": 1463,
-      "catches": 48,
-      "expPerHour": 14412,
-      "status": "hunting",
       "currentArea": "geodude",
-      "currentAreaName": "Caverna Rochosa (Geodude)",
-      "durationSec": 4919,
-      "activePokemon": {
-        "id": 1,
-        "name": "Bulbasaur",
-        "level": 31,
-        "types": [
-          "Grama",
-          "Veneno"
+      "durationSec": 5154,
+      "expPerHour": 9686.655064429282,
+      "extra": {
+        "catches": 0,
+        "diamonds": 0,
+        "kickLives": [
+          "biscoitao"
         ],
-        "hp": 549,
-        "maxHp": 636,
-        "power": 88,
-        "effectivePower": 176,
-        "shiny": false,
-        "xp": 8820,
-        "xpNext": 11500
+        "noCentro": false,
+        "orbs": 0
       },
-      "matchup": {
-        "status": "Super Efetivo x2.0 💥",
-        "multiplier": 2.0,
-        "effectivePower": 176,
-        "attackerTypes": "Grama / Veneno",
-        "defenderTypes": "Pedra / Terra",
-        "speedBonus": "+120% velocidade de farm"
-      },
-      "team": [
-        {
-          "name": "Bulbasaur",
-          "level": 31,
-          "types": [
-            "Grama",
-            "Veneno"
-          ],
-          "hp": 549,
-          "maxHp": 636,
-          "active": true,
-          "matchup": "x2.0 💥"
-        },
-        {
-          "name": "Pidgeotto",
-          "level": 28,
-          "types": [
-            "Normal",
-            "Voador"
-          ],
-          "hp": 480,
-          "maxHp": 480,
-          "active": false,
-          "matchup": "x0.5 🛡️"
-        },
-        {
-          "name": "Geodude",
-          "level": 27,
-          "types": [
-            "Pedra",
-            "Terra"
-          ],
-          "hp": 465,
-          "maxHp": 465,
-          "active": false,
-          "matchup": "x1.0"
-        },
-        {
-          "name": "Raticate",
-          "level": 26,
-          "types": [
-            "Normal"
-          ],
-          "hp": 420,
-          "maxHp": 420,
-          "active": false,
-          "matchup": "x0.5 🛡️"
-        }
-      ],
-      "pokeballs": {
-        "pokeball": 58,
-        "greatball": 24,
-        "ultraball": 8,
-        "masterball": 1
-      },
-      "items": {
-        "potion": 25,
-        "superpotion": 14,
-        "revive": 9,
-        "hardstone": 52
-      },
-      "bestiary": {
-        "captured": 48,
-        "seen": 86,
-        "total": 151,
-        "progressPct": 31.8,
-        "currentAreaStatus": "100% Concluído (Caverna Rochosa)",
-        "focusBestiary": true
-      },
-      "automation": {
-        "autoHunt": true,
-        "autoWeakness": true,
-        "autoOptimizeXP": true,
-        "autoCatch": true,
-        "focusBestiary": true,
-        "autoHeal": true,
-        "autoRevive": true,
-        "noCentro": false
-      },
+      "gold": 2131125,
+      "hp": 549,
+      "id": "acc-1",
+      "kills": 1537,
+      "level": 31,
       "logs": [
-        "🎯 [Otimizador de XP/h] Avaliou rotas desbloqueadas e selecionou Caverna Rochosa para taxa máxima",
-        "⚔️ [Auto-Fraqueza] Equipou Bulbasaur (Grama) com Super Efetivo x2.0 contra Geodude (Dano Efetivo: 176)!",
-        "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball, Stone Orb",
-        "Arremessou Pokébola em Geodude selvagem... Capturado!",
-        "📖 [Bestiário] NOVO REGISTRO DESBLOQUEADO: Geodude (#74)! Progresso da Pokédex: 48/151 (31.8%)",
-        "🏆 [Bestiário] 100% das espécies de 'Caverna Rochosa' capturadas! Procurando próxima rota com espécies pendentes...",
-        "Bulbasaur subiu para o Nível 31 (+18 HP, +4 Poder)!",
-        "Taxa medida: 14.412 EXP/h (Velocidade de farm aumentada em 2.2x)",
-        "Vida da equipe em 100% - Caçada, fraquezas e Bestiário ativos."
-      ]
+        "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball",
+        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball",
+        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball, Stone Orb",
+        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball",
+        "Derrotou Geodude! Loot: Earth Ball, Strange Rock",
+        "Derrotou Geodude! Loot: Small Stone, Earth Ball",
+        "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball",
+        "Derrotou Geodude! Loot: 2x Small Stone, Earth Ball",
+        "Derrotou Geodude! Loot: 2x Small Stone, Earth Ball",
+        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball"
+      ],
+      "mana": 88,
+      "maxHp": 636,
+      "maxMana": 88,
+      "name": "Treinador #1",
+      "status": "hunting",
+      "updatedAt": 1791896648844,
+      "vocation": "Bulbasaur (Nv. 31)"
     }
-  ]
+  ],
+  "goroutines": 12,
+  "ramAllocMB": 1.184906005859375,
+  "ramSysMB": 13.099861145019531,
+  "uptime": "1h25m58s"
 }
