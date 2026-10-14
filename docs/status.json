@@ -2,8 +2,8 @@
   "accounts": [
     {
       "currentArea": "geodude",
-      "durationSec": 592,
-      "expPerHour": 11185.068371090487,
+      "durationSec": 712,
+      "expPerHour": 10962.280423849492,
       "extra": {
         "catches": 0,
         "diamonds": 0,
@@ -17,34 +17,34 @@
         "noCentro": false,
         "orbs": 0
       },
-      "gold": 3585705,
-      "hp": 288,
+      "gold": 3587134,
+      "hp": 284,
       "id": "acc-1",
-      "kills": 184,
+      "kills": 216,
       "level": 37,
       "logs": [
-        "Derrotou Geodude! Loot: 2x Small Stone, Earth Ball",
-        "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball",
-        "Derrotou Geodude! Loot: 2x Small Stone, Earth Ball",
         "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball",
-        "Derrotou Geodude! Loot: Small Stone, Earth Ball, Stone Orb",
+        "Derrotou Geodude! Loot: 2x Small Stone, Earth Ball",
+        "Derrotou Geodude! Loot: Earth Ball",
+        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball",
+        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball",
+        "Derrotou Geodude! Loot: 2x Small Stone, Earth Ball",
         "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball",
         "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball",
-        "Derrotou Geodude! Loot: 2x Earth Ball",
         "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball",
-        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball"
+        "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball"
       ],
       "mana": 105,
       "maxHp": 768,
       "maxMana": 105,
       "name": "Treinador #1",
       "status": "hunting",
-      "updatedAt": 1792002126967,
+      "updatedAt": 1792002247374,
       "vocation": "Bulbasaur (Nv. 37)"
     }
   ],
-  "goroutines": 9,
-  "ramAllocMB": 1.2174072265625,
+  "goroutines": 10,
+  "ramAllocMB": 2.2467193603515625,
   "ramSysMB": 13.166282653808594,
-  "uptime": "9m53s"
+  "uptime": "11m53s"
 }
