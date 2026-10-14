@@ -2,8 +2,8 @@
   "accounts": [
     {
       "currentArea": "geodude",
-      "durationSec": 1848,
-      "expPerHour": 10792.02750968301,
+      "durationSec": 1968,
+      "expPerHour": 10791.886676254708,
       "extra": {
         "catches": 0,
         "diamonds": 0,
@@ -17,34 +17,34 @@
         "noCentro": false,
         "orbs": 0
       },
-      "gold": 3534201,
-      "hp": 375,
+      "gold": 3535663,
+      "hp": 371,
       "id": "acc-1",
-      "kills": 554,
+      "kills": 590,
       "level": 37,
       "logs": [
+        "Derrotou Geodude! Loot: 2x Small Stone, Earth Ball",
+        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball",
         "Derrotou Geodude! Loot: Small Stone, Earth Ball",
-        "Derrotou Geodude! Loot: Earth Ball, Stone Orb",
-        "Derrotou Geodude! Loot: Small Stone, Earth Ball",
-        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball, Stone Orb",
         "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball",
-        "Derrotou Geodude! Loot: 2x Small Stone, Earth Ball",
-        "Derrotou Geodude! Loot: 2x Small Stone, Earth Ball",
-        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball",
-        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball",
-        "Derrotou Geodude! Loot: 2x Small Stone, Earth Ball"
+        "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball",
+        "Derrotou Geodude! Loot: Small Stone, Earth Ball",
+        "Derrotou Geodude! Loot: Small Stone, Earth Ball",
+        "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball",
+        "Derrotou Geodude! Loot: 2x Earth Ball, Stone Orb",
+        "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball, Stone Orb"
       ],
       "mana": 105,
       "maxHp": 768,
       "maxMana": 105,
       "name": "Treinador #1",
       "status": "hunting",
-      "updatedAt": 1791998287816,
+      "updatedAt": 1791998407930,
       "vocation": "Bulbasaur (Nv. 37)"
     }
   ],
   "goroutines": 9,
-  "ramAllocMB": 1.0688705444335938,
+  "ramAllocMB": 1.078765869140625,
   "ramSysMB": 17.09986114501953,
-  "uptime": "30m50s"
+  "uptime": "32m52s"
 }
