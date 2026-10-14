@@ -2,8 +2,8 @@
   "accounts": [
     {
       "currentArea": "geodude",
-      "durationSec": 6808,
-      "expPerHour": 10608.696579245601,
+      "durationSec": 6927,
+      "expPerHour": 10619.398657665224,
       "extra": {
         "catches": 0,
         "diamonds": 0,
@@ -16,34 +16,34 @@
         "noCentro": false,
         "orbs": 0
       },
-      "gold": 3475368,
-      "hp": 498,
+      "gold": 3476971,
+      "hp": 494,
       "id": "acc-1",
-      "kills": 2033,
+      "kills": 2070,
       "level": 37,
       "logs": [
-        "Derrotou Geodude! Loot: 2x Small Stone, Earth Ball",
-        "Derrotou Geodude! Loot: 2x Small Stone, Earth Ball, Stone Orb",
+        "Derrotou Geodude! Loot: 2x Earth Ball, Stone Orb",
         "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball",
-        "Derrotou Geodude! Loot: Small Stone, Earth Ball, Stone Orb",
         "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball",
-        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball",
-        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball, Stone Orb",
         "Derrotou Geodude! Loot: Small Stone, Earth Ball, Stone Orb",
         "Derrotou Geodude! Loot: 2x Small Stone, Earth Ball",
-        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball, Stone Orb"
+        "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball",
+        "Derrotou Geodude! Loot: 2x Earth Ball, Stone Orb",
+        "Derrotou Geodude! Loot: Small Stone, Earth Ball",
+        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball, Stone Orb",
+        "Derrotou Geodude! Loot: 2x Small Stone, Earth Ball"
       ],
       "mana": 105,
       "maxHp": 768,
       "maxMana": 105,
       "name": "Treinador #1",
       "status": "hunting",
-      "updatedAt": 1791993847120,
+      "updatedAt": 1791993966331,
       "vocation": "Bulbasaur (Nv. 37)"
     }
   ],
   "goroutines": 10,
-  "ramAllocMB": 1.1524124145507812,
+  "ramAllocMB": 1.1131973266601562,
   "ramSysMB": 13.099861145019531,
-  "uptime": "1h53m30s"
+  "uptime": "1h55m30s"
 }
