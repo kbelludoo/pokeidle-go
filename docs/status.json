@@ -2,45 +2,46 @@
   "accounts": [
     {
       "currentArea": "geodude",
-      "durationSec": 67423,
-      "expPerHour": 13105.424291200374,
+      "durationSec": 67536,
+      "expPerHour": 13102.18495692468,
       "extra": {
         "catches": 0,
         "diamonds": 0,
         "kickLives": [
+          "clovaobengalalol",
           "biscoitao"
         ],
         "noCentro": false,
         "orbs": 0
       },
-      "gold": 3350794,
-      "hp": 745,
+      "gold": 3352321,
+      "hp": 740,
       "id": "acc-1",
-      "kills": 20405,
+      "kills": 20440,
       "level": 37,
       "logs": [
-        "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball",
-        "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball",
-        "Derrotou Geodude! Loot: Small Stone, Earth Ball",
-        "Derrotou Geodude! Loot: 2x Small Stone",
-        "Derrotou Geodude! Loot: Small Stone, Earth Ball",
-        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball, Stone Orb",
+        "Derrotou Geodude! Loot: 2x Small Stone, Earth Ball, Stone Orb",
         "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball, Stone Orb",
-        "Derrotou Geodude! Loot: Small Stone, Earth Ball, Stone Orb",
-        "Derrotou Geodude! Loot: Small Stone, Earth Ball, Stone Orb",
-        "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball"
+        "Derrotou Geodude! Loot: 2x Small Stone, Earth Ball",
+        "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball",
+        "Derrotou Geodude! Loot: Small Stone, Earth Ball",
+        "Derrotou Geodude! Loot: 2x Small Stone, Earth Ball",
+        "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball, Stone Orb",
+        "Derrotou Geodude! Loot: Small Stone, Earth Ball",
+        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball",
+        "Derrotou Geodude! Loot: Small Stone, Earth Ball"
       ],
       "mana": 105,
       "maxHp": 768,
       "maxMana": 105,
       "name": "Treinador #1",
       "status": "hunting",
-      "updatedAt": 1791984729942,
+      "updatedAt": 1791984842779,
       "vocation": "Bulbasaur (Nv. 37)"
     }
   ],
   "goroutines": 11,
-  "ramAllocMB": 1.1320419311523438,
+  "ramAllocMB": 1.13421630859375,
   "ramSysMB": 17.09986114501953,
-  "uptime": "18h43m44s"
+  "uptime": "18h45m43s"
 }
