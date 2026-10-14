@@ -2,8 +2,8 @@
   "accounts": [
     {
       "currentArea": "geodude",
-      "durationSec": 24700,
-      "expPerHour": 11941.358735672828,
+      "durationSec": 24822,
+      "expPerHour": 11961.694611669656,
       "extra": {
         "catches": 0,
         "diamonds": 0,
@@ -21,34 +21,34 @@
         "noCentro": false,
         "orbs": 0
       },
-      "gold": 2746711,
+      "gold": 2748562,
       "hp": 642,
       "id": "acc-1",
-      "kills": 7383,
+      "kills": 7422,
       "level": 34,
       "logs": [
+        "Derrotou Geodude! Loot: Small Stone, Earth Ball, Stone Orb",
+        "Derrotou Geodude! Loot: Small Stone, Earth Ball",
+        "Derrotou Geodude! Loot: 2x Small Stone, Earth Ball, Stone Orb",
+        "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball, Stone Orb",
         "Derrotou Geodude! Loot: 2x Small Stone, Earth Ball",
         "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball",
-        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball",
-        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball, Stone Orb",
-        "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball",
-        "Derrotou Geodude! Loot: Small Stone, Earth Ball, Stone Orb",
-        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball, Stone Orb",
-        "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball",
         "Derrotou Geodude! Loot: Small Stone, Earth Ball",
-        "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball"
+        "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball",
+        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball",
+        "Derrotou Geodude! Loot: 2x Small Stone, Earth Ball"
       ],
       "mana": 96,
       "maxHp": 708,
       "maxMana": 96,
       "name": "Treinador #1",
       "status": "hunting",
-      "updatedAt": 1791942007107,
+      "updatedAt": 1791942129439,
       "vocation": "Bulbasaur (Nv. 34)"
     }
   ],
   "goroutines": 9,
-  "ramAllocMB": 1.130462646484375,
+  "ramAllocMB": 1.1252365112304688,
   "ramSysMB": 17.09986114501953,
-  "uptime": "6h51m42s"
+  "uptime": "6h53m43s"
 }
