@@ -2,8 +2,8 @@
   "accounts": [
     {
       "currentArea": "geodude",
-      "durationSec": 3106,
-      "expPerHour": 10918.101632684191,
+      "durationSec": 104,
+      "expPerHour": 11040.473753895887,
       "extra": {
         "catches": 0,
         "diamonds": 0,
@@ -17,21 +17,21 @@
         "noCentro": false,
         "orbs": 0
       },
-      "gold": 3620996,
+      "gold": 3622531,
       "hp": 269,
       "id": "acc-1",
-      "kills": 940,
+      "kills": 32,
       "level": 38,
       "logs": [
+        "Derrotou Geodude! Loot: 2x Small Stone, Earth Ball",
+        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball, Stone Orb",
+        "Derrotou Geodude! Loot: 2x Small Stone, Earth Ball, Stone Orb",
+        "Derrotou Geodude! Loot: 2x Earth Ball",
         "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball",
-        "Derrotou Geodude! Loot: Small Stone, Earth Ball",
-        "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball, Stone Orb",
-        "Derrotou Geodude! Loot: Small Stone, Earth Ball",
-        "Conectado ao PokeIdle. Sessão iniciada.",
+        "Derrotou Geodude! Loot: Small Stone, Earth Ball, Stone Orb",
+        "Derrotou Geodude! Loot: Small Stone, Earth Ball, Stone Orb",
         "Derrotou Geodude! Loot: 2x Small Stone, Earth Ball, Stone Orb",
         "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball",
-        "Derrotou Geodude! Loot: 2x Small Stone, Earth Ball, Stone Orb",
-        "Derrotou Geodude! Loot: Small Stone, Earth Ball",
         "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball"
       ],
       "mana": 105,
@@ -39,12 +39,12 @@
       "maxMana": 105,
       "name": "Treinador #1",
       "status": "hunting",
-      "updatedAt": 1792004640783,
+      "updatedAt": 1792004764362,
       "vocation": "Bulbasaur (Nv. 37)"
     }
   ],
-  "goroutines": 11,
-  "ramAllocMB": 2.260284423828125,
-  "ramSysMB": 13.166282653808594,
-  "uptime": "51m55s"
+  "goroutines": 9,
+  "ramAllocMB": 2.8920516967773438,
+  "ramSysMB": 12.529548645019531,
+  "uptime": "1m48s"
 }
