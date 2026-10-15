@@ -2,8 +2,8 @@
   "accounts": [
     {
       "currentArea": "geodude",
-      "durationSec": 2276,
-      "expPerHour": 11951.690642715857,
+      "durationSec": 2404,
+      "expPerHour": 11958.40213307845,
       "extra": {
         "catches": 0,
         "diamonds": 0,
@@ -22,34 +22,34 @@
         "noCentro": false,
         "orbs": 0
       },
-      "gold": 5509192,
-      "hp": 755,
+      "gold": 5511053,
+      "hp": 751,
       "id": "acc-1",
-      "kills": 684,
+      "kills": 722,
       "level": 42,
       "logs": [
+        "Derrotou Geodude! Loot: 2x Small Stone, Earth Ball",
+        "Derrotou Geodude! Loot: Small Stone, Earth Ball",
+        "Derrotou Geodude! Loot: 2x Small Stone, Earth Ball",
+        "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball",
+        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball, Stone Orb",
+        "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball, Stone Orb",
         "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball",
-        "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball",
         "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball, Stone Orb",
-        "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball, Stone Orb",
-        "Derrotou Geodude! Loot: Small Stone, Earth Ball, Stone Orb",
-        "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball",
-        "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball",
-        "Derrotou Geodude! Loot: Small Stone, Earth Ball, Stone Orb",
-        "Derrotou Geodude! Loot: 2x Earth Ball",
-        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball, Stone Orb"
+        "Derrotou Geodude! Loot: Small Stone, Earth Ball",
+        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball"
       ],
       "mana": 119,
       "maxHp": 864,
       "maxMana": 119,
       "name": "Treinador #1",
       "status": "hunting",
-      "updatedAt": 1792107005762,
+      "updatedAt": 1792107133633,
       "vocation": "Bulbasaur (Nv. 42)"
     }
   ],
-  "goroutines": 11,
-  "ramAllocMB": 1.265380859375,
+  "goroutines": 12,
+  "ramAllocMB": 0.989501953125,
   "ramSysMB": 17.09986114501953,
-  "uptime": "37m59s"
+  "uptime": "40m6s"
 }
