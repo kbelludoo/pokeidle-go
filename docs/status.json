@@ -2,8 +2,8 @@
   "accounts": [
     {
       "currentArea": "geodude",
-      "durationSec": 31919,
-      "expPerHour": 10862.532932880553,
+      "durationSec": 32032,
+      "expPerHour": 10859.657550374182,
       "extra": {
         "catches": 0,
         "diamonds": 0,
@@ -14,34 +14,34 @@
         "noCentro": false,
         "orbs": 0
       },
-      "gold": 4723827,
-      "hp": 282,
+      "gold": 4725388,
+      "hp": 278,
       "id": "acc-1",
-      "kills": 9555,
+      "kills": 9590,
       "level": 40,
       "logs": [
-        "Derrotou Geodude! Loot: Small Stone, Earth Ball, Stone Orb",
-        "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball, Stone Orb",
-        "Derrotou Geodude! Loot: Small Stone, Earth Ball",
-        "Derrotou Geodude! Loot: Small Stone, Earth Ball",
-        "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball, Stone Orb",
+        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball",
+        "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball",
         "Derrotou Geodude! Loot: 2x Small Stone, Earth Ball",
         "Derrotou Geodude! Loot: Small Stone, Earth Ball",
-        "Derrotou Geodude! Loot: Small Stone, Earth Ball, Stone Orb",
-        "Derrotou Geodude! Loot: 2x Earth Ball, Stone Orb",
-        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball, Stone Orb"
+        "Derrotou Geodude! Loot: Small Stone, Earth Ball",
+        "Derrotou Geodude! Loot: 2x Small Stone, Earth Ball, Stone Orb",
+        "Derrotou Geodude! Loot: Small Stone",
+        "Derrotou Geodude! Loot: Small Stone, Earth Ball",
+        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball, Stone Orb",
+        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball"
       ],
       "mana": 111,
       "maxHp": 804,
       "maxMana": 111,
       "name": "Treinador #1",
       "status": "hunting",
-      "updatedAt": 1792049048480,
+      "updatedAt": 1792049161354,
       "vocation": "Bulbasaur (Nv. 39)"
     }
   ],
   "goroutines": 9,
-  "ramAllocMB": 1.0236892700195312,
+  "ramAllocMB": 1.0273818969726562,
   "ramSysMB": 13.099861145019531,
-  "uptime": "8h52m0s"
+  "uptime": "8h53m59s"
 }
