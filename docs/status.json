@@ -2,8 +2,8 @@
   "accounts": [
     {
       "currentArea": "geodude",
-      "durationSec": 5842,
-      "expPerHour": 10389.613371888172,
+      "durationSec": 5963,
+      "expPerHour": 10414.535662678754,
       "extra": {
         "catches": 0,
         "diamonds": 0,
@@ -17,34 +17,34 @@
         "noCentro": false,
         "orbs": 0
       },
-      "gold": 5165821,
+      "gold": 5167495,
       "hp": 738,
       "id": "acc-1",
-      "kills": 1721,
+      "kills": 1760,
       "level": 41,
       "logs": [
-        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball",
-        "Derrotou Geodude! Loot: 2x Small Stone, Earth Ball",
-        "Derrotou Geodude! Loot: 2x Small Stone, Earth Ball",
+        "Derrotou Geodude! Loot: Small Stone, Earth Ball",
+        "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball",
         "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball, Stone Orb",
         "Derrotou Geodude! Loot: 2x Small Stone, Earth Ball",
-        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball",
-        "Derrotou Geodude! Loot: Small Stone, Earth Ball",
-        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball",
+        "Derrotou Geodude! Loot: Small Stone, Earth Ball, Stone Orb",
         "Derrotou Geodude! Loot: 2x Small Stone, Earth Ball",
-        "Derrotou Geodude! Loot: Small Stone, Earth Ball"
+        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball, Stone Orb",
+        "Derrotou Geodude! Loot: 2x Small Stone",
+        "Derrotou Geodude! Loot: 2x Small Stone, Earth Ball",
+        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball"
       ],
       "mana": 116,
       "maxHp": 852,
       "maxMana": 116,
       "name": "Treinador #1",
       "status": "hunting",
-      "updatedAt": 1792081927179,
+      "updatedAt": 1792082048009,
       "vocation": "Bulbasaur (Nv. 41)"
     }
   ],
   "goroutines": 10,
-  "ramAllocMB": 1.1152725219726562,
+  "ramAllocMB": 1.1205596923828125,
   "ramSysMB": 13.099861145019531,
-  "uptime": "1h37m24s"
+  "uptime": "1h39m24s"
 }
