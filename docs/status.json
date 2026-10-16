@@ -2,8 +2,8 @@
   "accounts": [
     {
       "currentArea": "geodude",
-      "durationSec": 7796,
-      "expPerHour": 12916.106162024033,
+      "durationSec": 7917,
+      "expPerHour": 12920.48050859237,
       "extra": {
         "catches": 0,
         "diamonds": 0,
@@ -14,21 +14,21 @@
         "noCentro": false,
         "orbs": 0
       },
-      "gold": 5951821,
-      "hp": 288,
+      "gold": 5953563,
+      "hp": 283,
       "id": "acc-1",
-      "kills": 2329,
+      "kills": 2366,
       "level": 43,
       "logs": [
-        "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball",
-        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball",
-        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball, Stone Orb",
+        "Derrotou Geodude! Loot: Small Stone, Earth Ball",
         "Derrotou Geodude! Loot: Small Stone, Earth Ball",
         "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball, Stone Orb",
-        "Derrotou Geodude! Loot: 2x Small Stone, Earth Ball",
         "Derrotou Geodude! Loot: Small Stone, Earth Ball",
-        "Derrotou Geodude! Loot: Small Stone, Earth Ball",
-        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball, Stone Orb",
+        "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball, Stone Orb",
+        "Derrotou Geodude! Loot: Small Stone, Earth Ball, Stone Orb",
+        "Derrotou Geodude! Loot: 2x Small Stone, Earth Ball, Stone Orb",
+        "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball",
+        "Derrotou Geodude! Loot: 2x Small Stone, Earth Ball, Stone Orb",
         "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball, Stone Orb"
       ],
       "mana": 122,
@@ -36,12 +36,12 @@
       "maxMana": 122,
       "name": "Treinador #1",
       "status": "hunting",
-      "updatedAt": 1792137365713,
+      "updatedAt": 1792137486784,
       "vocation": "Bulbasaur (Nv. 43)"
     }
   ],
   "goroutines": 10,
-  "ramAllocMB": 1.1675643920898438,
+  "ramAllocMB": 1.1419143676757812,
   "ramSysMB": 13.099861145019531,
-  "uptime": "2h9m58s"
+  "uptime": "2h11m59s"
 }
