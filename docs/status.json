@@ -2,8 +2,8 @@
   "accounts": [
     {
       "currentArea": "geodude",
-      "durationSec": 11309,
-      "expPerHour": 15542.772045794229,
+      "durationSec": 11430,
+      "expPerHour": 15536.489628222773,
       "extra": {
         "catches": 0,
         "diamonds": 0,
@@ -16,34 +16,34 @@
         "noCentro": false,
         "orbs": 0
       },
-      "gold": 5827637,
-      "hp": 384,
+      "gold": 5829585,
+      "hp": 366,
       "id": "acc-1",
-      "kills": 3846,
+      "kills": 3888,
       "level": 43,
       "logs": [
-        "Derrotou Geodude! Loot: Small Stone, Earth Ball",
-        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball",
-        "Derrotou Geodude! Loot: Small Stone, Earth Ball",
-        "Derrotou Geodude! Loot: 2x Small Stone, Earth Ball",
-        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball",
-        "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball",
         "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball",
         "Derrotou Geodude! Loot: 2x Small Stone, Earth Ball",
+        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball",
+        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball",
         "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball",
-        "Derrotou Geodude! Loot: Small Stone, Earth Ball"
+        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball",
+        "Derrotou Geodude! Loot: 2x Small Stone, Earth Ball, Strange Rock",
+        "Derrotou Geodude! Loot: 2x Small Stone, Earth Ball",
+        "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball",
+        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball"
       ],
       "mana": 122,
       "maxHp": 888,
       "maxMana": 122,
       "name": "Treinador #1",
       "status": "hunting",
-      "updatedAt": 1792128486576,
+      "updatedAt": 1792128607933,
       "vocation": "Bulbasaur (Nv. 43)"
     }
   ],
   "goroutines": 10,
-  "ramAllocMB": 1.0077667236328125,
+  "ramAllocMB": 1.0187530517578125,
   "ramSysMB": 13.349861145019531,
-  "uptime": "3h8m31s"
+  "uptime": "3h10m31s"
 }
