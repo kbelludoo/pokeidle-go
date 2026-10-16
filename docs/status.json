@@ -2,8 +2,8 @@
   "accounts": [
     {
       "currentArea": "geodude",
-      "durationSec": 2561,
-      "expPerHour": 10579.601249673164,
+      "durationSec": 2682,
+      "expPerHour": 10587.159364545341,
       "extra": {
         "catches": 0,
         "diamonds": 0,
@@ -15,34 +15,34 @@
         "noCentro": false,
         "orbs": 0
       },
-      "gold": 6230689,
+      "gold": 6232374,
       "hp": 654,
       "id": "acc-1",
-      "kills": 773,
+      "kills": 809,
       "level": 44,
       "logs": [
-        "Derrotou Geodude! Loot: Small Stone, Earth Ball",
-        "Derrotou Geodude! Loot: 2x Small Stone, Earth Ball",
-        "Derrotou Geodude! Loot: 2x Small Stone, Earth Ball",
-        "Derrotou Geodude! Loot: 2x Small Stone, Earth Ball",
-        "Derrotou Geodude! Loot: 2x Small Stone, Earth Ball, Stone Orb",
-        "Derrotou Geodude! Loot: 2x Small Stone, Earth Ball, Stone Orb",
-        "Derrotou Geodude! Loot: Small Stone, Earth Ball, Stone Orb",
+        "Derrotou Geodude! Loot: Earth Ball, Stone Orb",
+        "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball, Stone Orb",
         "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball",
-        "Derrotou Geodude! Loot: Small Stone, Earth Ball, Stone Orb",
-        "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball, Stone Orb"
+        "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball, Stone Orb",
+        "Derrotou Geodude! Loot: 2x Small Stone, 2x Earth Ball",
+        "Derrotou Geodude! Loot: 2x Small Stone, Earth Ball",
+        "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball",
+        "Derrotou Geodude! Loot: 2x Small Stone, Earth Ball",
+        "Derrotou Geodude! Loot: Small Stone, Earth Ball",
+        "Derrotou Geodude! Loot: Small Stone, 2x Earth Ball"
       ],
       "mana": 125,
       "maxHp": 912,
       "maxMana": 125,
       "name": "Treinador #1",
       "status": "hunting",
-      "updatedAt": 1792157526611,
+      "updatedAt": 1792157647195,
       "vocation": "Bulbasaur (Nv. 44)"
     }
   ],
   "goroutines": 10,
-  "ramAllocMB": 1.0276260375976562,
+  "ramAllocMB": 1.0241851806640625,
   "ramSysMB": 13.099861145019531,
-  "uptime": "42m43s"
+  "uptime": "44m43s"
 }
