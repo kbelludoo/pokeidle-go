@@ -2,8 +2,8 @@
   "accounts": [
     {
       "currentArea": "geodude",
-      "durationSec": 22190,
-      "expPerHour": 10027.36044550367,
+      "durationSec": 22312,
+      "expPerHour": 10029.357810526471,
       "extra": {
         "catches": 0,
         "diamonds": 0,
@@ -13,10 +13,10 @@
         "noCentro": false,
         "orbs": 0
       },
-      "gold": 8247297,
-      "hp": 923,
+      "gold": 8248732,
+      "hp": 919,
       "id": "acc-1",
-      "kills": 6633,
+      "kills": 6668,
       "level": 47,
       "logs": [
         "🌟 Treinador subiu para o Nível 47!",
@@ -35,12 +35,12 @@
       "maxMana": 133,
       "name": "Treinador #1",
       "status": "hunting",
-      "updatedAt": 1792239483379,
+      "updatedAt": 1792239604591,
       "vocation": "Bulbasaur (Nv. 47)"
     }
   ],
   "goroutines": 9,
-  "ramAllocMB": 0.9761199951171875,
+  "ramAllocMB": 0.96331787109375,
   "ramSysMB": 13.099861145019531,
-  "uptime": "6h9m55s"
+  "uptime": "6h11m55s"
 }
