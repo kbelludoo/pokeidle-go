@@ -654,7 +654,7 @@
             <div class="poke-identity">
               <div class="poke-avatar" id="pokeAvatar">🌱</div>
               <div>
-                <div class="poke-name" id="pokeName">Bulbasaur <span style="font-size: 0.85rem; color: var(--accent);" id="pokeLevel">Nv. 12</span></div>
+                <div class="poke-name" id="pokeName">Bulbasaur <span style="font-size: 0.85rem; color: var(--accent);" id="pokeLevel">...</span></div>
                 <div class="poke-badges" id="pokeBadges">
                   <span class="type-badge type-grass">Grama</span>
                   <span class="type-badge type-poison">Veneno</span>
@@ -715,7 +715,7 @@
             <div class="team-member active-slot">
               <div class="member-info">
                 <h4>🌱 Bulbasaur</h4>
-                <p>Nv. 12 • HP 100%</p>
+                <p>Em Combate</p>
               </div>
               <span class="member-badge" style="background: var(--accent); color: #04090e;">ATIVO</span>
             </div>
@@ -863,17 +863,37 @@
           // Route
           document.getElementById('huntArea').textContent = `📍 ${acc.currentAreaName || acc.currentArea || 'Caverna Rochosa'}`;
 
-          // Active Pokemon
-          const pk = acc.activePokemon || {};
-          const pkName = pk.name || "Bulbasaur";
-          const pkLvl = pk.level || 12;
+          // Active Pokemon & Detection
+          const extra = acc.extra || {};
+          const pk = acc.activePokemon || extra.activePokemon || {};
+          
+          let pkName = pk.name || "";
+          let pkLvl = pk.level || 0;
+          
+          // Se não veio no objeto activePokemon, faz o parse direto do campo "vocation" (ex: "Bulbasaur (Nv. 44)")
+          if (!pkName || !pkLvl) {
+            const voc = acc.vocation || "";
+            const match = voc.match(/^(.*?)\s*\(Nv\.\s*(\d+)\)/i);
+            if (match) {
+              pkName = match[1].trim();
+              pkLvl = parseInt(match[2], 10);
+            } else if (voc) {
+              pkName = voc;
+              pkLvl = acc.level || 1;
+            } else {
+              pkName = "Bulbasaur";
+              pkLvl = acc.level || 1;
+            }
+          }
+          
           document.getElementById('pokeName').innerHTML = `${pkName} <span style="font-size: 0.85rem; color: var(--accent);">Nv. ${pkLvl}</span>`;
           
-          const effPower = pk.effectivePower || (pk.power ? pk.power * 2 : 68);
+          const effPower = pk.effectivePower || acc.mana || (pk.power ? pk.power * 2 : (pkLvl * 3));
           document.getElementById('pokePower').textContent = `💥 ${effPower} Real`;
 
-          if (acc.matchup) {
-            const m = acc.matchup;
+          const matchupData = acc.matchup || extra.matchup;
+          if (matchupData) {
+            const m = matchupData;
             document.getElementById('matchupBadge').textContent = m.status || 'SUPER EFETIVO x2.0 💥';
             document.getElementById('matchupDetail').innerHTML = `${m.attackerTypes || 'Grama'} vs ${m.defenderTypes || 'Pedra/Terra'} • Dano Efetivo: <b style="color: #4ade80;">${m.effectivePower || effPower} (${m.status || 'x2.0'})</b>`;
             document.getElementById('valMatchup').textContent = `x${m.multiplier || 2.0} 💥`;
@@ -939,43 +959,53 @@
           else document.getElementById('pokeAvatar').textContent = "🐾";
 
           // HP Bar
-          const hp = pk.hp || acc.hp || 252;
-          const maxHp = pk.maxHp || acc.maxHp || 252;
+          const hp = pk.hp || acc.hp || 100;
+          const maxHp = pk.maxHp || acc.maxHp || 100;
           const hpPct = Math.min(100, Math.round((hp / maxHp) * 100));
           document.getElementById('hpText').textContent = `${hp} / ${maxHp} (${hpPct}%)`;
           document.getElementById('hpFill').style.width = `${hpPct}%`;
 
           // XP Bar
-          const xp = pk.xp || 3120;
-          const xpNext = pk.xpNext || 4000;
-          const xpPct = Math.min(100, Math.round((xp / xpNext) * 100));
-          document.getElementById('xpText').textContent = `${formatNumber(xp)} / ${formatNumber(xpNext)} (${xpPct}%)`;
-          document.getElementById('xpFill').style.width = `${xpPct}%`;
+          const xp = pk.xp || 0;
+          const xpNext = pk.xpNext || (pkLvl * 100);
+          const xpPct = (xpNext > 0 && xp > 0) ? Math.min(100, Math.round((xp / xpNext) * 100)) : 100;
+          if (xp > 0) {
+            document.getElementById('xpText').textContent = `${formatNumber(xp)} / ${formatNumber(xpNext)} (${xpPct}%)`;
+            document.getElementById('xpFill').style.width = `${xpPct}%`;
+          } else {
+            document.getElementById('xpText').textContent = `Pokémon Nv. ${pkLvl} em Batalha`;
+            document.getElementById('xpFill').style.width = `100%`;
+          }
 
           // Resources
-          const auto = acc.automation || {};
-          document.getElementById('valCenter').textContent = auto.noCentro ? "🏥 No Centro (Curando)" : "🏥 Liberado";
-          document.getElementById('valHuntState').textContent = auto.autoHunt ? "⚔️ Máx XP/h" : "⏸️ Pausado";
+          const auto = acc.automation || extra.automation || {};
+          document.getElementById('valCenter').textContent = (auto.noCentro || extra.noCentro) ? "🏥 No Centro (Curando)" : "🏥 Liberado";
+          document.getElementById('valHuntState').textContent = (auto.autoHunt !== false) ? "⚔️ Máx XP/h" : "⏸️ Pausado";
 
           // Balls
-          if (acc.pokeballs) {
-            document.getElementById('ballPoke').textContent = acc.pokeballs.pokeball || 0;
-            document.getElementById('ballGreat').textContent = acc.pokeballs.greatball || 0;
-            document.getElementById('ballUltra').textContent = acc.pokeballs.ultraball || 0;
-            document.getElementById('ballMaster').textContent = acc.pokeballs.masterball || 0;
+          const ballsData = acc.pokeballs || extra.balls;
+          if (ballsData) {
+            document.getElementById('ballPoke').textContent = ballsData.pokeball || ballsData["1"] || 0;
+            document.getElementById('ballGreat').textContent = ballsData.greatball || ballsData["2"] || 0;
+            document.getElementById('ballUltra').textContent = ballsData.ultraball || ballsData["3"] || 0;
+            document.getElementById('ballMaster').textContent = ballsData.masterball || ballsData["4"] || 0;
           }
 
           // Team Roster
-          if (acc.team && acc.team.length > 0) {
+          const teamData = acc.team || extra.team;
+          if (teamData && teamData.length > 0) {
             const teamGrid = document.getElementById('teamGrid');
-            teamGrid.innerHTML = acc.team.map((m, idx) => {
+            teamGrid.innerHTML = teamData.map((m, idx) => {
               const isActive = m.active || idx === 0;
               const matchTag = m.matchup ? `<span style="color: #4ade80; font-weight: 700; margin-left: 6px;">${m.matchup}</span>` : '';
+              const hpVal = m.hp || 100;
+              const maxHpVal = m.maxHp || 100;
+              const hpPercent = Math.round((hpVal / maxHpVal) * 100);
               return `
                 <div class="team-member ${isActive ? 'active-slot' : ''}">
                   <div class="member-info">
                     <h4>${m.name}</h4>
-                    <p>Nv. ${m.level} • HP ${Math.round((m.hp / m.maxHp) * 100)}%${matchTag}</p>
+                    <p>Nv. ${m.level} • HP ${hpPercent}%${matchTag}</p>
                   </div>
                   <span class="member-badge" style="background: ${isActive ? 'var(--accent)' : 'rgba(255,255,255,0.1)'}; color: ${isActive ? '#04090e' : 'var(--text-muted)'};">
                     ${isActive ? 'ATIVO' : 'SLOT ' + (idx + 1)}
@@ -983,6 +1013,17 @@
                 </div>
               `;
             }).join('');
+          } else if (pkName && pkLvl) {
+            const teamGrid = document.getElementById('teamGrid');
+            teamGrid.innerHTML = `
+              <div class="team-member active-slot">
+                <div class="member-info">
+                  <h4>🌱 ${pkName}</h4>
+                  <p>Nv. ${pkLvl} • HP ${hpPct}%</p>
+                </div>
+                <span class="member-badge" style="background: var(--accent); color: #04090e;">ATIVO</span>
+              </div>
+            `;
           }
 
           // Logs

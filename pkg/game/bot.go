@@ -384,6 +384,44 @@ func (b *Bot) applyState(e *PokeState) {
 		b.status.MaxHP = activePk.MaxHP
 		b.status.Mana = activePk.Poder
 		b.status.MaxMana = activePk.Poder
+
+		b.status.Extra["activePokemon"] = map[string]any{
+			"id":             activePk.PokeID,
+			"name":           pkName,
+			"level":          activePk.Level,
+			"hp":             activePk.HP,
+			"maxHp":          activePk.MaxHP,
+			"power":          activePk.Poder,
+			"effectivePower": activePk.Poder * 2,
+			"shiny":          activePk.Shiny,
+			"xp":             activePk.XP,
+			"xpNext":         activePk.XPProximo,
+		}
+	}
+
+	if len(b.pokemons) > 0 {
+		var teamList []map[string]any
+		for _, p := range b.pokemons {
+			if p.Slot != nil || p.ID == b.activeID || p.Starter {
+				pName := p.Nome
+				if pName == "" {
+					pName = p.Name
+				}
+				teamList = append(teamList, map[string]any{
+					"id":     p.PokeID,
+					"name":   pName,
+					"level":  p.Level,
+					"hp":     p.HP,
+					"maxHp":  p.MaxHP,
+					"power":  p.Poder,
+					"shiny":  p.Shiny,
+					"active": p.ID == b.activeID,
+				})
+			}
+		}
+		if len(teamList) > 0 {
+			b.status.Extra["team"] = teamList
+		}
 	}
 
 	if e.Diamonds > 0 || e.Cheio {
