@@ -2,8 +2,8 @@
   "accounts": [
     {
       "currentArea": "geodude",
-      "durationSec": 34010,
-      "expPerHour": 10784.861401957578,
+      "durationSec": 34131,
+      "expPerHour": 10783.631129285177,
       "extra": {
         "catches": 0,
         "diamonds": 0,
@@ -14,10 +14,10 @@
         "noCentro": false,
         "orbs": 0
       },
-      "gold": 10249040,
-      "hp": 321,
+      "gold": 10250639,
+      "hp": 376,
       "id": "acc-1",
-      "kills": 10173,
+      "kills": 10212,
       "level": 51,
       "logs": [
         "Derrotou Geodude! Loot: Earth Stone",
@@ -36,12 +36,12 @@
       "maxMana": 145,
       "name": "Treinador #1",
       "status": "hunting",
-      "updatedAt": 1792402687052,
+      "updatedAt": 1792402808110,
       "vocation": "Bulbasaur (Nv. 51)"
     }
   ],
   "goroutines": 11,
-  "ramAllocMB": 1.0382080078125,
+  "ramAllocMB": 1.0428543090820312,
   "ramSysMB": 13.099861145019531,
-  "uptime": "9h26m51s"
+  "uptime": "9h28m52s"
 }
