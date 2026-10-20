@@ -2,8 +2,8 @@
   "accounts": [
     {
       "currentArea": "geodude",
-      "durationSec": 7548,
-      "expPerHour": 11173.930238721074,
+      "durationSec": 7670,
+      "expPerHour": 11210.054229214373,
       "extra": {
         "catches": 0,
         "diamonds": 0,
@@ -22,10 +22,10 @@
         "noCentro": false,
         "orbs": 0
       },
-      "gold": 10900448,
-      "hp": 19,
+      "gold": 10902006,
+      "hp": 10,
       "id": "acc-1",
-      "kills": 2294,
+      "kills": 2332,
       "level": 52,
       "logs": [
         "Pokémon desmaiou! Curando no Centro Pokémon...",
@@ -44,12 +44,12 @@
       "maxMana": 147,
       "name": "Treinador #1",
       "status": "hunting",
-      "updatedAt": 1792455246768,
+      "updatedAt": 1792455368883,
       "vocation": "Bulbasaur (Nv. 52)"
     }
   ],
   "goroutines": 11,
-  "ramAllocMB": 1.2163925170898438,
+  "ramAllocMB": 1.2007064819335938,
   "ramSysMB": 13.099861145019531,
-  "uptime": "2h5m50s"
+  "uptime": "2h7m51s"
 }
