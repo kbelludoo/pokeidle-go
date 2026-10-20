@@ -1,50 +1,28 @@
 {
   "accounts": [
     {
-      "currentArea": "geodude",
-      "durationSec": 826,
-      "expPerHour": 10695.267279484213,
-      "extra": {
-        "catches": 0,
-        "diamonds": 0,
-        "kickLives": [
-          "yetz",
-          "axt",
-          "clovaobengalalol",
-          "biscoitao",
-          "cogu",
-          "tftoddy",
-          "techzz",
-          "guaxilol1",
-          "faturetosl"
-        ],
-        "noCentro": false,
-        "orbs": 0
-      },
-      "gold": 12596810,
-      "hp": 80,
+      "currentArea": "",
+      "durationSec": 0,
+      "expPerHour": 0,
+      "gold": 0,
+      "hp": 0,
       "id": "acc-1",
-      "kills": 218,
-      "level": 54,
+      "kills": 0,
+      "level": 0,
       "logs": [
-        "Conectado ao PokeIdle. Sessão iniciada.",
-        "Conectado ao PokeIdle. Sessão iniciada.",
-        "Conectado ao PokeIdle. Sessão iniciada.",
-        "Conectado ao PokeIdle. Sessão iniciada.",
         "Conectado ao PokeIdle. Sessão iniciada.",
         "Conectado ao PokeIdle. Sessão iniciada."
       ],
-      "mana": 153,
-      "maxHp": 1116,
-      "maxMana": 153,
+      "mana": 0,
+      "maxHp": 0,
+      "maxMana": 0,
       "name": "Treinador #1",
       "status": "hunting",
-      "updatedAt": 1792531687685,
-      "vocation": "Bulbasaur (Nv. 54)"
+      "updatedAt": 1792531772507
     }
   ],
-  "goroutines": 15,
-  "ramAllocMB": 1.1644821166992188,
-  "ramSysMB": 13.349861145019531,
-  "uptime": "13m47s"
+  "goroutines": 11,
+  "ramAllocMB": 2.6348342895507812,
+  "ramSysMB": 12.537361145019531,
+  "uptime": "1m49s"
 }
