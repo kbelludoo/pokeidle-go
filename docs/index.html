@@ -639,6 +639,59 @@
       </div>
     </div>
 
+    <!-- CENTRAL DE AUTOMAÇÕES AVANÇADAS -->
+    <div style="background: linear-gradient(135deg, rgba(168, 85, 247, 0.12) 0%, rgba(59, 130, 246, 0.1) 100%); border: 1px solid rgba(168, 85, 247, 0.35); border-radius: 16px; padding: 18px 22px; margin-bottom: 22px; box-shadow: 0 10px 25px -10px rgba(0,0,0,0.5);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 10px;">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <div style="width: 42px; height: 42px; border-radius: 12px; background: rgba(168, 85, 247, 0.2); border: 1px solid #a855f7; display: flex; align-items: center; justify-content: center; font-size: 1.4rem;">
+            ⚡
+          </div>
+          <div>
+            <div style="font-size: 0.98rem; font-weight: 800; color: #fff;">Automações Avançadas & Progressão</div>
+            <div style="font-size: 0.78rem; color: var(--text-muted);">Evolução, Boss Rush, Chocadeira, Ginásios, Bicicletas e Oferenda</div>
+          </div>
+        </div>
+        <div style="display: flex; gap: 8px;">
+          <button onclick="triggerAction('evolve')" style="background: rgba(16, 185, 129, 0.2); color: #4ade80; border: 1px solid #10b981; padding: 5px 12px; border-radius: 6px; font-size: 0.75rem; font-weight: 700; cursor: pointer;">🌟 Forçar Evolução</button>
+          <button onclick="triggerAction('bossRush')" style="background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid #f59e0b; padding: 5px 12px; border-radius: 6px; font-size: 0.75rem; font-weight: 700; cursor: pointer;">👑 Chefe Rush</button>
+          <button onclick="triggerAction('gymChallenge')" style="background: rgba(56, 189, 248, 0.2); color: #38bdf8; border: 1px solid #0284c7; padding: 5px 12px; border-radius: 6px; font-size: 0.75rem; font-weight: 700; cursor: pointer;">🏛️ Desafiar Ginásio</button>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px;">
+        <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; padding: 10px;">
+          <div style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase;">🌟 Auto-Evolução</div>
+          <div style="font-size: 0.95rem; font-weight: 800; color: #4ade80; margin-top: 2px;" id="autoEvoStatus">ATIVO (Auto Nv)</div>
+          <div style="font-size: 0.68rem; color: var(--text-muted);">Evolui formas Nv 16/32/36</div>
+        </div>
+        <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; padding: 10px;">
+          <div style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase;">👑 Auto-Boss Rush</div>
+          <div style="font-size: 0.95rem; font-weight: 800; color: #fbbf24; margin-top: 2px;" id="bossRushStatus">0 Tokens</div>
+          <div style="font-size: 0.68rem; color: var(--text-muted);">Looping contínuo de chefes</div>
+        </div>
+        <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; padding: 10px;">
+          <div style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase;">🥚 Chocadeira de Ovos</div>
+          <div style="font-size: 0.95rem; font-weight: 800; color: #38bdf8; margin-top: 2px;" id="chocadeiraStatus">Monitorando</div>
+          <div style="font-size: 0.68rem; color: var(--text-muted);">Mystery Eggs & Shinys</div>
+        </div>
+        <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; padding: 10px;">
+          <div style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase;">🚴 Bicicleta & Velocidade</div>
+          <div style="font-size: 0.95rem; font-weight: 800; color: #c084fc; margin-top: 2px;" id="bicicletaStatus">Auto-Equip</div>
+          <div style="font-size: 0.68rem; color: var(--text-muted);">Funde e equipa melhor bike</div>
+        </div>
+        <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; padding: 10px;">
+          <div style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase;">🏛️ 18 Ginásios</div>
+          <div style="font-size: 0.95rem; font-weight: 800; color: #f43f5e; margin-top: 2px;" id="gymsStatus">Auto-Desafio</div>
+          <div style="font-size: 0.68rem; color: var(--text-muted);">Insígnias e lideranças</div>
+        </div>
+        <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; padding: 10px;">
+          <div style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase;">🎰 Oferenda de Lixo</div>
+          <div style="font-size: 0.95rem; font-weight: 800; color: #a78bfa; margin-top: 2px;" id="offeringStatus">Roleta Ativa</div>
+          <div style="font-size: 0.68rem; color: var(--text-muted);">Pedras e fragmentos Mega</div>
+        </div>
+      </div>
+    </div>
+
     <!-- MAIN SECTION -->
     <div class="main-grid">
       <!-- LEFT COLUMN: POKEMON & INVENTORY -->
@@ -982,6 +1035,30 @@
           document.getElementById('valCenter').textContent = (auto.noCentro || extra.noCentro) ? "🏥 No Centro (Curando)" : "🏥 Liberado";
           document.getElementById('valHuntState').textContent = (auto.autoHunt !== false) ? "⚔️ Máx XP/h" : "⏸️ Pausado";
 
+          // Automações Avançadas & Status
+          const bossTokens = extra.bossTokens || (acc.boss && acc.boss.tokens) || 0;
+          const bossAuto = extra.bossAuto || (acc.boss && acc.boss.auto) || false;
+          if (document.getElementById('bossRushStatus')) {
+            document.getElementById('bossRushStatus').textContent = bossAuto ? `ATIVO (${bossTokens} Tk)` : `${bossTokens} Tokens`;
+            document.getElementById('bossRushStatus').style.color = bossTokens > 0 ? '#fbbf24' : 'var(--text-muted)';
+          }
+
+          const chocTotal = extra.chocadeiraTotal || 0;
+          const chocOvos = extra.chocadeiraOvos || 0;
+          if (document.getElementById('chocadeiraStatus')) {
+            document.getElementById('chocadeiraStatus').textContent = chocTotal > 0 ? `${chocOvos}/${chocTotal} Ovos` : 'Monitorando';
+          }
+
+          const bici = extra.bicicleta || '';
+          if (document.getElementById('bicicletaStatus')) {
+            document.getElementById('bicicletaStatus').textContent = bici ? `Bike ${bici.toUpperCase()}` : 'Auto-Equip';
+          }
+
+          const gyms = extra.gymsTracked || 0;
+          if (document.getElementById('gymsStatus')) {
+            document.getElementById('gymsStatus').textContent = gyms > 0 ? `${gyms} Monitorados` : 'Auto-Desafio';
+          }
+
           // Balls
           const ballsData = acc.pokeballs || extra.balls;
           if (ballsData) {
@@ -1044,6 +1121,23 @@
       } catch (e) {
         console.error("Erro ao atualizar telemetria:", e);
       }
+    }
+
+    function triggerAction(actionName) {
+      fetch('/api/action', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: actionName, payload: {} })
+      })
+      .then(r => r.json())
+      .then(d => {
+        alert(d.message || 'Comando executado com sucesso!');
+        update();
+      })
+      .catch(e => {
+        console.error(e);
+        alert('Comando enviado para o bot!');
+      });
     }
 
     update();

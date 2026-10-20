@@ -54,42 +54,65 @@ type WSMessage struct {
 	AutoRevive          bool  `json:"autoRevive,omitempty"`
 	AutoPotion          bool  `json:"autoPotion,omitempty"`
 
-	// Shop / Loot / Team
-	Kind       string `json:"kind,omitempty"`
-	ItemID     any    `json:"id,omitempty"`
-	Qty        int    `json:"qty,omitempty"`
-	PokemonID  int64  `json:"pokemonId,omitempty"`
-	Slot       *int   `json:"slot,omitempty"`
-	Ativo      bool   `json:"ativo,omitempty"`
-	AvisoVisto bool   `json:"avisoVisto,omitempty"`
+	// Shop / Loot / Team / Features
+	Kind         string   `json:"kind,omitempty"`
+	ItemID       any      `json:"id,omitempty"`
+	Qty          int      `json:"qty,omitempty"`
+	PokemonID    int64    `json:"pokemonId,omitempty"`
+	Slot         *int     `json:"slot,omitempty"`
+	Ativo        bool     `json:"ativo,omitempty"`
+	AvisoVisto   bool     `json:"avisoVisto,omitempty"`
+	Key          string   `json:"key,omitempty"`
+	Tipo         string   `json:"tipo,omitempty"`
+	Nota         float64  `json:"nota,omitempty"`
+	AlvoID       int      `json:"alvoId,omitempty"`
+	BallID       int      `json:"ballId,omitempty"`
+	BicicletaID  any      `json:"bicicletaId,omitempty"`
+	BicicletaIDs []any    `json:"bicicletaIds,omitempty"`
+	CasaID       any      `json:"casaId,omitempty"`
+	Ovo          string   `json:"ovo,omitempty"`
+	PokemonIDs   []int64  `json:"pokemonIds,omitempty"`
+	Stat         string   `json:"stat,omitempty"`
 
 	// Server responses
-	Estado *PokeState      `json:"estado,omitempty"`
-	Hunts  []PokeHuntArea  `json:"hunts,omitempty"`
-	Ev     []PokeGameEvent `json:"ev,omitempty"`
+	Estado         *PokeState          `json:"estado,omitempty"`
+	Hunts          []PokeHuntArea      `json:"hunts,omitempty"`
+	Ev             []PokeGameEvent     `json:"ev,omitempty"`
+	BossesJogaveis []PokeBossEntry     `json:"bossesJogaveis,omitempty"`
+	Info           *PokeGinasioInfo    `json:"info,omitempty"`
+	Desafio        *PokeGinasioDesafio `json:"desafio,omitempty"`
+	Salvo          *PokeGinasioSalvo   `json:"salvo,omitempty"`
+	Mistico        *PokeMisticoState   `json:"mistico,omitempty"`
+	Bicicletas     *PokeBicicletasMeta `json:"bicicletas,omitempty"`
+	Casas          *PokeCasasMeta      `json:"casas,omitempty"`
 }
 
 type PokeState struct {
-	Cheio      bool               `json:"cheio,omitempty"`
-	Nick       string             `json:"nick"`
-	Level      int                `json:"level"`
-	XP         int64              `json:"xp"`
-	XPNivel    int64              `json:"xpNivel"`
-	XPProximo  int64              `json:"xpProximo"`
-	Gold       int64              `json:"gold"`
-	Diamonds   int64              `json:"diamonds"`
-	Orbs       int64              `json:"orbs"`
-	ActiveID   int64              `json:"activeId"`
-	HuntSlug   string             `json:"huntSlug"`
-	NoCentro   bool               `json:"noCentro"`
-	Pokemons   []PokeItemPokemon  `json:"pokemons,omitempty"`
-	PkMud      []PokeItemPokemon  `json:"pkMud,omitempty"`
-	PkFora     []int64            `json:"pkFora,omitempty"`
+	Cheio      bool                    `json:"cheio,omitempty"`
+	Nick       string                  `json:"nick"`
+	Level      int                     `json:"level"`
+	XP         int64                   `json:"xp"`
+	XPNivel    int64                   `json:"xpNivel"`
+	XPProximo  int64                   `json:"xpProximo"`
+	Gold       int64                   `json:"gold"`
+	Diamonds   int64                   `json:"diamonds"`
+	Orbs       int64                   `json:"orbs"`
+	ActiveID   int64                   `json:"activeId"`
+	HuntSlug   string                  `json:"huntSlug"`
+	NoCentro   bool                    `json:"noCentro"`
+	Pokemons   []PokeItemPokemon       `json:"pokemons,omitempty"`
+	PkMud      []PokeItemPokemon       `json:"pkMud,omitempty"`
+	PkFora     []int64                 `json:"pkFora,omitempty"`
 	Items      map[string]int          `json:"items,omitempty"`
 	Balls      map[string]int          `json:"balls,omitempty"`
 	Automation PokeAutomationPref      `json:"automation,omitempty"`
 	Pokedex    map[string]PokeDexEntry `json:"pokedex,omitempty"`
 	Boss       *PokeBossState          `json:"boss,omitempty"`
+	Chocadeira *PokeChocadeiraState    `json:"chocadeira,omitempty"`
+	Bicicleta  *PokeBicicletaState     `json:"bicicleta,omitempty"`
+	Casa       *PokeCasaState          `json:"casa,omitempty"`
+	XpShare    *PokeXpShareState       `json:"xpShare,omitempty"`
+	Mistico    *PokeMisticoState       `json:"mistico,omitempty"`
 	Twitch     *PokeTwitchState        `json:"twitch,omitempty"`
 	Kick       *PokeKickState          `json:"kick,omitempty"`
 }
@@ -97,6 +120,109 @@ type PokeState struct {
 type PokeBossState struct {
 	Vitorias map[string]int `json:"vitorias,omitempty"`
 	Tokens   int            `json:"tokens,omitempty"`
+	Auto     bool           `json:"auto,omitempty"`
+	AutoKey  string         `json:"autoKey,omitempty"`
+}
+
+type PokeBossEntry struct {
+	Key               string `json:"key"`
+	Name              string `json:"name,omitempty"`
+	Nome              string `json:"nome,omitempty"`
+	Level             int    `json:"level,omitempty"`
+	MinNivelTreinador int    `json:"minNivelTreinador,omitempty"`
+	Type1             string `json:"type1,omitempty"`
+	Type2             string `json:"type2,omitempty"`
+}
+
+type PokeChocadeiraState struct {
+	Total int           `json:"total"`
+	Ovos  []PokeEggSlot `json:"ovos,omitempty"`
+}
+
+type PokeEggSlot struct {
+	Slot   int    `json:"slot"`
+	Ovo    string `json:"ovo"`
+	Inicio int64  `json:"inicio"`
+	Fim    int64  `json:"fim"`
+	Luz    bool   `json:"luz,omitempty"`
+}
+
+type PokeBicicletaState struct {
+	Equipada    any                 `json:"equipada,omitempty"`
+	EquipadaRar string              `json:"equipadaRar,omitempty"`
+	Lista       []PokeBicicletaItem `json:"lista,omitempty"`
+}
+
+type PokeBicicletaItem struct {
+	ID       any    `json:"id"`
+	Raridade string `json:"raridade"`
+}
+
+type PokeBicicletasMeta struct {
+	Fragmento *PokeItemMeta `json:"fragmento,omitempty"`
+}
+
+type PokeCasaState struct {
+	Dentro any            `json:"dentro,omitempty"`
+	Lista  []PokeCasaItem `json:"lista,omitempty"`
+}
+
+type PokeCasaItem struct {
+	ID     any    `json:"id"`
+	Rar    string `json:"rar"`
+	Numero int    `json:"numero,omitempty"`
+}
+
+type PokeCasasMeta struct {
+	Fragmento *PokeItemMeta `json:"fragmento,omitempty"`
+}
+
+type PokeItemMeta struct {
+	ItemID int `json:"itemId"`
+	Custo  int `json:"custo,omitempty"`
+}
+
+type PokeXpShareState struct {
+	CasaID any               `json:"casaId,omitempty"`
+	Slots  []PokeXpShareSlot `json:"slots,omitempty"`
+}
+
+type PokeXpShareSlot struct {
+	ID   int64 `json:"id"`
+	Slot int   `json:"slot"`
+}
+
+type PokeGinasioInfo struct {
+	Ginasios      []PokeGinasioEntry `json:"ginasios,omitempty"`
+	NivelMin      int                `json:"nivelMin,omitempty"`
+	PodeRegistrar bool               `json:"podeRegistrar,omitempty"`
+	TimeMax       int                `json:"timeMax,omitempty"`
+}
+
+type PokeGinasioEntry struct {
+	Tipo     string `json:"tipo"`
+	SouLider bool   `json:"souLider,omitempty"`
+	MeuTime  bool   `json:"meuTime,omitempty"`
+	Lider    any    `json:"lider,omitempty"`
+}
+
+type PokeGinasioDesafio struct {
+	Tipo           string `json:"tipo"`
+	Venci          bool   `json:"venci"`
+	TomouLideranca bool   `json:"tomouLideranca,omitempty"`
+}
+
+type PokeGinasioSalvo struct {
+	Tipo string `json:"tipo"`
+}
+
+type PokeMisticoState struct {
+	SpeciesID  int    `json:"speciesId,omitempty"`
+	Nome       string `json:"nome,omitempty"`
+	Level      int    `json:"level,omitempty"`
+	Caido      any    `json:"caido,omitempty"`
+	Arremessou bool   `json:"arremessou,omitempty"`
+	Prazo      int64  `json:"prazo,omitempty"`
 }
 
 type PokeDexEntry struct {
@@ -179,6 +305,7 @@ type PokeKickReward struct {
 type PokeItemPokemon struct {
 	ID        int64  `json:"id"`
 	PokeID    int    `json:"pokeId"`
+	SpeciesID int    `json:"speciesId,omitempty"`
 	Nome      string `json:"nome"`
 	Name      string `json:"name"`
 	Level     int    `json:"level"`

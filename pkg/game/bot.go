@@ -48,6 +48,17 @@ type Bot struct {
 	pokedex     map[string]PokeDexEntry
 	bossState   *PokeBossState
 
+	// Novos Módulos de Automação Avançada
+	bossManager     *BossManager
+	gymManager      *GymManager
+	offeringManager *OfferingManager
+	items           map[string]int
+	chocadeiraState *PokeChocadeiraState
+	bicicletaState  *PokeBicicletaState
+	casaState       *PokeCasaState
+	xpShareState    *PokeXpShareState
+	misticoState    *PokeMisticoState
+
 	ticketChan chan string
 }
 
@@ -68,7 +79,11 @@ func NewBot(cfg AccountConfig) *Bot {
 		bossState:   &PokeBossState{Vitorias: make(map[string]int)},
 		twitchCli:   twitch.NewClient(cfg.Twitch),
 		kickCli:     kick.NewClient(cfg.Kick),
-		optimizer:   NewHuntOptimizer(),
+		optimizer:       NewHuntOptimizer(),
+		bossManager:     NewBossManager(),
+		gymManager:      NewGymManager(),
+		offeringManager: NewOfferingManager(),
+		items:           make(map[string]int),
 	}
 }
 
@@ -256,6 +271,9 @@ func (b *Bot) handleMessage(data []byte) {
 		if len(msg.Hunts) > 0 {
 			b.hunts = msg.Hunts
 		}
+		if len(msg.BossesJogaveis) > 0 {
+			b.bossManager.SetPlayableBosses(msg.BossesJogaveis)
+		}
 		b.mu.Unlock()
 
 		if msg.Estado != nil {
@@ -279,7 +297,9 @@ func (b *Bot) handleMessage(data []byte) {
 		})
 		_ = b.socket.SendJSON(map[string]any{"t": "shop.autoLockShiny", "ativo": true})
 		_ = b.socket.SendJSON(map[string]any{"t": "shop.autoLockP5", "ativo": true})
+		_ = b.socket.SendJSON(map[string]any{"t": "shop.autoLockNota9", "ativo": true, "nota": 8.0})
 		_ = b.socket.SendJSON(map[string]any{"t": "passe.resgatar"})
+		_ = b.socket.SendJSON(BuildQueryInfoMessage()) // Consulta inicial dos 18 ginásios
 
 		// Escolhe ou reativa a área de caça
 		b.ensureHunting()
@@ -294,6 +314,30 @@ func (b *Bot) handleMessage(data []byte) {
 
 	case "batalha":
 		b.handleBattleEvents(msg.Ev)
+
+	case "ginasio":
+		b.mu.Lock()
+		if msg.Info != nil {
+			b.gymManager.UpdateFromInfo(msg.Info)
+		}
+		if msg.Desafio != nil {
+			res := "derrota"
+			if msg.Desafio.Venci {
+				res = "vitória!"
+				if msg.Desafio.TomouLideranca {
+					res = "vitória e assumiu a liderança do ginásio!"
+				}
+			}
+			b.addLogLocked(fmt.Sprintf("🏛️ [Ginásio %s] Resultado do desafio: %s", msg.Desafio.Tipo, res))
+		}
+		b.mu.Unlock()
+
+	case "misticoCaiu":
+		b.mu.Lock()
+		bestBall := PickBestBallForMystic(b.balls)
+		_ = b.socket.SendJSON(BuildMysticBallMessage(bestBall))
+		b.addLogLocked(FormatMysticLog("Lendário", bestBall))
+		b.mu.Unlock()
 	}
 }
 
@@ -453,6 +497,50 @@ func (b *Bot) applyState(e *PokeState) {
 
 	if e.Boss != nil {
 		b.bossState = e.Boss
+	}
+	if e.Items != nil {
+		if b.items == nil {
+			b.items = make(map[string]int)
+		}
+		for k, v := range e.Items {
+			b.items[k] = v
+		}
+	}
+	if e.Chocadeira != nil {
+		b.chocadeiraState = e.Chocadeira
+	}
+	if e.Bicicleta != nil {
+		b.bicicletaState = e.Bicicleta
+	}
+	if e.Casa != nil {
+		b.casaState = e.Casa
+	}
+	if e.XpShare != nil {
+		b.xpShareState = e.XpShare
+	}
+	if e.Mistico != nil {
+		b.misticoState = e.Mistico
+		if e.Mistico.Caido != nil && !e.Mistico.Arremessou {
+			bestBall := PickBestBallForMystic(b.balls)
+			_ = b.socket.SendJSON(BuildMysticBallMessage(bestBall))
+			b.addLogLocked(FormatMysticLog(e.Mistico.Nome, bestBall))
+		}
+	}
+
+	// Telemetrias dos Novos Sistemas no Dashboard
+	if b.bossState != nil {
+		b.status.Extra["bossTokens"] = b.bossState.Tokens
+		b.status.Extra["bossAuto"] = b.bossState.Auto
+	}
+	if b.chocadeiraState != nil {
+		b.status.Extra["chocadeiraTotal"] = b.chocadeiraState.Total
+		b.status.Extra["chocadeiraOvos"] = len(b.chocadeiraState.Ovos)
+	}
+	if b.bicicletaState != nil && b.bicicletaState.EquipadaRar != "" {
+		b.status.Extra["bicicleta"] = b.bicicletaState.EquipadaRar
+	}
+	if b.gymManager != nil {
+		b.status.Extra["gymsTracked"] = len(b.gymManager.GymsStatus)
 	}
 
 	// Telemetria Completa de Todos os Bestiários (Nacional 1-9, Outland, Megas, Shinys e Bosses)
@@ -716,9 +804,10 @@ func (b *Bot) performPeriodicRoutine() {
 		_ = b.socket.SendJSON(map[string]any{"t": "shop.sellAllItems"})
 	}
 
-	// 3. Resgate diário de passe
+	// 3. Resgate diário de passe & recompensas de afiliados
 	if autoDaily {
 		_ = b.socket.SendJSON(map[string]any{"t": "passe.resgatar"})
+		_ = b.socket.SendJSON(map[string]any{"t": "afiliado.recolher"})
 	}
 
 	// 4. Auto-Restock de Pokébolas se a quantidade for baixa e tiver ouro
@@ -750,7 +839,28 @@ func (b *Bot) performPeriodicRoutine() {
 		})
 	}
 
-	// 6. Otimização contínua do time e do Pokémon ativo
+	// 6. Auto-Evolução Automática (Evolui Pokémons que atingiram o nível)
+	b.executeAutoEvolutions()
+
+	// 7. Auto-Boss Rush (Gasta tokens automaticamente no servidor)
+	b.executeAutoBoss()
+
+	// 8. Chocadeira de Ovos (Choca Mystery Eggs e Ovos Shinys)
+	b.executeAutoIncubator()
+
+	// 9. Bicicletas & XP Share de Casas (Acelera caça e treina reserva)
+	b.executeAutoBikesAndHouses()
+
+	// 10. Desafios aos 18 Ginásios Elementais
+	b.executeAutoGyms()
+
+	// 11. Masmorra Mística (Lendários via Mystic Ticket)
+	b.executeAutoMystic()
+
+	// 12. Oferenda de Lixo (Roleta por Pedras de Evolução e Mega Stones)
+	b.executeAutoOffering()
+
+	// 13. Otimização contínua do time e do Pokémon ativo
 	b.optimizeTeam()
 }
 
@@ -949,6 +1059,28 @@ func (b *Bot) ExecuteAction(action string, payload map[string]any) (any, error) 
 		b.status.Logs = append(b.status.Logs, "Otimização de equipe solicitada.")
 		return "Equipe otimizada com sucesso!", nil
 
+	case "evolve":
+		go b.executeAutoEvolutions()
+		b.status.Logs = append(b.status.Logs, "Verificação de evolução solicitada.")
+		return "Evoluções verificadas!", nil
+
+	case "bossRush":
+		go b.executeAutoBoss()
+		b.status.Logs = append(b.status.Logs, "Auto-Boss Rush solicitado.")
+		return "Auto-Boss Rush verificado!", nil
+
+	case "gymChallenge":
+		go b.executeAutoGyms()
+		b.status.Logs = append(b.status.Logs, "Desafio de ginásio solicitado.")
+		return "Desafio de ginásio enviado!", nil
+
+	case "offering":
+		if b.socket != nil && b.socket.IsConnected() {
+			_ = b.socket.SendJSON(BuildOfferingMessage())
+			b.status.Logs = append(b.status.Logs, FormatOfferingLog())
+		}
+		return "Oferenda de lixo executada!", nil
+
 	default:
 		return nil, fmt.Errorf("ação desconhecida: %s", action)
 	}
@@ -997,12 +1129,109 @@ func (b *Bot) updateStatus(fn func(s *engine.AccountStatus)) {
 	b.status.UpdatedAt = time.Now().UnixMilli()
 }
 
-func (b *Bot) addLog(msg string) {
-	b.mu.Lock()
-	defer b.mu.Unlock()
+func (b *Bot) addLogLocked(msg string) {
 	b.status.Logs = append(b.status.Logs, msg)
 	if len(b.status.Logs) > 10 {
 		b.status.Logs = b.status.Logs[1:]
+	}
+}
+
+func (b *Bot) addLog(msg string) {
+	b.mu.Lock()
+	defer b.mu.Unlock()
+	b.addLogLocked(msg)
+}
+
+func (b *Bot) executeAutoEvolutions() {
+	b.mu.Lock()
+	defer b.mu.Unlock()
+
+	evos := FindEvolutionsToPerform(b.pokemons)
+	for _, item := range evos {
+		msg := BuildEvolutionMessage(item.Pokemon.ID, item.Evo.TargetID)
+		_ = b.socket.SendJSON(msg)
+		logMsg := FormatEvolutionLog(item.Pokemon, item.Evo)
+		b.addLogLocked(logMsg)
+		// Atualiza localmente a espécie para não disparar em loop
+		p := item.Pokemon
+		p.PokeID = item.Evo.TargetID
+		p.Nome = item.Evo.TargetName
+		b.pokemons[p.ID] = p
+	}
+}
+
+func (b *Bot) executeAutoBoss() {
+	b.mu.Lock()
+	defer b.mu.Unlock()
+
+	if b.bossState != nil && b.bossState.Tokens > 0 && !b.bossState.Auto {
+		bestBoss, found := b.bossManager.PickBestBoss(b.status.Level, b.bossState.Vitorias)
+		if found {
+			_ = b.socket.SendJSON(BuildBossAutoMessage(bestBoss.Key, true))
+			b.bossState.Auto = true
+			b.bossState.AutoKey = bestBoss.Key
+			b.addLogLocked(FormatBossLog(bestBoss, b.bossState.Tokens, true))
+		}
+	}
+}
+
+func (b *Bot) executeAutoIncubator() {
+	b.mu.Lock()
+	defer b.mu.Unlock()
+
+	if msg, logMsg, ok := CheckIncubatorActions(b.chocadeiraState, b.items); ok {
+		_ = b.socket.SendJSON(msg)
+		b.addLogLocked(logMsg)
+	}
+}
+
+func (b *Bot) executeAutoBikesAndHouses() {
+	b.mu.Lock()
+	defer b.mu.Unlock()
+
+	if msg, logMsg, ok := CheckBicycleActions(b.bicicletaState, b.items); ok {
+		_ = b.socket.SendJSON(msg)
+		b.addLogLocked(logMsg)
+	}
+
+	if msg, logMsg, ok := CheckHouseXpShareActions(b.casaState, b.xpShareState, b.pokemons, b.activeID); ok {
+		_ = b.socket.SendJSON(msg)
+		b.addLogLocked(logMsg)
+	}
+}
+
+func (b *Bot) executeAutoGyms() {
+	b.mu.Lock()
+	defer b.mu.Unlock()
+
+	if b.gymManager.ShouldQueryInfo() {
+		_ = b.socket.SendJSON(BuildQueryInfoMessage())
+		b.gymManager.LastQuery = time.Now()
+	}
+
+	if tipo, ok := b.gymManager.PickNextGymToChallenge(b.status.Level); ok {
+		_ = b.socket.SendJSON(BuildGymChallengeMessage(tipo))
+		b.addLogLocked(FormatGymChallengeLog(tipo))
+	}
+}
+
+func (b *Bot) executeAutoMystic() {
+	b.mu.Lock()
+	defer b.mu.Unlock()
+
+	if msg, logMsg, ok := CheckMysticEntry(b.items, b.misticoState); ok {
+		_ = b.socket.SendJSON(msg)
+		b.addLogLocked(logMsg)
+	}
+}
+
+func (b *Bot) executeAutoOffering() {
+	b.mu.Lock()
+	defer b.mu.Unlock()
+
+	if b.offeringManager.ShouldRunOffering(len(b.pokemons)) {
+		_ = b.socket.SendJSON(BuildOfferingMessage())
+		b.addLogLocked(FormatOfferingLog())
 	}
 }
 

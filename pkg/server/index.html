@@ -264,6 +264,10 @@
               <button class="btn" onclick="promptSendChat('${acc.id}')">💬 Enviar Chat</button>
               ${hasGuild ? `<button class="btn" onclick="promptGuildDonate('${acc.id}')">💰 Doar Guilda</button>` : ''}
               <button class="btn" onclick="dispatchAction('${acc.id}', 'claimDaily')">🎁 Coletar Diário</button>
+              <button class="btn btn-green" onclick="dispatchAction('${acc.id}', 'evolve')">🌟 Auto-Evoluir</button>
+              <button class="btn btn-yellow" onclick="dispatchAction('${acc.id}', 'bossRush')">👑 Chefe Rush</button>
+              <button class="btn btn-primary" onclick="dispatchAction('${acc.id}', 'gymChallenge')">🏛️ Ginásio</button>
+              <button class="btn btn-purple" onclick="dispatchAction('${acc.id}', 'offering')">🎰 Oferenda</button>
               <button class="btn btn-purple" onclick="promptSupplyTicket('${acc.id}')">🔑 Injetar Token</button>
             </div>
 
