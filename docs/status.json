@@ -2,8 +2,8 @@
   "accounts": [
     {
       "currentArea": "geodude",
-      "durationSec": 30,
-      "expPerHour": 13043.114040502287,
+      "durationSec": 146,
+      "expPerHour": 13297.74472441755,
       "extra": {
         "catches": 0,
         "diamonds": 0,
@@ -18,12 +18,13 @@
         "noCentro": false,
         "orbs": 0
       },
-      "gold": 14680081,
-      "hp": 332,
+      "gold": 14681844,
+      "hp": 309,
       "id": "acc-1",
-      "kills": 12,
+      "kills": 54,
       "level": 58,
       "logs": [
+        "Conectado ao PokeIdle. Sessão iniciada.",
         "Conectado ao PokeIdle. Sessão iniciada.",
         "Conectado ao PokeIdle. Sessão iniciada."
       ],
@@ -32,12 +33,12 @@
       "maxMana": 164,
       "name": "Treinador #1",
       "status": "hunting",
-      "updatedAt": 1792698611979,
+      "updatedAt": 1792698727809,
       "vocation": "Bulbasaur (Nv. 58)"
     }
   ],
-  "goroutines": 11,
-  "ramAllocMB": 1.5693740844726562,
-  "ramSysMB": 12.849861145019531,
-  "uptime": "31s"
+  "goroutines": 12,
+  "ramAllocMB": 1.0727920532226562,
+  "ramSysMB": 13.099861145019531,
+  "uptime": "2m29s"
 }
