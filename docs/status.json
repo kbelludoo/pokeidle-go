@@ -2,8 +2,8 @@
   "accounts": [
     {
       "currentArea": "geodude",
-      "durationSec": 11576,
-      "expPerHour": 11054.149284671717,
+      "durationSec": 11694,
+      "expPerHour": 11053.403950024283,
       "extra": {
         "catches": 0,
         "diamonds": 0,
@@ -17,10 +17,10 @@
         "noCentro": false,
         "orbs": 0
       },
-      "gold": 14532604,
+      "gold": 14534080,
       "hp": 866,
       "id": "acc-1",
-      "kills": 3560,
+      "kills": 3596,
       "level": 58,
       "logs": [
         "⬆️ Pokémon subiu para o Nível 58!",
@@ -39,12 +39,12 @@
       "maxMana": 164,
       "name": "Treinador #1",
       "status": "hunting",
-      "updatedAt": 1792686969148,
+      "updatedAt": 1792687087178,
       "vocation": "Bulbasaur (Nv. 58)"
     }
   ],
   "goroutines": 12,
-  "ramAllocMB": 1.03887939453125,
+  "ramAllocMB": 1.0354843139648438,
   "ramSysMB": 13.099861145019531,
-  "uptime": "3h12m57s"
+  "uptime": "3h14m57s"
 }
