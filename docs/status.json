@@ -2,8 +2,8 @@
   "accounts": [
     {
       "currentArea": "geodude",
-      "durationSec": 1399,
-      "expPerHour": 13429.282872946504,
+      "durationSec": 1520,
+      "expPerHour": 13341.904278670561,
       "extra": {
         "catches": 0,
         "diamonds": 0,
@@ -23,27 +23,28 @@
         "noCentro": false,
         "orbs": 0
       },
-      "gold": 22721416,
-      "hp": 1082,
+      "gold": 22722810,
+      "hp": 1078,
       "id": "acc-1",
-      "kills": 433,
+      "kills": 467,
       "level": 66,
       "logs": [
         "Conectado ao PokeIdle. Sessão iniciada.",
         "Derrotou Geodude! Loot: Earth Stone",
-        "Derrotou Geodude! Loot: Rock Stone"
+        "Derrotou Geodude! Loot: Rock Stone",
+        "Conectado ao PokeIdle. Sessão iniciada."
       ],
       "mana": 187,
       "maxHp": 1368,
       "maxMana": 187,
       "name": "Treinador #1",
       "status": "hunting",
-      "updatedAt": 1793147648726,
+      "updatedAt": 1793147769732,
       "vocation": "Bulbasaur (Nv. 66)"
     }
   ],
-  "goroutines": 10,
-  "ramAllocMB": 1.2037582397460938,
-  "ramSysMB": 16.84986114501953,
-  "uptime": "23m21s"
+  "goroutines": 11,
+  "ramAllocMB": 2.5546188354492188,
+  "ramSysMB": 17.09986114501953,
+  "uptime": "25m21s"
 }
