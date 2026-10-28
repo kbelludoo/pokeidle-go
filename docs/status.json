@@ -2,14 +2,13 @@
   "accounts": [
     {
       "currentArea": "geodude",
-      "durationSec": 4497,
-      "expPerHour": 12966.939491872174,
+      "durationSec": 4620,
+      "expPerHour": 12977.301604727641,
       "extra": {
         "catches": 0,
         "diamonds": 0,
         "kickLives": [
           "yetz",
-          "patopapao2",
           "axt",
           "rodil",
           "biscoitao",
@@ -21,10 +20,10 @@
         "noCentro": false,
         "orbs": 0
       },
-      "gold": 22787549,
+      "gold": 22789107,
       "hp": 989,
       "id": "acc-1",
-      "kills": 1350,
+      "kills": 1388,
       "level": 66,
       "logs": [
         "Conectado ao PokeIdle. Sessão iniciada.",
@@ -38,12 +37,12 @@
       "maxMana": 187,
       "name": "Treinador #1",
       "status": "hunting",
-      "updatedAt": 1793153047579,
+      "updatedAt": 1793153170485,
       "vocation": "Bulbasaur (Nv. 66)"
     }
   ],
   "goroutines": 10,
-  "ramAllocMB": 1.07781982421875,
+  "ramAllocMB": 1.10400390625,
   "ramSysMB": 12.849861145019531,
-  "uptime": "1h15m0s"
+  "uptime": "1h17m1s"
 }
