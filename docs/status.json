@@ -18,18 +18,19 @@
         "Conectado ao PokeIdle. Sessão iniciada.",
         "Conectado ao PokeIdle. Sessão iniciada.",
         "Conectado ao PokeIdle. Sessão iniciada.",
+        "Conectado ao PokeIdle. Sessão iniciada.",
         "Conectado ao PokeIdle. Sessão iniciada."
       ],
       "mana": 0,
       "maxHp": 0,
       "maxMana": 0,
       "name": "Treinador #1",
-      "status": "Token configurado",
-      "updatedAt": 1793167339879
+      "status": "reconnecting",
+      "updatedAt": 1793167463980
     }
   ],
-  "goroutines": 17,
-  "ramAllocMB": 3.093963623046875,
-  "ramSysMB": 12.529548645019531,
-  "uptime": "44s"
+  "goroutines": 38,
+  "ramAllocMB": 2.1468582153320312,
+  "ramSysMB": 13.349861145019531,
+  "uptime": "2m48s"
 }
