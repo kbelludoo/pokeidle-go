@@ -12,13 +12,6 @@
       "logs": [
         "Conectado ao PokeIdle. Sessão iniciada.",
         "Conectado ao PokeIdle. Sessão iniciada.",
-        "Conectado ao PokeIdle. Sessão iniciada.",
-        "Conectado ao PokeIdle. Sessão iniciada.",
-        "Conectado ao PokeIdle. Sessão iniciada.",
-        "Conectado ao PokeIdle. Sessão iniciada.",
-        "Conectado ao PokeIdle. Sessão iniciada.",
-        "Conectado ao PokeIdle. Sessão iniciada.",
-        "Conectado ao PokeIdle. Sessão iniciada.",
         "Conectado ao PokeIdle. Sessão iniciada."
       ],
       "mana": 0,
@@ -26,11 +19,11 @@
       "maxMana": 0,
       "name": "Treinador #1",
       "status": "reconnecting",
-      "updatedAt": 1793169134700
+      "updatedAt": 1793169250282
     }
   ],
-  "goroutines": 144,
-  "ramAllocMB": 4.435478210449219,
-  "ramSysMB": 17.34986114501953,
-  "uptime": "13m58s"
+  "goroutines": 10,
+  "ramAllocMB": 2.016937255859375,
+  "ramSysMB": 12.529548645019531,
+  "uptime": "9s"
 }
