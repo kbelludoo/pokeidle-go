@@ -1,26 +1,14 @@
 {
   "accounts": [
     {
-      "currentArea": "geodude",
-      "durationSec": 2700,
-      "expPerHour": 10745.94958179757,
-      "extra": {
-        "catches": 0,
-        "diamonds": 0,
-        "kickLives": [
-          "rodil",
-          "guaxilol1",
-          "faturetosl",
-          "mandiocaa"
-        ],
-        "noCentro": false,
-        "orbs": 0
-      },
-      "gold": 22946670,
-      "hp": 1019,
+      "currentArea": "",
+      "durationSec": 0,
+      "expPerHour": 0,
+      "gold": 0,
+      "hp": 0,
       "id": "acc-1",
-      "kills": 806,
-      "level": 66,
+      "kills": 0,
+      "level": 0,
       "logs": [
         "Conectado ao PokeIdle. Sessão iniciada.",
         "Conectado ao PokeIdle. Sessão iniciada.",
@@ -33,17 +21,16 @@
         "Conectado ao PokeIdle. Sessão iniciada.",
         "Conectado ao PokeIdle. Sessão iniciada."
       ],
-      "mana": 187,
-      "maxHp": 1368,
-      "maxMana": 187,
+      "mana": 0,
+      "maxHp": 0,
+      "maxMana": 0,
       "name": "Treinador #1",
-      "status": "Token configurado",
-      "updatedAt": 1793165526881,
-      "vocation": "Bulbasaur (Nv. 66)"
+      "status": "reconnecting",
+      "updatedAt": 1793165648285
     }
   ],
-  "goroutines": 38,
-  "ramAllocMB": 2.1314163208007812,
-  "ramSysMB": 17.34986114501953,
-  "uptime": "47m50s"
+  "goroutines": 18,
+  "ramAllocMB": 3.1071624755859375,
+  "ramSysMB": 12.529548645019531,
+  "uptime": "34s"
 }
